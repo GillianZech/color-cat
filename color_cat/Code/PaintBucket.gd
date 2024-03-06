@@ -13,8 +13,6 @@ func _on_body_entered(body):
 		BUCKET_SPRITE.play("splash")
 		body._change_color(COLOR)
 
-
-
 func _on_bucket_sprite_animation_finished():
 	if BUCKET_SPRITE.animation == "splash":
 		BUCKET_SPRITE.play("idle")

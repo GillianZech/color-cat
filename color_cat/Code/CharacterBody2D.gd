@@ -25,6 +25,7 @@ var FOOD_APPEARED = false
 @onready var FOOD: Array
 #@onready var LASERS_PARENT: Node2D
 @onready var LASERS: Array
+@onready var BUCKETS: Array
 
 @onready var LOCK_AUDIO
 @onready var UNLOCK_AUDIO
@@ -39,6 +40,13 @@ func _reset():
 	CURRENT_LASER = 0
 	FOOD_COUNT = 0
 	get_parent().get_parent().get_node("HUD").update_score(FOOD_COUNT, false)
+	
+	if get_parent().get_node("Buckets"): # if getting this node returns not null
+		BUCKETS = get_parent().get_node("Buckets").get_children()
+		for bucket in BUCKETS:
+			bucket.get_node("BucketSprite").play("idle")
+	else:
+		BUCKETS = []
 	if get_parent().get_node("Doors"): # if getting this node returns not null
 		DOORS = get_parent().get_node("Doors").get_children()
 	else:
