@@ -1343,7 +1343,6 @@ animation = &"splash"
 
 [node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket"]
 stream = ExtResource("5_se1di")
-volume_db = -20.445
 
 [node name="PaintBucket2" type="Area2D" parent="Buckets"]
 position = Vector2(2072, 208)
@@ -1365,7 +1364,6 @@ animation = &"splash"
 
 [node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket2"]
 stream = ExtResource("5_se1di")
-volume_db = -20.445
 
 [node name="PaintBucket3" type="Area2D" parent="Buckets"]
 position = Vector2(1061, 412)
@@ -1384,7 +1382,6 @@ animation = &"splash"
 
 [node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket3"]
 stream = ExtResource("5_se1di")
-volume_db = -20.445
 
 [node name="PaintBucket4" type="Area2D" parent="Buckets"]
 position = Vector2(2443, 68)
@@ -1406,7 +1403,6 @@ animation = &"idle"
 
 [node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket4"]
 stream = ExtResource("5_se1di")
-volume_db = -20.445
 
 [node name="Doors" type="Node2D" parent="."]
 
@@ -1494,7 +1490,7 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser"]
 stream = ExtResource("23_x3uet")
-volume_db = 20.0
+volume_db = -15.0
 
 [node name="Laser2" type="Area2D" parent="Lasers"]
 position = Vector2(1214, 282)
@@ -1517,7 +1513,7 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser2"]
 stream = ExtResource("23_x3uet")
-volume_db = 20.0
+volume_db = -15.0
 
 [node name="Laser3" type="Area2D" parent="Lasers"]
 position = Vector2(2504, 70)
@@ -1540,7 +1536,7 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser3"]
 stream = ExtResource("23_x3uet")
-volume_db = 20.0
+volume_db = -15.0
 
 [node name="Laser4" type="Area2D" parent="Lasers"]
 position = Vector2(2319, 67)
@@ -1563,7 +1559,7 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser4"]
 stream = ExtResource("23_x3uet")
-volume_db = 20.0
+volume_db = -15.0
 
 [node name="DeathPlane" type="Area2D" parent="."]
 position = Vector2(3915, 620)

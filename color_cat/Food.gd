@@ -14,7 +14,7 @@ func _on_body_entered(body):
 	visible = true
 	body.FOOD_COUNT+=1
 	get_parent().get_parent().get_parent().get_node("HUD").update_score(body.FOOD_COUNT, true)
-	print("Food collected! You have collected "+str(body.FOOD_COUNT)+" can(s) of food.")
+	#print("Food collected! You have collected "+str(body.FOOD_COUNT)+" can(s) of food.")
 	set_collision_layer_value(4, 0)
 	set_collision_mask_value(1, 0)
 	COLLECTED = true
