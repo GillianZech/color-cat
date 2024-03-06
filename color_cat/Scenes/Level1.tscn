@@ -1706,6 +1706,7 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser"]
 stream = ExtResource("27_4othl")
+volume_db = 20.0
 
 [node name="Laser2" type="Area2D" parent="Lasers"]
 position = Vector2(3170, 280)
@@ -1728,6 +1729,7 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser2"]
 stream = ExtResource("27_4othl")
+volume_db = 20.0
 
 [node name="Laser3" type="Area2D" parent="Lasers"]
 position = Vector2(4389, 289)
@@ -1751,6 +1753,7 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser3"]
 stream = ExtResource("27_4othl")
+volume_db = 20.0
 
 [node name="Laser4" type="Area2D" parent="Lasers"]
 position = Vector2(6879, 138)
@@ -1774,6 +1777,7 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser4"]
 stream = ExtResource("27_4othl")
+volume_db = 20.0
 
 [node name="EndArea" parent="." instance=ExtResource("12_bxdkk")]
 position = Vector2(8339, 294)

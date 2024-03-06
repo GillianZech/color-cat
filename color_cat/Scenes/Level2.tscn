@@ -1325,84 +1325,86 @@ libraries = {
 [node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can5"]
 stream = ExtResource("10_nnnm1")
 
-[node name="PaintBucket" type="Area2D" parent="."]
+[node name="Buckets" type="Node2D" parent="."]
+
+[node name="PaintBucket" type="Area2D" parent="Buckets"]
 position = Vector2(1722, -51)
 scale = Vector2(0.672262, 0.813744)
 collision_layer = 4
 script = ExtResource("3_jy0e1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PaintBucket"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket"]
 shape = SubResource("CircleShape2D_a6c14")
 
-[node name="BucketSprite" type="AnimatedSprite2D" parent="PaintBucket"]
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket"]
 scale = Vector2(2, 1.8)
 sprite_frames = SubResource("SpriteFrames_0noxq")
 animation = &"splash"
 
-[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="PaintBucket"]
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket"]
 stream = ExtResource("5_se1di")
 volume_db = -20.445
 
-[node name="PaintBucket2" type="Area2D" parent="."]
+[node name="PaintBucket2" type="Area2D" parent="Buckets"]
 position = Vector2(2072, 208)
 scale = Vector2(0.47, 0.645)
 collision_layer = 4
 script = ExtResource("3_jy0e1")
 COLOR = "Blue"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PaintBucket2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket2"]
 position = Vector2(0.000171661, 3.8743e-07)
 scale = Vector2(1, 0.877517)
 shape = SubResource("CircleShape2D_a784t")
 
-[node name="BucketSprite" type="AnimatedSprite2D" parent="PaintBucket2"]
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket2"]
 position = Vector2(0.000108898, 1.84774e-05)
 scale = Vector2(2.851, 2.28222)
 sprite_frames = SubResource("SpriteFrames_ypfvi")
 animation = &"splash"
 
-[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="PaintBucket2"]
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket2"]
 stream = ExtResource("5_se1di")
 volume_db = -20.445
 
-[node name="PaintBucket3" type="Area2D" parent="."]
+[node name="PaintBucket3" type="Area2D" parent="Buckets"]
 position = Vector2(1061, 412)
 scale = Vector2(0.672262, 0.813744)
 collision_layer = 4
 script = ExtResource("3_jy0e1")
 COLOR = "Yellow"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PaintBucket3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket3"]
 shape = SubResource("CircleShape2D_a6c14")
 
-[node name="BucketSprite" type="AnimatedSprite2D" parent="PaintBucket3"]
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket3"]
 scale = Vector2(2, 1.8)
 sprite_frames = SubResource("SpriteFrames_rrbks")
 animation = &"splash"
 
-[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="PaintBucket3"]
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket3"]
 stream = ExtResource("5_se1di")
 volume_db = -20.445
 
-[node name="PaintBucket4" type="Area2D" parent="."]
+[node name="PaintBucket4" type="Area2D" parent="Buckets"]
 position = Vector2(2443, 68)
 scale = Vector2(0.47, 0.645)
 collision_layer = 4
 script = ExtResource("3_jy0e1")
 COLOR = "Blue"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PaintBucket4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket4"]
 position = Vector2(0.000171661, 3.8743e-07)
 scale = Vector2(1, 0.877517)
 shape = SubResource("CircleShape2D_a784t")
 
-[node name="BucketSprite" type="AnimatedSprite2D" parent="PaintBucket4"]
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket4"]
 position = Vector2(0.000108898, 1.84774e-05)
 scale = Vector2(2.851, 2.28222)
 sprite_frames = SubResource("SpriteFrames_ypfvi")
 animation = &"idle"
 
-[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="PaintBucket4"]
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket4"]
 stream = ExtResource("5_se1di")
 volume_db = -20.445
 
@@ -1492,6 +1494,7 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser"]
 stream = ExtResource("23_x3uet")
+volume_db = 20.0
 
 [node name="Laser2" type="Area2D" parent="Lasers"]
 position = Vector2(1214, 282)
@@ -1514,6 +1517,7 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser2"]
 stream = ExtResource("23_x3uet")
+volume_db = 20.0
 
 [node name="Laser3" type="Area2D" parent="Lasers"]
 position = Vector2(2504, 70)
@@ -1536,6 +1540,7 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser3"]
 stream = ExtResource("23_x3uet")
+volume_db = 20.0
 
 [node name="Laser4" type="Area2D" parent="Lasers"]
 position = Vector2(2319, 67)
@@ -1558,6 +1563,7 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser4"]
 stream = ExtResource("23_x3uet")
+volume_db = 20.0
 
 [node name="DeathPlane" type="Area2D" parent="."]
 position = Vector2(3915, 620)
@@ -1579,10 +1585,14 @@ stream = ExtResource("18_5ujqm")
 [connection signal="body_entered" from="Food/Can3" to="Food/Can3" method="_on_body_entered"]
 [connection signal="body_entered" from="Food/Can4" to="Food/Can4" method="_on_body_entered"]
 [connection signal="body_entered" from="Food/Can5" to="Food/Can5" method="_on_body_entered"]
-[connection signal="body_entered" from="PaintBucket" to="PaintBucket" method="_on_body_entered"]
-[connection signal="body_entered" from="PaintBucket2" to="PaintBucket2" method="_on_body_entered"]
-[connection signal="body_entered" from="PaintBucket3" to="PaintBucket3" method="_on_body_entered"]
-[connection signal="body_entered" from="PaintBucket4" to="PaintBucket4" method="_on_body_entered"]
+[connection signal="body_entered" from="Buckets/PaintBucket" to="Buckets/PaintBucket" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket/BucketSprite" to="Buckets/PaintBucket" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket2" to="Buckets/PaintBucket2" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket2/BucketSprite" to="Buckets/PaintBucket2" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket3" to="Buckets/PaintBucket3" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket3/BucketSprite" to="Buckets/PaintBucket3" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket4" to="Buckets/PaintBucket4" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket4/BucketSprite" to="Buckets/PaintBucket4" method="_on_bucket_sprite_animation_finished"]
 [connection signal="body_entered" from="Lasers/Laser" to="Lasers/Laser" method="_on_body_entered"]
 [connection signal="body_entered" from="Lasers/Laser2" to="Lasers/Laser2" method="_on_body_entered"]
 [connection signal="body_entered" from="Lasers/Laser3" to="Lasers/Laser3" method="_on_body_entered"]
