@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://deosvl585hffh"]
+
+[ext_resource type="Script" path="res://Code/CharacterBody2D.gd" id="1_34h3e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f00qb"]
+size = Vector2(1184, 95)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_48che"]
+size = Vector2(177, 177)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0h33d"]
+radius = 76.0
+height = 152.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(576, 609.5)
+shape = SubResource("RectangleShape2D_f00qb")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(761, 494)
+shape = SubResource("RectangleShape2D_48che")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(467, 335)
+script = ExtResource("1_34h3e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_0h33d")
