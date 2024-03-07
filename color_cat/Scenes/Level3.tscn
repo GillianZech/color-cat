@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://dc7f5jmb5wlfb"]
+[gd_scene load_steps=84 format=3 uid="uid://dc7f5jmb5wlfb"]
 
 [ext_resource type="Texture2D" uid="uid://7w8bxvkh34oo" path="res://Assets/tilemap.png" id="1_8v8o4"]
 [ext_resource type="Texture2D" uid="uid://dnej6v08nn5ag" path="res://Assets/background/SCS_Background_Nighttime_01.png" id="1_obbwj"]
@@ -23,6 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://b5y1fgkb5iplb" path="res://Sounds/weramp.ogg" id="18_is7o5"]
 [ext_resource type="Texture2D" uid="uid://dgeucs74gx5il" path="res://Assets/background/SCS_Clouds_Nighttime_03.png" id="20_hpbw4"]
 [ext_resource type="Texture2D" uid="uid://b4rsfcyk15aif" path="res://Assets/background/SCS_Clouds_Nighttime_02.png" id="21_gx0y6"]
+[ext_resource type="AudioStream" uid="uid://c0lpt3ae8jucd" path="res://Sounds/laser.ogg" id="24_qfr1a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mpuo8"]
 texture = ExtResource("1_8v8o4")
@@ -337,7 +338,95 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kym63"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7egkx"]
+size = Vector2(20, 61)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fm8pv"]
+atlas = ExtResource("10_iiikw")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fewpu"]
+atlas = ExtResource("10_iiikw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6l84v"]
+atlas = ExtResource("10_iiikw")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rv3x1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fm8pv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fewpu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6l84v")
+}],
+"loop": false,
+"name": &"unlock",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohh4f"]
+atlas = ExtResource("11_7j707")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfaqb"]
+atlas = ExtResource("11_7j707")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yoj3e"]
+atlas = ExtResource("11_7j707")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5txti"]
+atlas = ExtResource("11_7j707")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ublc7"]
+atlas = ExtResource("11_7j707")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kpvmu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohh4f")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfaqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yoj3e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5txti")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ublc7")
+}],
+"loop": false,
+"name": &"lock",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6kv2k"]
+size = Vector2(443.766, 162.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_urnup"]
 radius = 13.0384
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_umd7g"]
@@ -364,7 +453,7 @@ region = Rect2(128, 0, 32, 32)
 atlas = ExtResource("4_4y5vf")
 region = Rect2(160, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_kb2x5"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_w511a"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -471,92 +560,7 @@ _data = {
 "collect": SubResource("Animation_mylwv")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7egkx"]
-size = Vector2(20, 61)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fm8pv"]
-atlas = ExtResource("10_iiikw")
-region = Rect2(0, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fewpu"]
-atlas = ExtResource("10_iiikw")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6l84v"]
-atlas = ExtResource("10_iiikw")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_rv3x1"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fm8pv")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fewpu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6l84v")
-}],
-"loop": false,
-"name": &"unlock",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ohh4f"]
-atlas = ExtResource("11_7j707")
-region = Rect2(0, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sfaqb"]
-atlas = ExtResource("11_7j707")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yoj3e"]
-atlas = ExtResource("11_7j707")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5txti"]
-atlas = ExtResource("11_7j707")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ublc7"]
-atlas = ExtResource("11_7j707")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_kpvmu"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ohh4f")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sfaqb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yoj3e")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5txti")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ublc7")
-}],
-"loop": false,
-"name": &"lock",
-"speed": 5.0
-}]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_x1vt5"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_nb41u"]
 radius = 11.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jrswt"]
@@ -595,7 +599,7 @@ region = Rect2(224, 0, 32, 32)
 atlas = ExtResource("16_4lfje")
 region = Rect2(256, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_bnlv1"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_mt6a1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -629,9 +633,6 @@ animations = [{
 "name": &"idle",
 "speed": 10.0
 }]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6kv2k"]
-size = Vector2(443.766, 162.5)
 
 [node name="Level3" type="Node2D"]
 
@@ -669,147 +670,65 @@ layer_0/tile_data = PackedInt32Array(589846, 131074, 2, 524310, 131074, 1, 45877
 [node name="Cat" parent="." instance=ExtResource("2_i2ybn")]
 position = Vector2(225, 165)
 
-[node name="PaintBucket" type="Area2D" parent="."]
-position = Vector2(604, 289)
-scale = Vector2(0.672262, 0.813744)
+[node name="Buckets" type="Node2D" parent="."]
+position = Vector2(342, 205)
+scale = Vector2(1.5, 1.5)
+
+[node name="PaintBucket" type="Area2D" parent="Buckets"]
+position = Vector2(174.667, 56)
+scale = Vector2(0.448175, 0.542496)
 collision_layer = 4
 script = ExtResource("5_k8fq5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PaintBucket"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket"]
 shape = SubResource("CircleShape2D_hgufp")
 
-[node name="BucketSprite" type="AnimatedSprite2D" parent="PaintBucket"]
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket"]
 scale = Vector2(2, 1.8)
 sprite_frames = SubResource("SpriteFrames_7l5dr")
 animation = &"idle"
 
-[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="PaintBucket"]
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket"]
 stream = ExtResource("7_8tosj")
 
-[node name="PaintBucket2" type="Area2D" parent="."]
-position = Vector2(871, 288)
-scale = Vector2(0.47, 0.645)
+[node name="PaintBucket2" type="Area2D" parent="Buckets"]
+position = Vector2(352.667, 55.3333)
+scale = Vector2(0.313333, 0.43)
 collision_layer = 4
 script = ExtResource("5_k8fq5")
 COLOR = "Blue"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PaintBucket2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket2"]
 position = Vector2(0.000171661, 3.8743e-07)
 scale = Vector2(1, 0.877517)
 shape = SubResource("CircleShape2D_8u6su")
 
-[node name="BucketSprite" type="AnimatedSprite2D" parent="PaintBucket2"]
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket2"]
 position = Vector2(0.000108898, 1.84774e-05)
 scale = Vector2(2.851, 2.28222)
 sprite_frames = SubResource("SpriteFrames_jefux")
 animation = &"idle"
 
-[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="PaintBucket2"]
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket2"]
 stream = ExtResource("7_8tosj")
 
-[node name="PaintBucket3" type="Area2D" parent="."]
-position = Vector2(1140, 315)
-scale = Vector2(0.672262, 0.813744)
+[node name="PaintBucket3" type="Area2D" parent="Buckets"]
+position = Vector2(532, 73.3333)
+scale = Vector2(0.448175, 0.542496)
 collision_layer = 4
 script = ExtResource("5_k8fq5")
 COLOR = "Yellow"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PaintBucket3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket3"]
 shape = SubResource("CircleShape2D_hgufp")
 
-[node name="BucketSprite" type="AnimatedSprite2D" parent="PaintBucket3"]
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket3"]
 scale = Vector2(2, 1.8)
 sprite_frames = SubResource("SpriteFrames_31c2n")
 animation = &"idle"
 
-[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="PaintBucket3"]
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket3"]
 stream = ExtResource("7_8tosj")
-
-[node name="Food" type="Node2D" parent="."]
-
-[node name="Can" type="Area2D" parent="Food" groups=["food"]]
-position = Vector2(802, 144)
-collision_layer = 8
-script = ExtResource("3_yt2no")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can"]
-shape = SubResource("CircleShape2D_kym63")
-debug_color = Color(0.960784, 1, 0.054902, 0.47451)
-
-[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can"]
-sprite_frames = SubResource("SpriteFrames_kb2x5")
-animation = &"idle"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can"]
-libraries = {
-"": SubResource("AnimationLibrary_a0npr")
-}
-
-[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can"]
-stream = ExtResource("14_kmpra")
-
-[node name="Can2" type="Area2D" parent="Food" groups=["food"]]
-position = Vector2(806, 291)
-collision_layer = 8
-script = ExtResource("3_yt2no")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can2"]
-shape = SubResource("CircleShape2D_kym63")
-debug_color = Color(0.960784, 1, 0.054902, 0.47451)
-
-[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can2"]
-sprite_frames = SubResource("SpriteFrames_kb2x5")
-animation = &"idle"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can2"]
-libraries = {
-"": SubResource("AnimationLibrary_a0npr")
-}
-
-[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can2"]
-stream = ExtResource("14_kmpra")
-
-[node name="Can3" type="Area2D" parent="Food" groups=["food"]]
-position = Vector2(1475, -159)
-collision_layer = 8
-script = ExtResource("3_yt2no")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can3"]
-shape = SubResource("CircleShape2D_kym63")
-debug_color = Color(0.960784, 1, 0.054902, 0.47451)
-
-[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can3"]
-sprite_frames = SubResource("SpriteFrames_kb2x5")
-animation = &"idle"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can3"]
-libraries = {
-"": SubResource("AnimationLibrary_a0npr")
-}
-
-[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can3"]
-stream = ExtResource("14_kmpra")
-
-[node name="Can4" type="Area2D" parent="Food" groups=["food"]]
-position = Vector2(228, -40)
-collision_layer = 8
-script = ExtResource("3_yt2no")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can4"]
-shape = SubResource("CircleShape2D_kym63")
-debug_color = Color(0.960784, 1, 0.054902, 0.47451)
-
-[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can4"]
-sprite_frames = SubResource("SpriteFrames_kb2x5")
-animation = &"idle"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can4"]
-libraries = {
-"": SubResource("AnimationLibrary_a0npr")
-}
-
-[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can4"]
-stream = ExtResource("14_kmpra")
 
 [node name="EndArea" parent="." instance=ExtResource("14_e5de3")]
 position = Vector2(454, 323)
@@ -873,61 +792,6 @@ stream = ExtResource("12_di42s")
 [node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D2"]
 stream = ExtResource("13_jd32b")
 
-[node name="Lasers" type="Node2D" parent="."]
-z_index = 3
-
-[node name="Laser" type="Area2D" parent="Lasers"]
-position = Vector2(297, 210)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("15_q3bb4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser"]
-shape = SubResource("CircleShape2D_x1vt5")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser"]
-sprite_frames = SubResource("SpriteFrames_bnlv1")
-animation = &"idle"
-
-[node name="Laser2" type="Area2D" parent="Lasers"]
-position = Vector2(360, 216)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("15_q3bb4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser2"]
-shape = SubResource("CircleShape2D_x1vt5")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser2"]
-sprite_frames = SubResource("SpriteFrames_bnlv1")
-animation = &"idle"
-
-[node name="Laser3" type="Area2D" parent="Lasers"]
-position = Vector2(409, 248)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("15_q3bb4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser3"]
-shape = SubResource("CircleShape2D_x1vt5")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser3"]
-sprite_frames = SubResource("SpriteFrames_bnlv1")
-animation = &"idle"
-
-[node name="Laser4" type="Area2D" parent="Lasers"]
-position = Vector2(533, 286)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("15_q3bb4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser4"]
-shape = SubResource("CircleShape2D_x1vt5")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser4"]
-sprite_frames = SubResource("SpriteFrames_bnlv1")
-animation = &"idle"
-
 [node name="DeathPlane" type="Area2D" parent="."]
 position = Vector2(2527, 503)
 scale = Vector2(2.12, 1)
@@ -943,15 +807,163 @@ shape = SubResource("RectangleShape2D_6kv2k")
 [node name="Death" type="AudioStreamPlayer2D" parent="DeathPlane"]
 stream = ExtResource("18_is7o5")
 
-[connection signal="body_entered" from="PaintBucket" to="PaintBucket" method="_on_body_entered"]
-[connection signal="body_entered" from="PaintBucket2" to="PaintBucket2" method="_on_body_entered"]
-[connection signal="body_entered" from="PaintBucket3" to="PaintBucket3" method="_on_body_entered"]
+[node name="Food" type="Node2D" parent="."]
+
+[node name="Can" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(802, 144)
+collision_layer = 8
+script = ExtResource("3_yt2no")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can"]
+shape = SubResource("CircleShape2D_urnup")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can"]
+sprite_frames = SubResource("SpriteFrames_w511a")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can"]
+stream = ExtResource("14_kmpra")
+
+[node name="Can2" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(806, 291)
+collision_layer = 8
+script = ExtResource("3_yt2no")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can2"]
+shape = SubResource("CircleShape2D_urnup")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can2"]
+sprite_frames = SubResource("SpriteFrames_w511a")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can2"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can2"]
+stream = ExtResource("14_kmpra")
+
+[node name="Can3" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(1475, -159)
+collision_layer = 8
+script = ExtResource("3_yt2no")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can3"]
+shape = SubResource("CircleShape2D_urnup")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can3"]
+sprite_frames = SubResource("SpriteFrames_w511a")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can3"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can3"]
+stream = ExtResource("14_kmpra")
+
+[node name="Can4" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(228, -40)
+collision_layer = 8
+script = ExtResource("3_yt2no")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can4"]
+shape = SubResource("CircleShape2D_urnup")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can4"]
+sprite_frames = SubResource("SpriteFrames_w511a")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can4"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can4"]
+stream = ExtResource("14_kmpra")
+
+[node name="Can5" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(2850, 161)
+collision_layer = 8
+script = ExtResource("3_yt2no")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can5"]
+shape = SubResource("CircleShape2D_urnup")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can5"]
+sprite_frames = SubResource("SpriteFrames_w511a")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can5"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can5"]
+stream = ExtResource("14_kmpra")
+
+[node name="Lasers" type="Node2D" parent="."]
+
+[node name="Laser" type="Area2D" parent="Lasers"]
+position = Vector2(342, 205)
+scale = Vector2(1.5, 1.5)
+collision_layer = 32
+script = ExtResource("15_q3bb4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser"]
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_nb41u")
+
+[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser"]
+sprite_frames = SubResource("SpriteFrames_mt6a1")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Lasers/Laser"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser"]
+stream = ExtResource("24_qfr1a")
+volume_db = -15.0
+
+[node name="Laser2" type="Area2D" parent="Lasers"]
+position = Vector2(499, 209)
+scale = Vector2(1.5, 1.5)
+collision_layer = 32
+script = ExtResource("15_q3bb4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser2"]
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_nb41u")
+
+[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser2"]
+sprite_frames = SubResource("SpriteFrames_mt6a1")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Lasers/Laser2"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser2"]
+stream = ExtResource("24_qfr1a")
+volume_db = -15.0
+
+[connection signal="body_entered" from="Buckets/PaintBucket" to="Buckets/PaintBucket" method="_on_body_entered"]
+[connection signal="body_entered" from="Buckets/PaintBucket2" to="Buckets/PaintBucket2" method="_on_body_entered"]
+[connection signal="body_entered" from="Buckets/PaintBucket3" to="Buckets/PaintBucket3" method="_on_body_entered"]
+[connection signal="body_entered" from="DeathPlane" to="DeathPlane" method="_on_body_entered"]
 [connection signal="body_entered" from="Food/Can" to="Food/Can" method="_on_body_entered"]
 [connection signal="body_entered" from="Food/Can2" to="Food/Can2" method="_on_body_entered"]
 [connection signal="body_entered" from="Food/Can3" to="Food/Can3" method="_on_body_entered"]
 [connection signal="body_entered" from="Food/Can4" to="Food/Can4" method="_on_body_entered"]
+[connection signal="body_entered" from="Food/Can5" to="Food/Can5" method="_on_body_entered"]
 [connection signal="body_entered" from="Lasers/Laser" to="Lasers/Laser" method="_on_body_entered"]
 [connection signal="body_entered" from="Lasers/Laser2" to="Lasers/Laser2" method="_on_body_entered"]
-[connection signal="body_entered" from="Lasers/Laser3" to="Lasers/Laser3" method="_on_body_entered"]
-[connection signal="body_entered" from="Lasers/Laser4" to="Lasers/Laser4" method="_on_body_entered"]
-[connection signal="body_entered" from="DeathPlane" to="DeathPlane" method="_on_body_entered"]

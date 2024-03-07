@@ -1464,7 +1464,7 @@ stream = ExtResource("14_68mqa")
 
 [node name="EndArea" parent="." instance=ExtResource("10_hxe7t")]
 position = Vector2(1314, -351)
-NEXT_LEVEL = "Level4"
+NEXT_LEVEL = "Level3"
 
 [node name="Lasers" type="Node2D" parent="."]
 z_index = 3

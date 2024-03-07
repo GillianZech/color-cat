@@ -17,6 +17,7 @@ var FOOD_APPEARED = false
 @onready var JUMP_AUDIO = $JumpAudio
 @onready var WALK_AUDIO = $WalkAudio
 @onready var CURRENT_LASER = 0
+@onready var LASER_COUNT
 
 #@export var DOORS_PARENT: Node2D
 #@onready var DOORS_PARENT: Node2D
@@ -38,6 +39,7 @@ func _reset():
 	if get_parent().get_node("EndArea"):
 		get_parent().get_node("EndArea").visible = false
 	CURRENT_LASER = 0
+	LASER_COUNT = 0
 	FOOD_COUNT = 0
 	get_parent().get_parent().get_node("HUD").update_score(FOOD_COUNT, false)
 	
@@ -61,6 +63,7 @@ func _reset():
 		LASERS = get_parent().get_node("Lasers").get_children()
 		for laser in LASERS:
 			laser.visible = false
+			LASER_COUNT+=1 # won't change throughout the level but will be different by level
 		get_parent().get_node("Lasers").get_child(0).visible = true
 	else:
 		LASERS = []
