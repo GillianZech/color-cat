@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkwnokg50alof"]
+
+[ext_resource type="Script" path="res://Code/Spike.gd" id="1_6exv4"]
+[ext_resource type="Texture2D" uid="uid://2mgonvlp574m" path="res://Assets/spikes.png" id="1_mqw5y"]
+[ext_resource type="AudioStream" uid="uid://b5y1fgkb5iplb" path="res://Sounds/weramp.ogg" id="3_3wb7w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3bc3g"]
+size = Vector2(61.5, 10.5)
+
+[node name="Spike" type="Area2D"]
+collision_layer = 128
+script = ExtResource("1_6exv4")
+
+[node name="SpikeSprite" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_mqw5y")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(31, 59)
+shape = SubResource("RectangleShape2D_3bc3g")
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_3wb7w")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=132 format=3 uid="uid://n63lnk86ts66"]
+[gd_scene load_steps=133 format=3 uid="uid://n63lnk86ts66"]
 
 [ext_resource type="Texture2D" uid="uid://nxein6hl20v5" path="res://Assets/background/SCS_Background_Daytime_01.png" id="1_3kedn"]
 [ext_resource type="Texture2D" uid="uid://7w8bxvkh34oo" path="res://Assets/tilemap.png" id="1_mqh5o"]
@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://bo1bbdw2577s0" path="res://Assets/BlackText.png" id="21_xrrx1"]
 [ext_resource type="Texture2D" uid="uid://cdx4p2qqi7gie" path="res://Assets/BlackText2.png" id="23_610m7"]
 [ext_resource type="AudioStream" uid="uid://c0lpt3ae8jucd" path="res://Sounds/laser.ogg" id="27_4othl"]
+[ext_resource type="PackedScene" uid="uid://dkwnokg50alof" path="res://Scenes/Spike.tscn" id="34_38fuf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mpuo8"]
 texture = ExtResource("1_mqh5o")
@@ -1790,6 +1791,11 @@ shape = SubResource("RectangleShape2D_4tpfr")
 
 [node name="Death" type="AudioStreamPlayer2D" parent="DeathPlane"]
 stream = ExtResource("18_l8bih")
+
+[node name="Spikes" type="Node2D" parent="."]
+
+[node name="Spike" parent="Spikes" instance=ExtResource("34_38fuf")]
+position = Vector2(497, 255)
 
 [connection signal="body_entered" from="Buckets/PaintBucket" to="Buckets/PaintBucket" method="_on_body_entered"]
 [connection signal="animation_finished" from="Buckets/PaintBucket/BucketSprite" to="Buckets/PaintBucket" method="_on_bucket_sprite_animation_finished"]
