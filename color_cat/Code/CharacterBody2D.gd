@@ -46,35 +46,34 @@ func _reset():
 	if get_parent().get_node("EndArea"):
 		get_parent().get_node("EndArea").visible = false
 	
+	# Buckets
 	if get_parent().get_node("Buckets"): # if getting this node returns not null
 		BUCKETS = get_parent().get_node("Buckets").get_children()
-		if BUCKETS == null:
-			BUCKETS = []
-		else:
+		if BUCKETS != []:
 			for bucket in BUCKETS:
 				bucket.get_node("BucketSprite").play("idle")
 	else:
 		BUCKETS = []
+		
+	# Doors
 	if get_parent().get_node("Doors"): # if getting this node returns not null
 		DOORS = get_parent().get_node("Doors").get_children()
-		if DOORS == null:
-			DOORS = []
 	else:
 		DOORS = []
+	
+	# Food
 	if get_parent().get_node("Food"):
 		FOOD = get_parent().get_node("Food").get_children()
-		if FOOD == null:
-			FOOD = []
-		else:
+		if FOOD != []:
 			for can in FOOD:
 				can.visible = false
 	else:
 		FOOD = []
+		
+	# Lasers
 	if get_parent().get_node("Lasers"):
 		LASERS = get_parent().get_node("Lasers").get_children()
-		if LASERS == null:
-			LASERS = []
-		else:
+		if LASERS != []:
 			for laser in LASERS:
 				laser.visible = false
 				LASER_COUNT+=1 # won't change throughout the level but will be different by level

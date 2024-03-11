@@ -1,9 +1,11 @@
-[gd_scene load_steps=84 format=3 uid="uid://dc7f5jmb5wlfb"]
+[gd_scene load_steps=98 format=3 uid="uid://dc7f5jmb5wlfb"]
 
 [ext_resource type="Texture2D" uid="uid://7w8bxvkh34oo" path="res://Assets/tilemap.png" id="1_8v8o4"]
 [ext_resource type="Texture2D" uid="uid://dnej6v08nn5ag" path="res://Assets/background/SCS_Background_Nighttime_01.png" id="1_obbwj"]
 [ext_resource type="Texture2D" uid="uid://bb7yj2jt5q0nc" path="res://Assets/background/SCS_Skyline_Nighttime_Layer01.png" id="2_4myvx"]
 [ext_resource type="PackedScene" uid="uid://c0judastlvqt1" path="res://Scenes/Cat.tscn" id="2_i2ybn"]
+[ext_resource type="Script" path="res://Food.gd" id="3_yt2no"]
+[ext_resource type="Texture2D" uid="uid://cg6kriqlt02sj" path="res://Assets/food.png" id="4_4y5vf"]
 [ext_resource type="Script" path="res://Code/PaintBucket.gd" id="5_k8fq5"]
 [ext_resource type="Texture2D" uid="uid://cf1jykggxkf8v" path="res://Assets/paint_bucket_red.png" id="6_pom8f"]
 [ext_resource type="AudioStream" uid="uid://ba1ta67ygvkp2" path="res://Sounds/dwoop2.ogg" id="7_8tosj"]
@@ -14,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://07jpj77vqh2s" path="res://Sounds/lock.ogg" id="12_di42s"]
 [ext_resource type="AudioStream" uid="uid://8ktkbjjr4fnp" path="res://Sounds/unlock.ogg" id="13_jd32b"]
 [ext_resource type="PackedScene" uid="uid://dykbqv6sog3xw" path="res://Scenes/EndArea.tscn" id="14_e5de3"]
+[ext_resource type="AudioStream" uid="uid://b05d6g0x3njyo" path="res://Sounds/eat.ogg" id="14_kmpra"]
 [ext_resource type="Texture2D" uid="uid://csdax0y8win6l" path="res://Assets/paint_bucket_red_sprite_sheet.png" id="16_i3ygb"]
 [ext_resource type="Script" path="res://Scenes/DeathPlane.gd" id="17_wj3jp"]
 [ext_resource type="AudioStream" uid="uid://b5y1fgkb5iplb" path="res://Sounds/weramp.ogg" id="18_is7o5"]
@@ -607,6 +610,140 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8lf6s"]
+radius = 13.0384
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umd7g"]
+atlas = ExtResource("4_4y5vf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thstt"]
+atlas = ExtResource("4_4y5vf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gd2o6"]
+atlas = ExtResource("4_4y5vf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sm4wj"]
+atlas = ExtResource("4_4y5vf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gcm7"]
+atlas = ExtResource("4_4y5vf")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbduu"]
+atlas = ExtResource("4_4y5vf")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x8eij"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_umd7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thstt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gd2o6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sm4wj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gcm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vbduu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_4doyy"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FoodSprite:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FoodSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FoodSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mylwv"]
+resource_name = "collect"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FoodSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.2, 1)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FoodSprite:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.8)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FoodSprite:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -60, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.8)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a0npr"]
+_data = {
+"RESET": SubResource("Animation_4doyy"),
+"collect": SubResource("Animation_mylwv")
+}
+
 [node name="Level3" type="Node2D"]
 
 [node name="ScsBackgroundNighttime01" type="Sprite2D" parent="."]
@@ -784,6 +921,71 @@ stream = ExtResource("7_8tosj")
 [node name="Spike" parent="Spikes" instance=ExtResource("22_d2ood")]
 position = Vector2(-328, 288)
 
+[node name="Food" type="Node2D" parent="."]
+
+[node name="Can" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(-208, 184)
+collision_layer = 8
+script = ExtResource("3_yt2no")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can"]
+shape = SubResource("CircleShape2D_8lf6s")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can"]
+sprite_frames = SubResource("SpriteFrames_x8eij")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can"]
+stream = ExtResource("14_kmpra")
+
+[node name="Can2" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(-376, 176)
+collision_layer = 8
+script = ExtResource("3_yt2no")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can2"]
+shape = SubResource("CircleShape2D_8lf6s")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can2"]
+sprite_frames = SubResource("SpriteFrames_x8eij")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can2"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can2"]
+stream = ExtResource("14_kmpra")
+
+[node name="Can3" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(-200, 96)
+collision_layer = 8
+script = ExtResource("3_yt2no")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can3"]
+shape = SubResource("CircleShape2D_8lf6s")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can3"]
+sprite_frames = SubResource("SpriteFrames_x8eij")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can3"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can3"]
+stream = ExtResource("14_kmpra")
+
 [connection signal="body_entered" from="DeathPlane" to="DeathPlane" method="_on_body_entered"]
 [connection signal="body_entered" from="Buckets/PaintBucket" to="Buckets/PaintBucket" method="_on_body_entered"]
 [connection signal="animation_finished" from="Buckets/PaintBucket/BucketSprite" to="Buckets/PaintBucket" method="_on_bucket_sprite_animation_finished"]
@@ -791,3 +993,6 @@ position = Vector2(-328, 288)
 [connection signal="animation_finished" from="Buckets/PaintBucket2/BucketSprite" to="Buckets/PaintBucket2" method="_on_bucket_sprite_animation_finished"]
 [connection signal="body_entered" from="Buckets/PaintBucket3" to="Buckets/PaintBucket3" method="_on_body_entered"]
 [connection signal="animation_finished" from="Buckets/PaintBucket3/BucketSprite" to="Buckets/PaintBucket3" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Food/Can" to="Food/Can" method="_on_body_entered"]
+[connection signal="body_entered" from="Food/Can2" to="Food/Can2" method="_on_body_entered"]
+[connection signal="body_entered" from="Food/Can3" to="Food/Can3" method="_on_body_entered"]

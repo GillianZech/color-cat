@@ -184,3 +184,4 @@ texture = ExtResource("4_ocsbs")
 
 [node name="EndArea" parent="." instance=ExtResource("5_jwo1l")]
 position = Vector2(-458, 141)
+NEXT_LEVEL = "Level5"
