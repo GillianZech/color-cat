@@ -797,7 +797,6 @@ position = Vector2(2527, 503)
 scale = Vector2(2.12, 1)
 collision_layer = 64
 script = ExtResource("17_wj3jp")
-THIS_LEVEL = "Level3"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathPlane"]
 position = Vector2(-378.538, 0)

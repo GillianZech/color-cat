@@ -10,6 +10,7 @@ var DJUMP_USED = false
 var DOORS_LOCKED = true
 var FOOD_COUNT
 var FOOD_APPEARED = false
+var DEAD = false
 
 @onready var ANIM_SPRITE = $CatSprite
 @onready var ANIM_PLAYER = $AnimationPlayer
@@ -76,59 +77,55 @@ func _jump_animation():
 		ANIM_SPRITE.play("fall")
 # Code that runs every frame
 func _physics_process(_delta):
-	_animate()
-	
-	# Set x variable of input to right - left
-	INPUT_VECTOR.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	INPUT_VECTOR.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-	
-	# adding gravity to y velocity
-	velocity.y += GRAVITY
-	
-	if Input.is_action_just_pressed("move_up") and is_on_floor():
-		velocity.y = JUMP_STRENGTH
-		WALK_AUDIO.stop()
-		DUST_PARTICLES.emitting = false
-		JUMP_AUDIO.play()
-		JUMP_AUDIO.pitch_scale = randf_range(3.6, 4.0)
-		ANIM_PLAYER.seek(0)
-		ANIM_PLAYER.play("JumpSquish")
-		_jump_animation()
+	if not DEAD:
+		_animate()
 		
-	if Input.is_action_just_pressed("move_up") and not is_on_floor() and PAINT_COLOR == "Blue" and DJUMP_USED == false:
-		velocity.y = JUMP_STRENGTH
-		WALK_AUDIO.stop()
-		DUST_PARTICLES.emitting = false
-		JUMP_AUDIO.play()
-		JUMP_AUDIO.pitch_scale = randf_range(4.0, 4.2)
-		ANIM_PLAYER.seek(0)
-		ANIM_PLAYER.play("JumpSquish")
-		DJUMP_USED = true
-		_jump_animation()
-	
-
-	
-	
-	if Input.is_action_pressed("move_right") and velocity.x < SPEED:
-		velocity.x += ACCELERATION
-		if WALK_AUDIO.playing == false:
-			WALK_AUDIO.play()
-		if is_on_floor() == false:
+		# Set x variable of input to right - left
+		INPUT_VECTOR.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+		INPUT_VECTOR.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+		
+		# adding gravity to y velocity
+		velocity.y += GRAVITY
+		
+		if Input.is_action_just_pressed("move_up") and is_on_floor():
+			velocity.y = JUMP_STRENGTH
 			WALK_AUDIO.stop()
-	
-	elif Input.is_action_pressed("move_left") and velocity.x > (SPEED*-1):
-		velocity.x -= ACCELERATION
-		if WALK_AUDIO.playing == false:
-			WALK_AUDIO.play()
-		if is_on_floor() == false:
+			DUST_PARTICLES.emitting = false
+			JUMP_AUDIO.play()
+			JUMP_AUDIO.pitch_scale = randf_range(3.6, 4.0)
+			ANIM_PLAYER.seek(0)
+			ANIM_PLAYER.play("JumpSquish")
+			_jump_animation()
+			
+		if Input.is_action_just_pressed("move_up") and not is_on_floor() and PAINT_COLOR == "Blue" and DJUMP_USED == false:
+			velocity.y = JUMP_STRENGTH
 			WALK_AUDIO.stop()
-	else:
-		velocity.x = lerpf(velocity.x, 0.0, 0.4)
-	
-	
-	
-	# move the character according to velocity
-	move_and_slide()
+			DUST_PARTICLES.emitting = false
+			JUMP_AUDIO.play()
+			JUMP_AUDIO.pitch_scale = randf_range(4.0, 4.2)
+			ANIM_PLAYER.seek(0)
+			ANIM_PLAYER.play("JumpSquish")
+			DJUMP_USED = true
+			_jump_animation()
+		
+		if Input.is_action_pressed("move_right") and velocity.x < SPEED:
+			velocity.x += ACCELERATION
+			if WALK_AUDIO.playing == false:
+				WALK_AUDIO.play()
+			if is_on_floor() == false:
+				WALK_AUDIO.stop()
+		
+		elif Input.is_action_pressed("move_left") and velocity.x > (SPEED*-1):
+			velocity.x -= ACCELERATION
+			if WALK_AUDIO.playing == false:
+				WALK_AUDIO.play()
+			if is_on_floor() == false:
+				WALK_AUDIO.stop()
+		else:
+			velocity.x = lerpf(velocity.x, 0.0, 0.4)
+		
+		# move the character according to velocity
+		move_and_slide()
 
 func _animate():
 	if INPUT_VECTOR.x > 0:
@@ -151,10 +148,17 @@ func _animate():
 		ANIM_SPRITE.flip_h = true
 	if INPUT_VECTOR.x > 0:
 		ANIM_SPRITE.flip_h = false
-		
-		
-		
-		
+
+func _die():
+	DEAD = true
+	ANIM_PLAYER.play("Death")
+	get_parent().get_parent()._restart()
+	FOOD_APPEARED = false
+	DOORS_LOCKED = true
+	get_node("Death").play()
+	_reset()
+	DEAD = false
+
 func _change_color(NEW_COLOR):	
 	PAINT_COLOR = NEW_COLOR
 	if PAINT_COLOR == "Red":

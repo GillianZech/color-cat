@@ -17,8 +17,8 @@ func _physics_process(_delta):
 func _on_body_entered(body):
 	if visible:
 		visible = false
-		get_parent().get_parent()._update_scene(NEXT_LEVEL)
 		$AudioStreamPlayer2D.play()
+		get_parent().get_parent()._update_scene(NEXT_LEVEL)
 		body._reset()
 		body.FOOD_APPEARED = false
 		body.DOORS_LOCKED = true

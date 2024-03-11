@@ -26,11 +26,6 @@ func _on_body_entered(_body):
 		timer.one_shot = true
 		timer.timeout.connect(_on_timer_timeout)
 		timer.start()
-		#if body.CURRENT_LASER >= 3:
-			#body.get_parent().get_node("EndArea").visible = true
-		#else:
-			#body.CURRENT_LASER += 1
-			#body.get_parent().get_node("Lasers").get_child(body.CURRENT_LASER).visible = true
 
 @onready var cat = self.get_parent().get_parent().get_node("Cat")
 func _on_timer_timeout():
@@ -40,6 +35,7 @@ func _on_timer_timeout():
 		cat.CURRENT_LASER += 1
 		get_parent().get_child(cat.CURRENT_LASER).visible = true
 
+# my attempt at automating laser animations
 #func _move(cat):
 	#var animPlayer = AnimationPlayer.new()
 	#add_child(animPlayer)

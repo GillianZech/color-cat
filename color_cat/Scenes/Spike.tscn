@@ -5,19 +5,19 @@
 [ext_resource type="AudioStream" uid="uid://b5y1fgkb5iplb" path="res://Sounds/weramp.ogg" id="3_3wb7w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3bc3g"]
-size = Vector2(61.5, 10.5)
+size = Vector2(64, 10.25)
 
 [node name="Spike" type="Area2D"]
 collision_layer = 128
 script = ExtResource("1_6exv4")
 
 [node name="SpikeSprite" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
+scale = Vector2(2.0625, 2)
 texture = ExtResource("1_mqw5y")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(31, 59)
+position = Vector2(32, 58.875)
 shape = SubResource("RectangleShape2D_3bc3g")
 
 [node name="Death" type="AudioStreamPlayer2D" parent="."]

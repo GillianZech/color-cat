@@ -1,10 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://c0judastlvqt1"]
+[gd_scene load_steps=33 format=3 uid="uid://c0judastlvqt1"]
 
 [ext_resource type="Script" path="res://Code/CharacterBody2D.gd" id="1_8abq4"]
 [ext_resource type="Texture2D" uid="uid://dp31bok0hrsxi" path="res://Assets/cat_sprite_sheet.png" id="2_oq7j7"]
 [ext_resource type="Texture2D" uid="uid://dascpsjcm6hc7" path="res://Assets/cat_jump.png" id="2_oy5ub"]
 [ext_resource type="AudioStream" uid="uid://ccahguhaa0r55" path="res://Sounds/quack.ogg" id="3_vflh0"]
 [ext_resource type="AudioStream" uid="uid://cm5ttk4t88ag8" path="res://Sounds/pawing.ogg" id="4_msema"]
+[ext_resource type="AudioStream" uid="uid://b5y1fgkb5iplb" path="res://Sounds/weramp.ogg" id="6_h80cd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j3am3"]
 atlas = ExtResource("2_oy5ub")
@@ -166,6 +167,43 @@ animations = [{
 radius = 28.0
 height = 56.0
 
+[sub_resource type="Animation" id="Animation_ea8a2"]
+resource_name = "Death"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CatSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 6.28319, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CatSprite:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(2, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CatSprite:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(2, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+
 [sub_resource type="Animation" id="Animation_ixj0i"]
 resource_name = "JumpSquish"
 length = 0.4
@@ -216,9 +254,21 @@ tracks/1/keys = {
 "points": PackedFloat32Array(2, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CatSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p231f"]
 _data = {
+"Death": SubResource("Animation_ea8a2"),
 "JumpSquish": SubResource("Animation_ixj0i"),
 "RESET": SubResource("Animation_srcs7")
 }
@@ -229,7 +279,7 @@ point_count = 4
 
 [node name="Cat" type="CharacterBody2D"]
 position = Vector2(225, 224)
-collision_mask = 18
+collision_mask = 146
 script = ExtResource("1_8abq4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -283,3 +333,6 @@ scale_amount_min = 2.0
 scale_amount_max = 8.0
 scale_amount_curve = SubResource("Curve_vt6vl")
 color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_h80cd")

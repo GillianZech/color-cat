@@ -16,12 +16,17 @@ func _ready():
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("restart"):
 		get_node("Restart").play()
-		_update_scene(CURRENT_LEVEL_NAME)
+		_restart()
 
 func _update_scene(NEXT_DESTINATION_NAME):
 	NEXT_LEVEL_NAME = NEXT_DESTINATION_NAME
 	ADVANCING = true
 	ANIM.play("fade_in")
+
+func _restart():
+	ADVANCING = false
+	ANIM.play("fade_in")
+	#_update_scene(CURRENT_LEVEL_NAME)
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "fade_in":
@@ -34,4 +39,11 @@ func _on_animation_player_animation_finished(anim_name):
 			CURRENT_LEVEL_NAME = NEXT_LEVEL_NAME
 			CURRENT_LEVEL.visible = true
 			ANIM.play("fade_out")
-	
+		else:
+			RELOAD = load("res://Scenes/" + CURRENT_LEVEL_NAME + (".tscn")).instantiate()
+			RELOAD.visible = false
+			add_child(RELOAD)
+			CURRENT_LEVEL.queue_free()
+			CURRENT_LEVEL = RELOAD
+			CURRENT_LEVEL.visible = true
+			ANIM.play("fade_out")
