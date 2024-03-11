@@ -19,21 +19,41 @@ func _on_body_entered(_body):
 		#_move(body)
 		set_collision_layer_value(6, 0)
 		set_collision_mask_value(1, 0)
-		var timer : Timer = Timer.new()
-		add_child(timer)
-		timer.wait_time = 0.55
-		timer.autostart = false
-		timer.one_shot = true
-		timer.timeout.connect(_on_timer_timeout)
-		timer.start()
+		
+		
+		#var timer : Timer = Timer.new()
+		#add_child(timer)
+		#timer.wait_time = 0.55
+		#timer.autostart = false
+		#timer.one_shot = true
+		#timer.timeout.connect(_on_timer_timeout)
+		#timer.start()
+
+
+
 
 @onready var cat = self.get_parent().get_parent().get_node("Cat")
-func _on_timer_timeout():
-	if cat.CURRENT_LASER >= cat.LASER_COUNT - 1:
-		get_parent().get_parent().get_node("EndArea").visible = true
-	else:
-		cat.CURRENT_LASER += 1
-		get_parent().get_child(cat.CURRENT_LASER).visible = true
+#func _on_timer_timeout():
+	#if cat.CURRENT_LASER >= cat.LASER_COUNT - 1:
+		#get_parent().get_parent().get_node("EndArea").visible = true
+	#else:
+		#cat.CURRENT_LASER += 1
+		#get_parent().get_child(cat.CURRENT_LASER).visible = true
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "move":
+		#if cat.CURRENT_LASER >= cat.LASER_COUNT - 1:
+			#get_parent().get_parent().get_node("EndArea").visible = true
+		#else:
+			#cat.CURRENT_LASER += 1
+			#get_parent().get_child(cat.CURRENT_LASER).visible = true
+
+		if cat.CURRENT_LASER < cat.LASER_COUNT:
+			cat.CURRENT_LASER += 1
+			get_parent().get_child(cat.CURRENT_LASER).visible = true
+		else:
+			get_parent().get_parent().get_node("EndArea").visible = true
 
 # my attempt at automating laser animations
 #func _move(cat):
@@ -54,3 +74,4 @@ func _on_timer_timeout():
 	#next.track_insert_key(0, 200.0, 5)
 	#next.track_insert_key(0, 300.0, 7)
 	#animPlayer.play("next")
+
