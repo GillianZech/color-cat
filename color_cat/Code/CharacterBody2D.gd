@@ -7,9 +7,9 @@ var JUMP_STRENGTH = -625
 var ACCELERATION = 30
 var PAINT_COLOR = "Gray"
 var DJUMP_USED = false
-var DOORS_LOCKED = true
+var DOORS_LOCKED
 var FOOD_COUNT
-var FOOD_APPEARED = false
+var FOOD_APPEARED
 var DEAD = false
 
 @onready var ANIM_SPRITE = $CatSprite
@@ -17,7 +17,7 @@ var DEAD = false
 @onready var DUST_PARTICLES = $DustParticles
 @onready var JUMP_AUDIO = $JumpAudio
 @onready var WALK_AUDIO = $WalkAudio
-@onready var CURRENT_LASER = 0
+@onready var CURRENT_LASER
 @onready var LASER_COUNT
 
 #@export var DOORS_PARENT: Node2D
@@ -37,40 +37,53 @@ func _ready():
 	_reset()
 	
 func _reset():
-	if get_parent().get_node("EndArea"):
-		get_parent().get_node("EndArea").visible = false
+	FOOD_APPEARED = false
+	DOORS_LOCKED = true
 	CURRENT_LASER = 0
 	LASER_COUNT = 0
 	FOOD_COUNT = 0
 	get_parent().get_parent().get_node("HUD").update_score(FOOD_COUNT, false)
+	if get_parent().get_node("EndArea"):
+		get_parent().get_node("EndArea").visible = false
 	
 	if get_parent().get_node("Buckets"): # if getting this node returns not null
 		BUCKETS = get_parent().get_node("Buckets").get_children()
-		for bucket in BUCKETS:
-			bucket.get_node("BucketSprite").play("idle")
+		if BUCKETS == null:
+			BUCKETS = []
+		else:
+			for bucket in BUCKETS:
+				bucket.get_node("BucketSprite").play("idle")
 	else:
 		BUCKETS = []
 	if get_parent().get_node("Doors"): # if getting this node returns not null
 		DOORS = get_parent().get_node("Doors").get_children()
+		if DOORS == null:
+			DOORS = []
 	else:
 		DOORS = []
 	if get_parent().get_node("Food"):
 		FOOD = get_parent().get_node("Food").get_children()
-		for can in FOOD:
-			can.visible = false
+		if FOOD == null:
+			FOOD = []
+		else:
+			for can in FOOD:
+				can.visible = false
 	else:
 		FOOD = []
 	if get_parent().get_node("Lasers"):
 		LASERS = get_parent().get_node("Lasers").get_children()
-		for laser in LASERS:
-			laser.visible = false
-			LASER_COUNT+=1 # won't change throughout the level but will be different by level
-		get_parent().get_node("Lasers").get_child(0).visible = true
+		if LASERS == null:
+			LASERS = []
+		else:
+			for laser in LASERS:
+				laser.visible = false
+				LASER_COUNT+=1 # won't change throughout the level but will be different by level
+			get_parent().get_node("Lasers").get_child(0).visible = true
 	else:
 		LASERS = []
 		if get_parent().get_node("EndArea"):
 			get_parent().get_node("EndArea").visible = true
-			
+
 func _jump_animation():
 	ANIM_SPRITE.play("jump")
 	if INPUT_VECTOR.y < -0.9:
@@ -153,13 +166,11 @@ func _die():
 	DEAD = true
 	ANIM_PLAYER.play("Death")
 	get_parent().get_parent()._restart()
-	FOOD_APPEARED = false
-	DOORS_LOCKED = true
 	get_node("Death").play()
 	_reset()
 	DEAD = false
 
-func _change_color(NEW_COLOR):	
+func _change_color(NEW_COLOR):
 	PAINT_COLOR = NEW_COLOR
 	if PAINT_COLOR == "Red":
 		self.modulate = Color(1,0,0)
@@ -183,7 +194,6 @@ func _change_color(NEW_COLOR):
 				door.get_node("LockedDoorSprite").visible = false
 				door.get_node("UnlockedDoorSprite").play("unlock")
 				door.get_node("UnlockAudio").play()
-				#UNLOCK_AUDIO.play()
 			DOORS_LOCKED = false
 	if PAINT_COLOR == "Gray":
 		self.modulate = Color(1,1,1)

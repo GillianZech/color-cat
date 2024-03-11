@@ -14,16 +14,22 @@ func _ready():
 	pass
 	
 func _physics_process(_delta):
-	if Input.is_action_just_pressed("restart"):
+	if Input.is_action_just_pressed("restart"): # R key
+		# Restart the current level
 		get_node("Restart").play()
 		_restart()
 
+
 func _update_scene(NEXT_DESTINATION_NAME):
 	NEXT_LEVEL_NAME = NEXT_DESTINATION_NAME
+	# make HUD invisible
+	get_node("HUD").visible = false
 	ADVANCING = true
 	ANIM.play("fade_in")
 
 func _restart():
+	# make HUD invisible
+	get_node("HUD").visible = false
 	ADVANCING = false
 	ANIM.play("fade_in")
 	#_update_scene(CURRENT_LEVEL_NAME)
@@ -47,3 +53,6 @@ func _on_animation_player_animation_finished(anim_name):
 			CURRENT_LEVEL = RELOAD
 			CURRENT_LEVEL.visible = true
 			ANIM.play("fade_out")
+	if anim_name == "fade_out":
+		# make HUD visible
+		get_node("HUD").visible = true
