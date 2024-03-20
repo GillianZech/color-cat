@@ -9,8 +9,6 @@ var PAINT_COLOR = "Gray"
 var DJUMP_USED = false
 var DOORS_LOCKED
 var FOOD_APPEARED
-var FOOD_COUNT = 0
-var PREV_FOOD_COUNT = 0
 var DEAD = false
 
 @onready var hud = get_parent().get_parent().get_node("HUD")
@@ -30,7 +28,6 @@ var DEAD = false
 
 # Code that runs at the start of the game
 func _ready():
-	#PREV_FOOD_COUNT = 0
 	_reset()
 	
 func _reset():
@@ -38,8 +35,6 @@ func _reset():
 	DOORS_LOCKED = true
 	CURRENT_LASER = 0
 	LASER_COUNT = 0
-	#FOOD_COUNT = PREV_FOOD_COUNT
-	#get_parent().get_parent().get_node("HUD").update_score(FOOD_COUNT, false)
 	if get_parent().get_node("EndArea"):
 		get_parent().get_node("EndArea").visible = false
 	
@@ -165,8 +160,6 @@ func _die():
 	get_parent().get_parent()._restart()
 	get_node("Death").play()
 	_reset()
-	#hud.food_count = hud.pfood_count
-	#hud.update_score(hud.food_count, false)
 	DEAD = false
 
 func _change_color(NEW_COLOR):

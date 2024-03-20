@@ -1,5 +1,6 @@
 extends Area2D
 @onready var LASER_SPRITE = $LaserSprite
+@onready var cat = self.get_parent().get_parent().get_node("Cat")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
@@ -12,7 +13,6 @@ func _on_body_entered(_body):
 		set_collision_layer_value(6, 0)
 		set_collision_mask_value(1, 0)
 
-@onready var cat = self.get_parent().get_parent().get_node("Cat")
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "move":
 		if cat.CURRENT_LASER < cat.LASER_COUNT-1:

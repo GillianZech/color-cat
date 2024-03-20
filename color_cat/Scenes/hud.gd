@@ -13,7 +13,6 @@ func _physics_process(_delta):
 
 func update_score(score, animate):
 	# play an animation that makes it immediately large and then slowly shrink back to normal size
-	#food_count+=1
 	$FoodCount.text = "Food collected: "+str(score)
 	if animate:
 		$AnimationPlayer.play("food_collected")

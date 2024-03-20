@@ -4,7 +4,6 @@ extends Area2D
 @onready var BUCKET_SPRITE = $BucketSprite
 
 func _physics_process(_delta):
-	#BUCKET_SPRITE.play("idle")
 	pass
 
 func _on_body_entered(body):

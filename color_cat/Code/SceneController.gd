@@ -45,6 +45,7 @@ func _on_animation_player_animation_finished(anim_name):
 			CURRENT_LEVEL = NEXT_LEVEL
 			CURRENT_LEVEL_NAME = NEXT_LEVEL_NAME
 			CURRENT_LEVEL.visible = true
+			hud.pfood_count = hud.food_count
 			ANIM.play("fade_out")
 		else:
 			RELOAD = load("res://Scenes/" + CURRENT_LEVEL_NAME + (".tscn")).instantiate()
