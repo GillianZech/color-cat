@@ -8,8 +8,8 @@ var ACCELERATION = 30
 var PAINT_COLOR = "Gray"
 var DJUMP_USED = false
 var DOORS_LOCKED
-var FOOD_COUNT
 var FOOD_APPEARED
+var FOOD_COUNT = 0
 var PREV_FOOD_COUNT = 0
 var DEAD = false
 
@@ -37,8 +37,8 @@ func _reset():
 	DOORS_LOCKED = true
 	CURRENT_LASER = 0
 	LASER_COUNT = 0
-	FOOD_COUNT = PREV_FOOD_COUNT
-	get_parent().get_parent().get_node("HUD").update_score(FOOD_COUNT, false)
+	#FOOD_COUNT = PREV_FOOD_COUNT
+	#get_parent().get_parent().get_node("HUD").update_score(FOOD_COUNT, false)
 	if get_parent().get_node("EndArea"):
 		get_parent().get_node("EndArea").visible = false
 	
