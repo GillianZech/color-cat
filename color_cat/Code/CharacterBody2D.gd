@@ -13,6 +13,7 @@ var FOOD_COUNT = 0
 var PREV_FOOD_COUNT = 0
 var DEAD = false
 
+@onready var hud = get_parent().get_parent().get_node("HUD")
 @onready var ANIM_SPRITE = $CatSprite
 @onready var ANIM_PLAYER = $AnimationPlayer
 @onready var DUST_PARTICLES = $DustParticles
@@ -164,6 +165,8 @@ func _die():
 	get_parent().get_parent()._restart()
 	get_node("Death").play()
 	_reset()
+	#hud.food_count = hud.pfood_count
+	#hud.update_score(hud.food_count, false)
 	DEAD = false
 
 func _change_color(NEW_COLOR):

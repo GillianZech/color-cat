@@ -7,6 +7,7 @@ extends Node
 @onready var NEXT_LEVEL_NAME: String = "Level2"
 @onready var RELOAD
 @onready var ADVANCING: bool
+@onready var hud = get_node("HUD")
 
 @export var ANIM: AnimationPlayer
 
@@ -23,13 +24,13 @@ func _physics_process(_delta):
 func _update_scene(NEXT_DESTINATION_NAME):
 	NEXT_LEVEL_NAME = NEXT_DESTINATION_NAME
 	# make HUD invisible
-	get_node("HUD").visible = false
+	hud.visible = false
 	ADVANCING = true
 	ANIM.play("fade_in")
 
 func _restart():
 	# make HUD invisible
-	get_node("HUD").visible = false
+	hud.visible = false
 	ADVANCING = false
 	ANIM.play("fade_in")
 	#_update_scene(CURRENT_LEVEL_NAME)
@@ -52,7 +53,9 @@ func _on_animation_player_animation_finished(anim_name):
 			CURRENT_LEVEL.queue_free()
 			CURRENT_LEVEL = RELOAD
 			CURRENT_LEVEL.visible = true
+			hud.food_count = hud.pfood_count
+			hud.update_score(hud.food_count, false)
 			ANIM.play("fade_out")
 	if anim_name == "fade_out":
 		# make HUD visible
-		get_node("HUD").visible = true
+		hud.visible = true
