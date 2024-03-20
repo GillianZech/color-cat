@@ -55,7 +55,7 @@ func _on_animation_player_animation_finished(anim_name):
 			CURRENT_LEVEL = RELOAD
 			CURRENT_LEVEL.visible = true
 			hud.food_count = hud.pfood_count
-			hud.update_score(hud.food_count, false)
+			hud.update_score(false)
 			ANIM.play("fade_out")
 	if anim_name == "fade_out":
 		# make HUD visible

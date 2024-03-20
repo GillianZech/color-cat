@@ -15,7 +15,7 @@ func _on_body_entered(_body):
 	$CollectSound.play()
 	visible = true
 	hud.food_count+=1
-	hud.update_score(hud.food_count, true)
+	hud.update_score(true)
 	set_collision_layer_value(4, 0)
 	set_collision_mask_value(1, 0)
 	COLLECTED = true

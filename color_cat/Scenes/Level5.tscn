@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://hw3yfb3xyhdm"]
+
+[ext_resource type="PackedScene" uid="uid://dykbqv6sog3xw" path="res://Scenes/EndArea.tscn" id="1_de421"]
+
+[node name="Level5" type="Node2D"]
+
+[node name="EndArea" parent="." instance=ExtResource("1_de421")]
+NEXT_LEVEL = "EndDemo"
