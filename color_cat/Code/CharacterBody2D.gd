@@ -10,6 +10,7 @@ var DJUMP_USED = false
 var DOORS_LOCKED
 var FOOD_COUNT
 var FOOD_APPEARED
+var PREV_FOOD_COUNT = 0
 var DEAD = false
 
 @onready var ANIM_SPRITE = $CatSprite
@@ -19,21 +20,16 @@ var DEAD = false
 @onready var WALK_AUDIO = $WalkAudio
 @onready var CURRENT_LASER
 @onready var LASER_COUNT
-
-#@export var DOORS_PARENT: Node2D
-#@onready var DOORS_PARENT: Node2D
 @onready var DOORS: Array
-#@onready var CAN_PARENT: Node2D
 @onready var FOOD: Array
-#@onready var LASERS_PARENT: Node2D
 @onready var LASERS: Array
 @onready var BUCKETS: Array
-
 @onready var LOCK_AUDIO
 @onready var UNLOCK_AUDIO
 
 # Code that runs at the start of the game
 func _ready():
+	#PREV_FOOD_COUNT = 0
 	_reset()
 	
 func _reset():
@@ -41,7 +37,7 @@ func _reset():
 	DOORS_LOCKED = true
 	CURRENT_LASER = 0
 	LASER_COUNT = 0
-	FOOD_COUNT = 0
+	FOOD_COUNT = PREV_FOOD_COUNT
 	get_parent().get_parent().get_node("HUD").update_score(FOOD_COUNT, false)
 	if get_parent().get_node("EndArea"):
 		get_parent().get_node("EndArea").visible = false
@@ -80,6 +76,7 @@ func _reset():
 			get_parent().get_node("Lasers").get_child(0).visible = true
 	else:
 		LASERS = []
+		# if there are no lasers, then EndArea should be visible immediately
 		if get_parent().get_node("EndArea"):
 			get_parent().get_node("EndArea").visible = true
 

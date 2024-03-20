@@ -2,12 +2,13 @@ extends Area2D
 
 @onready var FOOD_SPRITE = $FoodSprite
 @export var COLLECTED = false
-func _physics_process(_delta):
-	_animate()
-	
-func _animate():
-	FOOD_SPRITE.play("idle")
 
+func _ready():
+	$CollectSound.set_volume_db(-20)
+
+func _physics_process(_delta):
+	FOOD_SPRITE.play("idle")
+	
 func _on_body_entered(body):
 	$AnimationPlayer.play("collect") # will be invisible at end of animation
 	$CollectSound.play()

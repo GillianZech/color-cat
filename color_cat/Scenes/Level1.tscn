@@ -1549,6 +1549,48 @@ libraries = {
 [node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can7"]
 stream = ExtResource("20_84rj5")
 
+[node name="Can8" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(10528, 288)
+collision_layer = 8
+script = ExtResource("10_st7eo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can8"]
+shape = SubResource("CircleShape2D_spdgo")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can8"]
+sprite_frames = SubResource("SpriteFrames_rtf0l")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can8"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can8"]
+stream = ExtResource("20_84rj5")
+
+[node name="Can9" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(10528, 64)
+collision_layer = 8
+script = ExtResource("10_st7eo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can9"]
+shape = SubResource("CircleShape2D_spdgo")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can9"]
+sprite_frames = SubResource("SpriteFrames_rtf0l")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can9"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can9"]
+stream = ExtResource("20_84rj5")
+
 [node name="Doors" type="Node2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Doors"]
@@ -1827,6 +1869,10 @@ volume_db = -15.0
 [connection signal="body_entered" from="Food/Can6" to="Food/Can6" method="_on_body_entered"]
 [connection signal="area_entered" from="Food/Can7" to="Buckets/PaintBucket3" method="_on_food_area_entered"]
 [connection signal="body_entered" from="Food/Can7" to="Food/Can7" method="_on_body_entered"]
+[connection signal="area_entered" from="Food/Can8" to="Buckets/PaintBucket3" method="_on_food_area_entered"]
+[connection signal="body_entered" from="Food/Can8" to="Food/Can8" method="_on_body_entered"]
+[connection signal="area_entered" from="Food/Can9" to="Buckets/PaintBucket3" method="_on_food_area_entered"]
+[connection signal="body_entered" from="Food/Can9" to="Food/Can9" method="_on_body_entered"]
 [connection signal="body_entered" from="Lasers/Laser" to="Lasers/Laser" method="_on_body_entered"]
 [connection signal="animation_finished" from="Lasers/Laser/AnimationPlayer" to="Lasers/Laser" method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Lasers/Laser2" to="Lasers/Laser2" method="_on_body_entered"]
