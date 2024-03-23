@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://hw3yfb3xyhdm"]
+[gd_scene load_steps=3 format=3 uid="uid://hw3yfb3xyhdm"]
 
 [ext_resource type="PackedScene" uid="uid://dykbqv6sog3xw" path="res://Scenes/EndArea.tscn" id="1_de421"]
+[ext_resource type="TileSet" uid="uid://cpefih0yhovpw" path="res://Scenes/steel.tres" id="2_y1j3v"]
 
 [node name="Level5" type="Node2D"]
 
 [node name="EndArea" parent="." instance=ExtResource("1_de421")]
 NEXT_LEVEL = "EndDemo"
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_y1j3v")
+format = 2

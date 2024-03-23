@@ -24,7 +24,7 @@ func _on_animation_player_animation_finished(anim_name):
 
 # originally I made a timer for the exact length of the move animation,
 # but using _on_animation_player_animation_finished made more sense.
-# I saved the code in case I want to make another timer elsewhere.
+# I saved this code here in case I want to make another timer elsewhere.
 
 # (part of on_body_entered):
 		#var timer : Timer = Timer.new()
