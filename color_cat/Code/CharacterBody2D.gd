@@ -9,7 +9,7 @@ var PAINT_COLOR = "Gray"
 var DJUMP_USED = false
 var DOORS_LOCKED
 var FOOD_APPEARED
-var DEAD = false
+#var DEAD = false
 
 @onready var hud = get_parent().get_parent().get_node("HUD")
 @onready var ANIM_SPRITE = $CatSprite
@@ -76,13 +76,9 @@ func _reset():
 		if get_parent().get_node("EndArea"):
 			get_parent().get_node("EndArea").visible = true
 
-func _jump_animation():
-	ANIM_SPRITE.play("jump")
-	if INPUT_VECTOR.y < -0.9:
-		ANIM_SPRITE.play("fall")
 # Code that runs every frame
 func _physics_process(_delta):
-	if not DEAD:
+	if not get_parent().get_parent().freeze:
 		_animate()
 		
 		# Set x variable of input to right - left
@@ -154,13 +150,16 @@ func _animate():
 	if INPUT_VECTOR.x > 0:
 		ANIM_SPRITE.flip_h = false
 
+func _jump_animation():
+	ANIM_SPRITE.play("jump")
+	if INPUT_VECTOR.y < -0.9:
+		ANIM_SPRITE.play("fall")
+
 func _die():
-	DEAD = true
 	ANIM_PLAYER.play("Death")
 	get_parent().get_parent()._restart()
 	get_node("Death").play()
 	_reset()
-	DEAD = false
 
 func _change_color(NEW_COLOR):
 	PAINT_COLOR = NEW_COLOR
@@ -191,7 +190,7 @@ func _change_color(NEW_COLOR):
 		self.modulate = Color(1,1,1)
 		_reset_speed()
 		_lock_doors()
-		
+
 func _lock_doors():
 	if not DOORS_LOCKED:
 		for door in DOORS:
@@ -202,7 +201,6 @@ func _lock_doors():
 		#DOORS.$LockAudio.play()
 			#LOCK_AUDIO.play()
 		DOORS_LOCKED = true
-		
+
 func _reset_speed():
 	SPEED = 600
-

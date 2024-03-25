@@ -8,6 +8,7 @@ extends Node
 @onready var RELOAD
 @onready var ADVANCING: bool
 @onready var hud = get_node("HUD")
+var freeze = false
 
 @export var ANIM: AnimationPlayer
 
@@ -26,12 +27,14 @@ func _update_scene(NEXT_DESTINATION_NAME):
 	# make HUD invisible
 	hud.visible = false
 	ADVANCING = true
+	freeze = true
 	ANIM.play("fade_in")
 
 func _restart():
 	# make HUD invisible
 	hud.visible = false
 	ADVANCING = false
+	freeze = true
 	ANIM.play("fade_in")
 	#_update_scene(CURRENT_LEVEL_NAME)
 
@@ -57,6 +60,7 @@ func _on_animation_player_animation_finished(anim_name):
 			hud.food_count = hud.pfood_count
 			hud.update_score(false)
 			ANIM.play("fade_out")
-	if anim_name == "fade_out":
+	if anim_name == "fade_out": #do these things once the level fully loads back in
 		# make HUD visible
 		hud.visible = true
+		freeze = false
