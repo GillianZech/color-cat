@@ -163,7 +163,7 @@ terrain_set_0/terrain_0/name = "Steel"
 terrain_set_0/terrain_0/color = Color(0.184314, 1, 0.2, 1)
 sources/2 = SubResource("TileSetAtlasSource_mpuo8")
 
-[node name="Level4" type="Node2D"]
+[node name="EndDemo" type="Node2D"]
 
 [node name="ScsBackgroundSunrise01" type="Sprite2D" parent="."]
 position = Vector2(650.641, 117)

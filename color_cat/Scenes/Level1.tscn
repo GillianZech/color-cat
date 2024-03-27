@@ -1,4 +1,4 @@
-[gd_scene load_steps=131 format=3 uid="uid://n63lnk86ts66"]
+[gd_scene load_steps=132 format=3 uid="uid://n63lnk86ts66"]
 
 [ext_resource type="Texture2D" uid="uid://nxein6hl20v5" path="res://Assets/background/SCS_Background_Daytime_01.png" id="1_3kedn"]
 [ext_resource type="Texture2D" uid="uid://2rfrc5obvcv" path="res://Assets/background/SCS_Skyline_Daytime_Layer03.png" id="2_dfbr5"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://cg6kriqlt02sj" path="res://Assets/food.png" id="11_yx0rl"]
 [ext_resource type="PackedScene" uid="uid://dykbqv6sog3xw" path="res://Scenes/EndArea.tscn" id="12_bxdkk"]
 [ext_resource type="AudioStream" uid="uid://07jpj77vqh2s" path="res://Sounds/lock.ogg" id="12_cu348"]
+[ext_resource type="Theme" uid="uid://da0ea5sht0oet" path="res://Scenes/handlee.tres" id="12_djx1g"]
 [ext_resource type="AudioStream" uid="uid://8ktkbjjr4fnp" path="res://Sounds/unlock.ogg" id="13_dbwnn"]
 [ext_resource type="Texture2D" uid="uid://c2w10jq5oih56" path="res://Assets/laser.png" id="13_hvm88"]
 [ext_resource type="Script" path="res://Scenes/Laser.gd" id="15_cvthf"]
@@ -1129,25 +1130,92 @@ layer_0/tile_data = PackedInt32Array(655361, 65538, 1, 589825, 65538, 1, 524289,
 [node name="Text" type="Node2D" parent="."]
 
 [node name="BlueText" type="Sprite2D" parent="Text"]
+visible = false
 position = Vector2(2224, 20)
 scale = Vector2(0.57, 0.57)
 texture = ExtResource("18_koa4e")
 
 [node name="YellowText" type="Sprite2D" parent="Text"]
+visible = false
 position = Vector2(4386, 31)
 texture = ExtResource("19_6emji")
 
 [node name="RedText" type="Sprite2D" parent="Text"]
+visible = false
 position = Vector2(6226, 54)
 texture = ExtResource("20_k7hu8")
 
 [node name="BlackText" type="Sprite2D" parent="Text"]
+visible = false
 position = Vector2(6234, 1027)
 texture = ExtResource("21_xrrx1")
 
 [node name="BlackText2" type="Sprite2D" parent="Text"]
+visible = false
 position = Vector2(10006, 98)
 texture = ExtResource("23_610m7")
+
+[node name="HighspeedDoublejump" type="Label" parent="Text"]
+offset_left = 2111.0
+offset_top = -113.0
+offset_right = 2541.0
+offset_bottom = 116.0
+theme = ExtResource("12_djx1g")
+theme_override_colors/font_color = Color(0, 0, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 84
+text = "High speed!
+Double jump!"
+
+[node name="Unlockdoors" type="Label" parent="Text"]
+offset_left = 4155.0
+offset_top = -4.0
+offset_right = 4621.0
+offset_bottom = 135.0
+theme = ExtResource("12_djx1g")
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 84
+text = "Unlock doors!"
+
+[node name="Makeuncollectedfoodvisible" type="Label" parent="Text"]
+offset_left = 5847.0
+offset_top = -41.0
+offset_right = 6848.0
+offset_bottom = 98.0
+theme = ExtResource("12_djx1g")
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 84
+text = "Make uncollected food visible!"
+
+[node name="Exploretheleveltocollectfood" type="Label" parent="Text"]
+offset_left = 5807.0
+offset_top = 62.0
+offset_right = 6890.0
+offset_bottom = 201.0
+theme = ExtResource("12_djx1g")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 84
+text = "Explore the level to collect food!"
+
+[node name="Youmaycollectinvisiblefood" type="Label" parent="Text"]
+offset_left = 5706.0
+offset_top = 994.0
+offset_right = 6789.0
+offset_bottom = 1133.0
+theme = ExtResource("12_djx1g")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 84
+text = "You may collect invisible food..."
+
+[node name="Thatpeskylaser" type="Label" parent="Text"]
+offset_left = 9811.0
+offset_top = 54.0
+offset_right = 10894.0
+offset_bottom = 193.0
+theme = ExtResource("12_djx1g")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 84
+text = "That pesky laser..."
 
 [node name="Cat" parent="." instance=ExtResource("2_dl4qo")]
 position = Vector2(408, 288)
