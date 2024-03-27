@@ -19,4 +19,4 @@ func _on_animation_player_animation_finished(anim_name):
 func _continue():
 	get_parent().get_parent()._update_scene(NEXT_LEVEL)
 	$AudioStreamPlayer2D.play()
-	get_parent().get_node("Cat")._reset()
+	#get_parent().get_node("Cat")._reset()

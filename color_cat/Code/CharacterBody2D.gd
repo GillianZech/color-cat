@@ -22,15 +22,9 @@ var FOOD_APPEARED
 @onready var FOOD: Array
 @onready var LASERS: Array
 @onready var BUCKETS: Array
-@onready var LOCK_AUDIO
-@onready var UNLOCK_AUDIO
 
 # Code that runs at the start of the game
 func _ready():
-	_reset()
-
-func _reset():
-	print("reset")
 	FOOD_APPEARED = false
 	DOORS_LOCKED = true
 	CURRENT_LASER = 0
@@ -159,7 +153,7 @@ func _die():
 	ANIM_PLAYER.play("Death")
 	get_node("Death").play()
 	get_parent().get_parent()._restart()
-	_reset()
+	#_reset()
 
 func _change_color(NEW_COLOR):
 	PAINT_COLOR = NEW_COLOR
