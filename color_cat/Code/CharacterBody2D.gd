@@ -9,7 +9,6 @@ var PAINT_COLOR = "Gray"
 var DJUMP_USED = false
 var DOORS_LOCKED
 var FOOD_APPEARED
-#var DEAD = false
 
 @onready var hud = get_parent().get_parent().get_node("HUD")
 @onready var ANIM_SPRITE = $CatSprite
@@ -29,15 +28,16 @@ var FOOD_APPEARED
 # Code that runs at the start of the game
 func _ready():
 	_reset()
-	
+
 func _reset():
+	print("reset")
 	FOOD_APPEARED = false
 	DOORS_LOCKED = true
 	CURRENT_LASER = 0
 	LASER_COUNT = 0
 	if get_parent().get_node("EndArea"):
 		get_parent().get_node("EndArea").visible = false
-	
+
 	# Buckets
 	if get_parent().get_node("Buckets"): # if getting this node returns not null
 		BUCKETS = get_parent().get_node("Buckets").get_children()
@@ -46,13 +46,13 @@ func _reset():
 				bucket.get_node("BucketSprite").play("idle")
 	else:
 		BUCKETS = []
-		
+
 	# Doors
 	if get_parent().get_node("Doors"): # if getting this node returns not null
 		DOORS = get_parent().get_node("Doors").get_children()
 	else:
 		DOORS = []
-	
+
 	# Food
 	if get_parent().get_node("Food"):
 		FOOD = get_parent().get_node("Food").get_children()
@@ -61,7 +61,7 @@ func _reset():
 				can.visible = false
 	else:
 		FOOD = []
-		
+
 	# Lasers
 	if get_parent().get_node("Lasers"):
 		LASERS = get_parent().get_node("Lasers").get_children()
@@ -157,8 +157,8 @@ func _jump_animation():
 
 func _die():
 	ANIM_PLAYER.play("Death")
-	get_parent().get_parent()._restart()
 	get_node("Death").play()
+	get_parent().get_parent()._restart()
 	_reset()
 
 func _change_color(NEW_COLOR):
@@ -198,8 +198,6 @@ func _lock_doors():
 			door.get_node("LockedDoorSprite").visible = true
 			door.get_node("LockedDoorSprite").play("lock")
 			door.get_node("LockAudio").play()
-		#DOORS.$LockAudio.play()
-			#LOCK_AUDIO.play()
 		DOORS_LOCKED = true
 
 func _reset_speed():
