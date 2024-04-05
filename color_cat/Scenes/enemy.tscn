@@ -1,0 +1,109 @@
+[gd_scene load_steps=10 format=3 uid="uid://cpgsfyulne2ru"]
+
+[ext_resource type="Script" path="res://Code/Enemy.gd" id="1_aer86"]
+[ext_resource type="Texture2D" uid="uid://c2prn803dx582" path="res://Assets/gridcat_left.png" id="2_xn4ws"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ob6f3"]
+radius = 6.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cdqab"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xn4ws")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gj0y3"]
+size = Vector2(20, 4)
+
+[sub_resource type="Animation" id="Animation_k44fl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ac3im"]
+resource_name = "Squish"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1.2, 0.5), Vector2(1.6, 0.5), Vector2(1.2, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sbr8q"]
+_data = {
+"RESET": SubResource("Animation_k44fl"),
+"Squish": SubResource("Animation_ac3im")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nq8gg"]
+radius = 12.0
+height = 63.4626
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 512
+collision_mask = 531
+script = ExtResource("1_aer86")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+rotation = 1.5708
+scale = Vector2(1.7744, 1.88002)
+shape = SubResource("CapsuleShape2D_ob6f3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_cdqab")
+animation = &"idle"
+
+[node name="DeathTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StompBox" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompBox"]
+position = Vector2(0, -12)
+scale = Vector2(2.31998, 1)
+shape = SubResource("RectangleShape2D_gj0y3")
+debug_color = Color(0.996078, 0, 0.211765, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sbr8q")
+}
+
+[node name="HurtArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
+position = Vector2(0, 5)
+rotation = 1.5708
+scale = Vector2(0.56001, 1.11996)
+shape = SubResource("CapsuleShape2D_nq8gg")
+debug_color = Color(0.623529, 0.529412, 0.2, 0.419608)
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="body_entered" from="StompBox" to="." method="_on_stomp_box_body_entered"]
+[connection signal="body_entered" from="HurtArea" to="." method="_on_hurt_area_body_entered"]

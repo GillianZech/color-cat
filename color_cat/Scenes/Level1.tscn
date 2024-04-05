@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=3 uid="uid://n63lnk86ts66"]
+[gd_scene load_steps=128 format=3 uid="uid://n63lnk86ts66"]
 
 [ext_resource type="Texture2D" uid="uid://nxein6hl20v5" path="res://Assets/background/SCS_Background_Daytime_01.png" id="1_3kedn"]
 [ext_resource type="Texture2D" uid="uid://2rfrc5obvcv" path="res://Assets/background/SCS_Skyline_Daytime_Layer03.png" id="2_dfbr5"]
@@ -29,6 +29,7 @@
 [ext_resource type="AudioStream" uid="uid://b05d6g0x3njyo" path="res://Sounds/eat.ogg" id="20_84rj5"]
 [ext_resource type="Texture2D" uid="uid://cgeushhu2cvhc" path="res://Assets/paint_bucket_yellow_sprite_sheet.png" id="20_p7vb6"]
 [ext_resource type="AudioStream" uid="uid://c0lpt3ae8jucd" path="res://Sounds/laser.ogg" id="27_4othl"]
+[ext_resource type="PackedScene" uid="uid://cpgsfyulne2ru" path="res://Scenes/enemy.tscn" id="27_hhwdx"]
 [ext_resource type="PackedScene" uid="uid://dkwnokg50alof" path="res://Scenes/Spike.tscn" id="34_38fuf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hgufp"]
@@ -1186,9 +1187,6 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 84
 text = "That pesky laser..."
 
-[node name="Cat" parent="." instance=ExtResource("2_dl4qo")]
-position = Vector2(408, 288)
-
 [node name="Buckets" type="Node2D" parent="."]
 
 [node name="PaintBucket" type="Area2D" parent="Buckets"]
@@ -1711,6 +1709,11 @@ libraries = {
 stream = ExtResource("27_4othl")
 volume_db = -15.0
 
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource("27_hhwdx")]
+position = Vector2(849, 308)
+
 [node name="EndArea" parent="." instance=ExtResource("12_bxdkk")]
 position = Vector2(8339, 294)
 
@@ -1726,6 +1729,9 @@ shape = SubResource("RectangleShape2D_4tpfr")
 
 [node name="Death" type="AudioStreamPlayer2D" parent="DeathPlane"]
 stream = ExtResource("18_l8bih")
+
+[node name="Cat" parent="." instance=ExtResource("2_dl4qo")]
+position = Vector2(408, 288)
 
 [connection signal="body_entered" from="Buckets/PaintBucket" to="Buckets/PaintBucket" method="_on_body_entered"]
 [connection signal="animation_finished" from="Buckets/PaintBucket/BucketSprite" to="Buckets/PaintBucket" method="_on_bucket_sprite_animation_finished"]

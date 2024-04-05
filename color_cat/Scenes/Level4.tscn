@@ -522,6 +522,43 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Animation" id="Animation_phcdy"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LaserSprite:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-0.00012207, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LaserSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LaserSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_74k53"]
 resource_name = "move"
 length = 0.55
@@ -560,7 +597,13 @@ tracks/2/keys = {
 "values": [true, true, false]
 }
 
-[sub_resource type="Animation" id="Animation_phcdy"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xhn3u"]
+_data = {
+"RESET": SubResource("Animation_phcdy"),
+"move": SubResource("Animation_74k53")
+}
+
+[sub_resource type="Animation" id="Animation_kiikt"]
 length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
@@ -570,7 +613,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-0.00012207, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/1/type = "bezier"
@@ -595,12 +638,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xhn3u"]
-_data = {
-"RESET": SubResource("Animation_phcdy"),
-"move": SubResource("Animation_74k53")
 }
 
 [sub_resource type="Animation" id="Animation_ulsqw"]
@@ -641,7 +678,13 @@ tracks/2/keys = {
 "values": [true, true, false]
 }
 
-[sub_resource type="Animation" id="Animation_kiikt"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bxhnd"]
+_data = {
+"RESET": SubResource("Animation_kiikt"),
+"move": SubResource("Animation_ulsqw")
+}
+
+[sub_resource type="Animation" id="Animation_x2yum"]
 length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
@@ -676,12 +719,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bxhnd"]
-_data = {
-"RESET": SubResource("Animation_kiikt"),
-"move": SubResource("Animation_ulsqw")
 }
 
 [sub_resource type="Animation" id="Animation_ww2e7"]
@@ -722,23 +759,30 @@ tracks/2/keys = {
 "values": [true, true, false]
 }
 
-[sub_resource type="Animation" id="Animation_x2yum"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_refqw"]
+_data = {
+"RESET": SubResource("Animation_x2yum"),
+"move": SubResource("Animation_ww2e7")
+}
+
+[sub_resource type="Animation" id="Animation_lflpg"]
 length = 0.001
-tracks/0/type = "bezier"
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("LaserSprite:position:x")
+tracks/0/path = NodePath("LaserSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("LaserSprite:position:y")
+tracks/1/path = NodePath("LaserSprite:position:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -746,23 +790,16 @@ tracks/1/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
-tracks/2/type = "value"
+tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("LaserSprite:visible")
+tracks/2/path = NodePath("LaserSprite:position:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_refqw"]
-_data = {
-"RESET": SubResource("Animation_x2yum"),
-"move": SubResource("Animation_ww2e7")
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="Animation" id="Animation_7g1p0"]
@@ -803,24 +840,29 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5)
 }
 
-[sub_resource type="Animation" id="Animation_lflpg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4sxen"]
+_data = {
+"RESET": SubResource("Animation_lflpg"),
+"move": SubResource("Animation_7g1p0")
+}
+
+[sub_resource type="Animation" id="Animation_vjxof"]
 length = 0.001
-tracks/0/type = "value"
+tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("LaserSprite:visible")
+tracks/0/path = NodePath("LaserSprite:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("LaserSprite:position:x")
+tracks/1/path = NodePath("LaserSprite:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -828,22 +870,17 @@ tracks/1/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
-tracks/2/type = "bezier"
+tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("LaserSprite:position:y")
+tracks/2/path = NodePath("LaserSprite:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4sxen"]
-_data = {
-"RESET": SubResource("Animation_lflpg"),
-"move": SubResource("Animation_7g1p0")
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_1et3w"]
@@ -884,7 +921,13 @@ tracks/2/keys = {
 "values": [true, true, false]
 }
 
-[sub_resource type="Animation" id="Animation_vjxof"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_esdrc"]
+_data = {
+"RESET": SubResource("Animation_vjxof"),
+"move": SubResource("Animation_1et3w")
+}
+
+[sub_resource type="Animation" id="Animation_el88k"]
 length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
@@ -919,12 +962,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_esdrc"]
-_data = {
-"RESET": SubResource("Animation_vjxof"),
-"move": SubResource("Animation_1et3w")
 }
 
 [sub_resource type="Animation" id="Animation_sbo3g"]
@@ -963,43 +1000,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, true, false]
-}
-
-[sub_resource type="Animation" id="Animation_el88k"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LaserSprite:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LaserSprite:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LaserSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6wmst"]

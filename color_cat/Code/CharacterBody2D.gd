@@ -83,25 +83,11 @@ func _physics_process(_delta):
 		velocity.y += GRAVITY
 		
 		if Input.is_action_just_pressed("move_up") and is_on_floor():
-			velocity.y = JUMP_STRENGTH
-			WALK_AUDIO.stop()
-			DUST_PARTICLES.emitting = false
-			JUMP_AUDIO.play()
-			JUMP_AUDIO.pitch_scale = randf_range(3.6, 4.0)
-			ANIM_PLAYER.seek(0)
-			ANIM_PLAYER.play("JumpSquish")
-			_jump_animation()
+			jump("low")
 			
 		if Input.is_action_just_pressed("move_up") and not is_on_floor() and PAINT_COLOR == "Blue" and DJUMP_USED == false:
-			velocity.y = JUMP_STRENGTH
-			WALK_AUDIO.stop()
-			DUST_PARTICLES.emitting = false
-			JUMP_AUDIO.play()
-			JUMP_AUDIO.pitch_scale = randf_range(4.0, 4.2)
-			ANIM_PLAYER.seek(0)
-			ANIM_PLAYER.play("JumpSquish")
+			jump("high")
 			DJUMP_USED = true
-			_jump_animation()
 		
 		if Input.is_action_pressed("move_right") and velocity.x < SPEED:
 			velocity.x += ACCELERATION
@@ -144,7 +130,17 @@ func _animate():
 	if INPUT_VECTOR.x > 0:
 		ANIM_SPRITE.flip_h = false
 
-func _jump_animation():
+func jump(pitch):
+	velocity.y = JUMP_STRENGTH
+	WALK_AUDIO.stop()
+	DUST_PARTICLES.emitting = false
+	JUMP_AUDIO.play()
+	if pitch == "low":
+		JUMP_AUDIO.pitch_scale = randf_range(3.6, 4.0)
+	else:
+		JUMP_AUDIO.pitch_scale = randf_range(4.0, 4.2)
+	ANIM_PLAYER.seek(0)
+	ANIM_PLAYER.play("JumpSquish")
 	ANIM_SPRITE.play("jump")
 	if INPUT_VECTOR.y < -0.9:
 		ANIM_SPRITE.play("fall")
@@ -153,7 +149,6 @@ func _die():
 	ANIM_PLAYER.play("Death")
 	get_node("Death").play()
 	get_parent().get_parent()._restart()
-	#_reset()
 
 func _change_color(NEW_COLOR):
 	PAINT_COLOR = NEW_COLOR
