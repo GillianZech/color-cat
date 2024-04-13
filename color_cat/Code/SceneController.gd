@@ -13,7 +13,7 @@ var freeze = false
 @export var ANIM: AnimationPlayer
 
 func _ready():
-	pass
+	$BackgroundMusic.play()
 	
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("restart"): # R key

@@ -1,24 +1,47 @@
 extends CharacterBody2D
-@export var DEAD = false
-@export var WALK_SPEED = 100
+
+@export var SPEED = 100
 @export var DIRECTION = -1
+@export var is_flying_enemy = false
 @onready var cat = get_parent().get_parent().get_node("Cat")
+
 var GRAVITY = 30
 var JUMP_VELOCITY = -400
+var DEAD = false
+
+var TARGET_VECTOR = Vector2(0,0)
+var ENGAGE_DISTANCE = 300
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
 	if not DEAD:
-		var DIRECT = cat.position.x - position.x
-		if DIRECT >= 0:
-			DIRECTION = 1
-			$AnimatedSprite2D.flip_h = true
+		if is_flying_enemy:
+			TARGET_VECTOR = cat.position - position
+			if TARGET_VECTOR.length() < ENGAGE_DISTANCE:
+				# normalized() makes it equal to 1 but keeps the coordinates
+				# so it goes in the right direction
+				TARGET_VECTOR = TARGET_VECTOR.normalized()
+				velocity = TARGET_VECTOR * SPEED
+			else:
+				velocity = Vector2(0,0)
 		else:
-			DIRECTION = -1
-			$AnimatedSprite2D.flip_h = false
-		velocity.x = WALK_SPEED*DIRECTION
-		if not is_on_floor():
-			velocity.y += GRAVITY
+			var DIRECT = cat.position.x - position.x
+			if DIRECT >= 0:
+				DIRECTION = 1
+				$AnimatedSprite2D.flip_h = true
+			else:
+				DIRECTION = -1
+				$AnimatedSprite2D.flip_h = false
+			TARGET_VECTOR = cat.position - position
+			if TARGET_VECTOR.length() < ENGAGE_DISTANCE:
+				TARGET_VECTOR = TARGET_VECTOR.normalized()
+				velocity.x = SPEED*DIRECTION
+			else:
+				velocity.x = 0
+			if not is_on_floor():
+				velocity.y += GRAVITY
+		#if $RayCast2D.is_colliding():
+			#$RayCast2D.target_position.x = $RayCast2D.target_position.x + -1
 		move_and_slide()
 
 func die():

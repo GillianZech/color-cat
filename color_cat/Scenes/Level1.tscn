@@ -1714,6 +1714,14 @@ volume_db = -15.0
 [node name="Enemy" parent="Enemies" instance=ExtResource("27_hhwdx")]
 position = Vector2(849, 308)
 
+[node name="Enemy2" parent="Enemies" instance=ExtResource("27_hhwdx")]
+position = Vector2(921, 134)
+is_flying_enemy = true
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource("27_hhwdx")]
+position = Vector2(2318, 183)
+is_flying_enemy = true
+
 [node name="EndArea" parent="." instance=ExtResource("12_bxdkk")]
 position = Vector2(8339, 294)
 

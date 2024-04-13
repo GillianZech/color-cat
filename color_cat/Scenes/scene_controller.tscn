@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bro0nk6v5146y"]
+[gd_scene load_steps=10 format=3 uid="uid://bro0nk6v5146y"]
 
 [ext_resource type="PackedScene" uid="uid://n63lnk86ts66" path="res://Scenes/Level1.tscn" id="1_0tiaa"]
 [ext_resource type="Script" path="res://Code/SceneController.gd" id="1_kyn8p"]
 [ext_resource type="AudioStream" uid="uid://b5y1fgkb5iplb" path="res://Sounds/weramp.ogg" id="3_w7o3t"]
 [ext_resource type="PackedScene" uid="uid://b2svwmqbe8ryq" path="res://Scenes/hud.tscn" id="4_duthn"]
+[ext_resource type="AudioStream" uid="uid://pllq2g8c63nh" path="res://Sounds/16bar.ogg" id="5_h4uy0"]
 
 [sub_resource type="Animation" id="Animation_vdcqd"]
 length = 0.001
@@ -81,5 +82,11 @@ color = Color(0, 0, 0, 1)
 
 [node name="Restart" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_w7o3t")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_h4uy0")
+volume_db = -22.106
+max_distance = 1e+09
+attenuation = 0.01
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
