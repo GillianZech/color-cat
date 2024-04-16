@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk3jgga1aa22v"]
+
+[ext_resource type="Script" path="res://Code/title_screen.gd" id="1_68akn"]
+[ext_resource type="FontFile" uid="uid://b5wr2pvb464e8" path="res://Fonts/Handlee-Regular.ttf" id="2_rfmo8"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_68akn")
+
+[node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 96.0
+offset_right = 1056.0
+offset_bottom = 359.0
+theme_override_fonts/normal_font = ExtResource("2_rfmo8")
+theme_override_font_sizes/normal_font_size = 196
+text = "Color Cat"
+fit_content = true
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 416.0
+offset_right = 768.0
+offset_bottom = 480.0
+theme_override_fonts/font = ExtResource("2_rfmo8")
+theme_override_font_sizes/font_size = 36
+text = "START"
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 544.0
+offset_right = 768.0
+offset_bottom = 608.0
+theme_override_fonts/font = ExtResource("2_rfmo8")
+theme_override_font_sizes/font_size = 36
+text = "QUIT"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

@@ -107,6 +107,8 @@ func _physics_process(_delta):
 		
 		# move the character according to velocity
 		move_and_slide()
+	else:
+		ANIM_SPRITE.pause()
 
 func _animate():
 	if INPUT_VECTOR.x > 0:

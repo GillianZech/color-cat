@@ -14,7 +14,7 @@ var ENGAGE_DISTANCE = 300
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
-	if not DEAD:
+	if not DEAD and not get_parent().get_parent().get_parent().freeze:
 		if is_flying_enemy:
 			TARGET_VECTOR = cat.position - position
 			if TARGET_VECTOR.length() < ENGAGE_DISTANCE:
@@ -62,9 +62,6 @@ func _on_stomp_box_body_entered(body):
 		$HurtArea.set_collision_mask_value(1, 0)
 		die()
 		body.jump("high")
-	pass # Replace with function body.
-
 
 func _on_hurt_area_body_entered(body):
 	body._die()
-	pass # Replace with function body.

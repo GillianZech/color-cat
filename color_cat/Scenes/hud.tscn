@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2svwmqbe8ryq"]
+[gd_scene load_steps=7 format=3 uid="uid://b2svwmqbe8ryq"]
 
 [ext_resource type="Script" path="res://Scenes/hud.gd" id="1_f7acf"]
 [ext_resource type="Theme" uid="uid://da0ea5sht0oet" path="res://Scenes/handlee.tres" id="2_mtu6p"]
+[ext_resource type="FontFile" uid="uid://b5wr2pvb464e8" path="res://Fonts/Handlee-Regular.ttf" id="3_fon5s"]
 
 [sub_resource type="Animation" id="Animation_x7wvj"]
 length = 0.001
@@ -49,10 +50,22 @@ offset_right = 337.0
 offset_bottom = 55.0
 theme = ExtResource("2_mtu6p")
 theme_override_font_sizes/font_size = 40
-text = "Food collected: 0"
+text = "Food collected this round: 0
+Food collected overall: 0"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../FoodCount")
 libraries = {
 "": SubResource("AnimationLibrary_o6jwf")
 }
+
+[node name="PauseButton" type="Button" parent="."]
+offset_left = 1200.0
+offset_top = 8.0
+offset_right = 1272.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("3_fon5s")
+theme_override_font_sizes/font_size = 24
+text = "Pause"
+
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]

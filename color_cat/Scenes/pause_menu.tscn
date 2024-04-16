@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsjhk3bsxa73u"]
+
+[ext_resource type="Script" path="res://Code/pause_menu.gd" id="1_nttqx"]
+[ext_resource type="FontFile" uid="uid://b5wr2pvb464e8" path="res://Fonts/Handlee-Regular.ttf" id="1_u3oc8"]
+[ext_resource type="PackedScene" uid="uid://btdvu7dmj18dn" path="res://Scenes/settings_menu.tscn" id="3_3sto3"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+script = ExtResource("1_nttqx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(0, 0, 0, 0.466667)
+offset_right = 1280.0
+offset_bottom = 736.0
+
+[node name="Unpause" type="Button" parent="."]
+offset_left = 544.0
+offset_top = 128.0
+offset_right = 736.0
+offset_bottom = 224.0
+theme_override_fonts/font = ExtResource("1_u3oc8")
+theme_override_font_sizes/font_size = 32
+text = "Unpause"
+
+[node name="Settings" type="Button" parent="."]
+offset_left = 544.0
+offset_top = 256.0
+offset_right = 736.0
+offset_bottom = 352.0
+theme_override_fonts/font = ExtResource("1_u3oc8")
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+
+[node name="QuitToTitle" type="Button" parent="."]
+offset_left = 512.0
+offset_top = 384.0
+offset_right = 768.0
+offset_bottom = 480.0
+theme_override_fonts/font = ExtResource("1_u3oc8")
+theme_override_font_sizes/font_size = 32
+text = "Quit to title screen"
+
+[node name="QuitAndClose" type="Button" parent="."]
+offset_left = 512.0
+offset_top = 512.0
+offset_right = 768.0
+offset_bottom = 608.0
+theme_override_fonts/font = ExtResource("1_u3oc8")
+theme_override_font_sizes/font_size = 32
+text = "Quit and close"
+
+[node name="SettingsMenu" parent="." instance=ExtResource("3_3sto3")]
+visible = false
+
+[connection signal="pressed" from="Unpause" to="." method="_on_unpause_pressed"]
+[connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="QuitToTitle" to="." method="_on_quit_to_title_pressed"]
+[connection signal="pressed" from="QuitAndClose" to="." method="_on_quit_and_close_pressed"]
