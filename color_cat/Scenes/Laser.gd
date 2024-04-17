@@ -1,14 +1,17 @@
 extends Area2D
 @onready var LASER_SPRITE = $LaserSprite
-@onready var cat = self.get_parent().get_node("Cat")
-#@onready var MARKERS = get_parent().get_node("Markers").get_children() # array of positions (markers)
-#@onready var markers_amount = MARKERS.size()
 @onready var markers = get_parent().get_node("Markers") # just a node, not an array you can get size of
-@onready var markers_amount = get_parent().get_node("Markers").get_children().size() # array of positions (markers) that I'm getting the size of
+# get_children() gives array of positions (markers) that I'm getting the size of
+@onready var markers_amount = get_parent().get_node("Markers").get_children().size()
+@export var collision_scale = Vector2(8,8)
 var current_marker = 0
 var tween
+var tween_speed = 0.5
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _ready():
+	$CollisionShape2D.set_scale(collision_scale)
+	pass
+
 func _physics_process(_delta):
 	LASER_SPRITE.play("idle")
 
@@ -17,19 +20,17 @@ func _on_body_entered(_body):
 	tween = create_tween()
 	if current_marker == markers_amount: # gone through all markers, now go to EndArea position
 		var new_position = get_parent().get_node("EndArea").position
-		tween.tween_property(self, "global_position", new_position, 0.5).set_trans(Tween.EASE_OUT)
+		tween.tween_property(self, "global_position", new_position, tween_speed).set_trans(Tween.EASE_OUT)
 		tween.finished.connect(tween_finished) # links signal of tween finishing just like _on_body_entered
 	else:
 		var new_position = markers.get_child(current_marker).position
 		# Tween the node's position from current to next position
-		tween.tween_property(self, "global_position", new_position, 0.5).set_trans(Tween.EASE_OUT)
+		tween.tween_property(self, "global_position", new_position, tween_speed).set_trans(Tween.EASE_OUT)
 		current_marker+=1
 
 func tween_finished():
 	get_parent().get_node("EndArea").visible = true
 	visible = false
-	
-
 
 
 

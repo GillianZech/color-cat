@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=3 uid="uid://hw3yfb3xyhdm"]
+[gd_scene load_steps=91 format=3 uid="uid://hw3yfb3xyhdm"]
 
 [ext_resource type="PackedScene" uid="uid://dykbqv6sog3xw" path="res://Scenes/EndArea.tscn" id="1_de421"]
 [ext_resource type="TileSet" uid="uid://cpefih0yhovpw" path="res://Scenes/steel.tres" id="2_y1j3v"]
@@ -18,11 +18,9 @@
 [ext_resource type="Script" path="res://Food.gd" id="16_ybclf"]
 [ext_resource type="Texture2D" uid="uid://cg6kriqlt02sj" path="res://Assets/food.png" id="17_hms6f"]
 [ext_resource type="AudioStream" uid="uid://b05d6g0x3njyo" path="res://Sounds/eat.ogg" id="18_bd4w4"]
-[ext_resource type="Script" path="res://Scenes/Laser.gd" id="19_mu66x"]
-[ext_resource type="Texture2D" uid="uid://c2w10jq5oih56" path="res://Assets/laser.png" id="20_ceta0"]
-[ext_resource type="AudioStream" uid="uid://c0lpt3ae8jucd" path="res://Sounds/laser.ogg" id="21_gjr16"]
 [ext_resource type="PackedScene" uid="uid://dkwnokg50alof" path="res://Scenes/Spike.tscn" id="22_4xt8e"]
 [ext_resource type="PackedScene" uid="uid://cpgsfyulne2ru" path="res://Scenes/enemy.tscn" id="23_la8ac"]
+[ext_resource type="PackedScene" uid="uid://18j8qm76751c" path="res://Scenes/laser.tscn" id="24_kwfho"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rwmtx"]
 size = Vector2(24, 64)
@@ -582,316 +580,7 @@ _data = {
 "collect": SubResource("Animation_mylwv")
 }
 
-[sub_resource type="GDScript" id="GDScript_w16w0"]
-script/source = "extends Area2D
-@onready var LASER_SPRITE = $LaserSprite
-@onready var cat = self.get_parent().get_parent().get_node(\"Cat\")
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta):
-	LASER_SPRITE.play(\"idle\")
-
-func _on_body_entered(_body):
-	if visible:
-		$AudioStreamPlayer2D.play()
-		$AnimationPlayer.play(\"move\") # will be invisible at end of animation
-		set_collision_layer_value(6, 0)
-		set_collision_mask_value(1, 0)
-
-func _on_animation_player_animation_finished(anim_name):
-	if anim_name == \"move\":
-		if cat.CURRENT_LASER < cat.LASER_COUNT-1:
-			cat.CURRENT_LASER += 1
-			get_parent().get_child(cat.CURRENT_LASER).visible = true
-		else:
-			get_parent().get_parent().get_node(\"EndArea\").visible = true
-
-
-# originally I made a timer for the exact length of the move animation,
-# but using _on_animation_player_animation_finished made more sense.
-# I saved this code here in case I want to make another timer elsewhere.
-
-# (part of on_body_entered):
-		#var timer : Timer = Timer.new()
-		#add_child(timer)
-		#timer.wait_time = 0.55
-		#timer.autostart = false
-		#timer.one_shot = true
-		#timer.timeout.connect(_on_timer_timeout)
-		#timer.start()
-#func _on_timer_timeout():
-	#if cat.CURRENT_LASER >= cat.LASER_COUNT - 1:
-		#get_parent().get_parent().get_node(\"EndArea\").visible = true
-	#else:
-		#cat.CURRENT_LASER += 1
-		#get_parent().get_child(cat.CURRENT_LASER).visible = true
-
-
-# my attempt at automating laser animations
-
-#func _move(cat):
-	#var animPlayer = AnimationPlayer.new()
-	#add_child(animPlayer)
-	#var lib : AnimationLibrary = AnimationLibrary.new()
-	#var next = Animation.new()
-	#lib.add_animation(\"next\", next)
-	#animPlayer.add_animation_library(\"lib\", lib)
-	#
-	#
-	#next.add_track(0)
-	#next.length = 0.55
-	#var path = String(self.get_path()) + \":position\"
-	#next.track_set_path(0, path)
-	#next.track_insert_key(0, 0.0, 1)
-	#next.track_insert_key(0, 100.0, 3)
-	#next.track_insert_key(0, 200.0, 5)
-	#next.track_insert_key(0, 300.0, 7)
-	#animPlayer.play(\"next\")
-
-"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_pq76j"]
-radius = 5.33333
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jrswt"]
-atlas = ExtResource("20_ceta0")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3th3g"]
-atlas = ExtResource("20_ceta0")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2p41a"]
-atlas = ExtResource("20_ceta0")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1qvs5"]
-atlas = ExtResource("20_ceta0")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uwbyy"]
-atlas = ExtResource("20_ceta0")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xaigm"]
-atlas = ExtResource("20_ceta0")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_udpqe"]
-atlas = ExtResource("20_ceta0")
-region = Rect2(192, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jb8sv"]
-atlas = ExtResource("20_ceta0")
-region = Rect2(224, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w2icx"]
-atlas = ExtResource("20_ceta0")
-region = Rect2(256, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_oou5r"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jrswt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3th3g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2p41a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1qvs5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uwbyy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xaigm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_udpqe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jb8sv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w2icx")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 10.0
-}]
-
-[sub_resource type="Animation" id="Animation_phcdy"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LaserSprite:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-0.00012207, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LaserSprite:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LaserSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_74k53"]
-resource_local_to_scene = true
-resource_name = "move"
-length = 0.55
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LaserSprite:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-0.00012207, -0.25, 0, 0.25, 0, -682.667, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LaserSprite:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 149.333, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LaserSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.55),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, true, false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xhn3u"]
-_data = {
-"RESET": SubResource("Animation_phcdy"),
-"move": SubResource("Animation_74k53")
-}
-
-[sub_resource type="Animation" id="Animation_kiikt"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LaserSprite:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LaserSprite:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LaserSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_ulsqw"]
-resource_name = "move"
-length = 0.55
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LaserSprite:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1066.67, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LaserSprite:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -42.6667, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LaserSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.55),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, true, false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bxhnd"]
-_data = {
-"RESET": SubResource("Animation_kiikt"),
-"move": SubResource("Animation_ulsqw")
-}
-
 [node name="Level5" type="Node2D"]
-
-[node name="EndArea" parent="." instance=ExtResource("1_de421")]
-position = Vector2(672, 256)
-NEXT_LEVEL = "Level6"
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_y1j3v")
@@ -1658,239 +1347,6 @@ libraries = {
 [node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can7"]
 stream = ExtResource("18_bd4w4")
 
-[node name="Lasers" type="Node2D" parent="."]
-
-[node name="Laser" type="Area2D" parent="Lasers"]
-position = Vector2(352, 64)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = SubResource("GDScript_w16w0")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser"]
-scale = Vector2(4, 4)
-shape = SubResource("CircleShape2D_pq76j")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser"]
-position = Vector2(-0.00012207, 0)
-sprite_frames = SubResource("SpriteFrames_oou5r")
-animation = &"idle"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser"]
-stream = ExtResource("21_gjr16")
-volume_db = -15.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Lasers/Laser"]
-libraries = {
-"": SubResource("AnimationLibrary_xhn3u")
-}
-
-[node name="Laser2" type="Area2D" parent="Lasers"]
-position = Vector2(928, -224)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("19_mu66x")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser2"]
-scale = Vector2(4, 4)
-shape = SubResource("CircleShape2D_pq76j")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser2"]
-sprite_frames = SubResource("SpriteFrames_oou5r")
-animation = &"idle"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser2"]
-stream = ExtResource("21_gjr16")
-volume_db = -15.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Lasers/Laser2"]
-libraries = {
-"": SubResource("AnimationLibrary_bxhnd")
-}
-
-[node name="Laser3" type="Area2D" parent="Lasers"]
-position = Vector2(928, -416)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("19_mu66x")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser3"]
-scale = Vector2(4, 4)
-shape = SubResource("CircleShape2D_pq76j")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser3"]
-sprite_frames = SubResource("SpriteFrames_oou5r")
-animation = &"idle"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser3"]
-stream = ExtResource("21_gjr16")
-volume_db = -15.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Lasers/Laser3"]
-libraries = {
-"": SubResource("AnimationLibrary_bxhnd")
-}
-
-[node name="Laser4" type="Area2D" parent="Lasers"]
-position = Vector2(224, -416)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("19_mu66x")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser4"]
-scale = Vector2(4, 4)
-shape = SubResource("CircleShape2D_pq76j")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser4"]
-sprite_frames = SubResource("SpriteFrames_oou5r")
-animation = &"idle"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser4"]
-stream = ExtResource("21_gjr16")
-volume_db = -15.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Lasers/Laser4"]
-libraries = {
-"": SubResource("AnimationLibrary_bxhnd")
-}
-
-[node name="Laser5" type="Area2D" parent="Lasers"]
-position = Vector2(800, -704)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("19_mu66x")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser5"]
-scale = Vector2(4, 4)
-shape = SubResource("CircleShape2D_pq76j")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser5"]
-sprite_frames = SubResource("SpriteFrames_oou5r")
-animation = &"idle"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser5"]
-stream = ExtResource("21_gjr16")
-volume_db = -15.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Lasers/Laser5"]
-libraries = {
-"": SubResource("AnimationLibrary_bxhnd")
-}
-
-[node name="Laser6" type="Area2D" parent="Lasers"]
-position = Vector2(800, -1088)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("19_mu66x")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser6"]
-scale = Vector2(4, 4)
-shape = SubResource("CircleShape2D_pq76j")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser6"]
-sprite_frames = SubResource("SpriteFrames_oou5r")
-animation = &"idle"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser6"]
-stream = ExtResource("21_gjr16")
-volume_db = -15.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Lasers/Laser6"]
-libraries = {
-"": SubResource("AnimationLibrary_bxhnd")
-}
-
-[node name="Laser7" type="Area2D" parent="Lasers"]
-position = Vector2(448, -992)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("19_mu66x")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser7"]
-scale = Vector2(4, 4)
-shape = SubResource("CircleShape2D_pq76j")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser7"]
-sprite_frames = SubResource("SpriteFrames_oou5r")
-animation = &"idle"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser7"]
-stream = ExtResource("21_gjr16")
-volume_db = -15.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Lasers/Laser7"]
-libraries = {
-"": SubResource("AnimationLibrary_bxhnd")
-}
-
-[node name="Laser8" type="Area2D" parent="Lasers"]
-position = Vector2(96, -1216)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("19_mu66x")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser8"]
-scale = Vector2(4, 4)
-shape = SubResource("CircleShape2D_pq76j")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser8"]
-sprite_frames = SubResource("SpriteFrames_oou5r")
-animation = &"idle"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser8"]
-stream = ExtResource("21_gjr16")
-volume_db = -15.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Lasers/Laser8"]
-libraries = {
-"": SubResource("AnimationLibrary_bxhnd")
-}
-
-[node name="Laser9" type="Area2D" parent="Lasers"]
-position = Vector2(1280, -832)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("19_mu66x")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser9"]
-scale = Vector2(4, 4)
-shape = SubResource("CircleShape2D_pq76j")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser9"]
-sprite_frames = SubResource("SpriteFrames_oou5r")
-animation = &"idle"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser9"]
-stream = ExtResource("21_gjr16")
-volume_db = -15.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Lasers/Laser9"]
-libraries = {
-"": SubResource("AnimationLibrary_bxhnd")
-}
-
-[node name="Laser10" type="Area2D" parent="Lasers"]
-position = Vector2(96, -64)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("19_mu66x")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser10"]
-scale = Vector2(4, 4)
-shape = SubResource("CircleShape2D_pq76j")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser10"]
-sprite_frames = SubResource("SpriteFrames_oou5r")
-animation = &"idle"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser10"]
-stream = ExtResource("21_gjr16")
-volume_db = -15.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Lasers/Laser10"]
-libraries = {
-"": SubResource("AnimationLibrary_bxhnd")
-}
-
 [node name="Spikes" type="Node2D" parent="."]
 
 [node name="Spike" parent="Spikes" instance=ExtResource("22_4xt8e")]
@@ -1931,6 +1387,43 @@ is_flying_enemy = true
 [node name="Enemy4" parent="Enemies" instance=ExtResource("23_la8ac")]
 position = Vector2(704, -960)
 is_flying_enemy = true
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Markers"]
+position = Vector2(928, -224)
+
+[node name="Marker2D2" type="Marker2D" parent="Markers"]
+position = Vector2(928, -416)
+
+[node name="Marker2D3" type="Marker2D" parent="Markers"]
+position = Vector2(224, -416)
+
+[node name="Marker2D4" type="Marker2D" parent="Markers"]
+position = Vector2(800, -704)
+
+[node name="Marker2D5" type="Marker2D" parent="Markers"]
+position = Vector2(800, -1088)
+
+[node name="Marker2D6" type="Marker2D" parent="Markers"]
+position = Vector2(448, -992)
+
+[node name="Marker2D7" type="Marker2D" parent="Markers"]
+position = Vector2(96, -1216)
+
+[node name="Marker2D8" type="Marker2D" parent="Markers"]
+position = Vector2(1280, -832)
+
+[node name="Marker2D9" type="Marker2D" parent="Markers"]
+position = Vector2(96, -64)
+
+[node name="Laser" parent="." instance=ExtResource("24_kwfho")]
+position = Vector2(352, 64)
+collision_scale = Vector2(4, 4)
+
+[node name="EndArea" parent="." instance=ExtResource("1_de421")]
+position = Vector2(672, 256)
+NEXT_LEVEL = "Level6"
 
 [node name="Cat" parent="." instance=ExtResource("3_wwg0h")]
 position = Vector2(256, 352)
@@ -1979,23 +1472,3 @@ scale = Vector2(0.75, 0.75)
 [connection signal="body_entered" from="Food/Can5" to="Food/Can5" method="_on_body_entered"]
 [connection signal="body_entered" from="Food/Can6" to="Food/Can6" method="_on_body_entered"]
 [connection signal="body_entered" from="Food/Can7" to="Food/Can7" method="_on_body_entered"]
-[connection signal="body_entered" from="Lasers/Laser" to="Lasers/Laser" method="_on_body_entered"]
-[connection signal="animation_finished" from="Lasers/Laser/AnimationPlayer" to="Lasers/Laser" method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="Lasers/Laser2" to="Lasers/Laser2" method="_on_body_entered"]
-[connection signal="animation_finished" from="Lasers/Laser2/AnimationPlayer" to="Lasers/Laser2" method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="Lasers/Laser3" to="Lasers/Laser3" method="_on_body_entered"]
-[connection signal="animation_finished" from="Lasers/Laser3/AnimationPlayer" to="Lasers/Laser3" method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="Lasers/Laser4" to="Lasers/Laser4" method="_on_body_entered"]
-[connection signal="animation_finished" from="Lasers/Laser4/AnimationPlayer" to="Lasers/Laser4" method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="Lasers/Laser5" to="Lasers/Laser5" method="_on_body_entered"]
-[connection signal="animation_finished" from="Lasers/Laser5/AnimationPlayer" to="Lasers/Laser5" method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="Lasers/Laser6" to="Lasers/Laser6" method="_on_body_entered"]
-[connection signal="animation_finished" from="Lasers/Laser6/AnimationPlayer" to="Lasers/Laser6" method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="Lasers/Laser7" to="Lasers/Laser7" method="_on_body_entered"]
-[connection signal="animation_finished" from="Lasers/Laser7/AnimationPlayer" to="Lasers/Laser7" method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="Lasers/Laser8" to="Lasers/Laser8" method="_on_body_entered"]
-[connection signal="animation_finished" from="Lasers/Laser8/AnimationPlayer" to="Lasers/Laser8" method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="Lasers/Laser9" to="Lasers/Laser9" method="_on_body_entered"]
-[connection signal="animation_finished" from="Lasers/Laser9/AnimationPlayer" to="Lasers/Laser9" method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="Lasers/Laser10" to="Lasers/Laser10" method="_on_body_entered"]
-[connection signal="animation_finished" from="Lasers/Laser10/AnimationPlayer" to="Lasers/Laser10" method="_on_animation_player_animation_finished"]

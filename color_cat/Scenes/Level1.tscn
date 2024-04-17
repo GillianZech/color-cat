@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=3 uid="uid://n63lnk86ts66"]
+[gd_scene load_steps=101 format=3 uid="uid://n63lnk86ts66"]
 
 [ext_resource type="Texture2D" uid="uid://nxein6hl20v5" path="res://Assets/background/SCS_Background_Daytime_01.png" id="1_3kedn"]
 [ext_resource type="Texture2D" uid="uid://2rfrc5obvcv" path="res://Assets/background/SCS_Skyline_Daytime_Layer03.png" id="2_dfbr5"]
@@ -20,16 +20,14 @@
 [ext_resource type="AudioStream" uid="uid://07jpj77vqh2s" path="res://Sounds/lock.ogg" id="12_cu348"]
 [ext_resource type="Theme" uid="uid://da0ea5sht0oet" path="res://Scenes/handlee.tres" id="12_djx1g"]
 [ext_resource type="AudioStream" uid="uid://8ktkbjjr4fnp" path="res://Sounds/unlock.ogg" id="13_dbwnn"]
-[ext_resource type="Texture2D" uid="uid://c2w10jq5oih56" path="res://Assets/laser.png" id="13_hvm88"]
-[ext_resource type="Script" path="res://Scenes/Laser.gd" id="15_cvthf"]
 [ext_resource type="Texture2D" uid="uid://csdax0y8win6l" path="res://Assets/paint_bucket_red_sprite_sheet.png" id="15_fh2il"]
 [ext_resource type="Script" path="res://Scenes/DeathPlane.gd" id="17_rp3yh"]
 [ext_resource type="Texture2D" uid="uid://cwvgcwiuqi1b2" path="res://Assets/paint_bucket_blue_sprite_sheet.png" id="18_j1yib"]
 [ext_resource type="AudioStream" uid="uid://b5y1fgkb5iplb" path="res://Sounds/weramp.ogg" id="18_l8bih"]
 [ext_resource type="AudioStream" uid="uid://b05d6g0x3njyo" path="res://Sounds/eat.ogg" id="20_84rj5"]
 [ext_resource type="Texture2D" uid="uid://cgeushhu2cvhc" path="res://Assets/paint_bucket_yellow_sprite_sheet.png" id="20_p7vb6"]
-[ext_resource type="AudioStream" uid="uid://c0lpt3ae8jucd" path="res://Sounds/laser.ogg" id="27_4othl"]
 [ext_resource type="PackedScene" uid="uid://cpgsfyulne2ru" path="res://Scenes/enemy.tscn" id="27_hhwdx"]
+[ext_resource type="PackedScene" uid="uid://18j8qm76751c" path="res://Scenes/laser.tscn" id="32_me4h2"]
 [ext_resource type="PackedScene" uid="uid://dkwnokg50alof" path="res://Scenes/Spike.tscn" id="34_38fuf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hgufp"]
@@ -593,474 +591,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u3440"]
 size = Vector2(28.976, 76.6732)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_x4su4"]
-radius = 11.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jrswt"]
-atlas = ExtResource("13_hvm88")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3th3g"]
-atlas = ExtResource("13_hvm88")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2p41a"]
-atlas = ExtResource("13_hvm88")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1qvs5"]
-atlas = ExtResource("13_hvm88")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uwbyy"]
-atlas = ExtResource("13_hvm88")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xaigm"]
-atlas = ExtResource("13_hvm88")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_udpqe"]
-atlas = ExtResource("13_hvm88")
-region = Rect2(192, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jb8sv"]
-atlas = ExtResource("13_hvm88")
-region = Rect2(224, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w2icx"]
-atlas = ExtResource("13_hvm88")
-region = Rect2(256, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_fg6i2"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jrswt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3th3g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2p41a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1qvs5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uwbyy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xaigm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_udpqe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jb8sv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w2icx")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 10.0
-}]
-
-[sub_resource type="Animation" id="Animation_jge2c"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LaserSprite:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LaserSprite:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LaserSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_v07e6"]
-resource_name = "move"
-length = 0.55
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LaserSprite:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1226, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LaserSprite:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 5.33334, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LaserSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.55),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, true, false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jygca"]
-_data = {
-"RESET": SubResource("Animation_jge2c"),
-"move": SubResource("Animation_v07e6")
-}
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_gbcg5"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jrswt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3th3g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2p41a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1qvs5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uwbyy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xaigm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_udpqe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jb8sv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w2icx")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 10.0
-}]
-
-[sub_resource type="Animation" id="Animation_2qo81"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LaserSprite:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LaserSprite:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LaserSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_xx3cx"]
-resource_name = "move"
-length = 0.55
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LaserSprite:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 812.667, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LaserSprite:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 6, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LaserSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.55),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, true, false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rwiwp"]
-_data = {
-"RESET": SubResource("Animation_2qo81"),
-"move": SubResource("Animation_xx3cx")
-}
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_2fntk"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jrswt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3th3g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2p41a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1qvs5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uwbyy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xaigm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_udpqe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jb8sv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w2icx")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 10.0
-}]
-
-[sub_resource type="Animation" id="Animation_r0y8i"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LaserSprite:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LaserSprite:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LaserSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_ffmyi"]
-resource_name = "move"
-length = 0.55
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LaserSprite:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1660, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LaserSprite:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -100.667, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LaserSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.55),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, true, false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qo7sb"]
-_data = {
-"RESET": SubResource("Animation_r0y8i"),
-"move": SubResource("Animation_ffmyi")
-}
-
-[sub_resource type="Animation" id="Animation_hcfdx"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LaserSprite:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LaserSprite:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LaserSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_b7f0q"]
-resource_name = "move"
-length = 0.55
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LaserSprite:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 973.333, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LaserSprite:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 104, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LaserSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.55),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, true, false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_81qh6"]
-_data = {
-"RESET": SubResource("Animation_hcfdx"),
-"move": SubResource("Animation_b7f0q")
-}
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4tpfr"]
 size = Vector2(145, 162.5)
 
@@ -1612,103 +1142,6 @@ position = Vector2(2048, 256)
 [node name="Spike4" parent="Spikes" instance=ExtResource("34_38fuf")]
 position = Vector2(6656, 128)
 
-[node name="Lasers" type="Node2D" parent="."]
-z_index = 3
-
-[node name="Laser" type="Area2D" parent="Lasers"]
-position = Vector2(1329, 280)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("15_cvthf")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser"]
-scale = Vector2(4, 4)
-shape = SubResource("CircleShape2D_x4su4")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser"]
-sprite_frames = SubResource("SpriteFrames_fg6i2")
-animation = &"idle"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Lasers/Laser"]
-libraries = {
-"": SubResource("AnimationLibrary_jygca")
-}
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser"]
-stream = ExtResource("27_4othl")
-volume_db = -15.0
-
-[node name="Laser2" type="Area2D" parent="Lasers"]
-position = Vector2(3168, 288)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("15_cvthf")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser2"]
-scale = Vector2(4, 4)
-shape = SubResource("CircleShape2D_x4su4")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser2"]
-sprite_frames = SubResource("SpriteFrames_gbcg5")
-animation = &"idle"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Lasers/Laser2"]
-libraries = {
-"": SubResource("AnimationLibrary_rwiwp")
-}
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser2"]
-stream = ExtResource("27_4othl")
-volume_db = -15.0
-
-[node name="Laser3" type="Area2D" parent="Lasers"]
-position = Vector2(4389, 289)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("15_cvthf")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser3"]
-scale = Vector2(4, 4)
-shape = SubResource("CircleShape2D_x4su4")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser3"]
-sprite_frames = SubResource("SpriteFrames_2fntk")
-animation = &"idle"
-frame_progress = 0.842958
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Lasers/Laser3"]
-libraries = {
-"": SubResource("AnimationLibrary_qo7sb")
-}
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser3"]
-stream = ExtResource("27_4othl")
-volume_db = -15.0
-
-[node name="Laser4" type="Area2D" parent="Lasers"]
-position = Vector2(6879, 138)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("15_cvthf")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser4"]
-scale = Vector2(4, 4)
-shape = SubResource("CircleShape2D_x4su4")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser4"]
-sprite_frames = SubResource("SpriteFrames_2fntk")
-animation = &"idle"
-frame_progress = 0.842958
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Lasers/Laser4"]
-libraries = {
-"": SubResource("AnimationLibrary_81qh6")
-}
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser4"]
-stream = ExtResource("27_4othl")
-volume_db = -15.0
-
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Enemy" parent="Enemies" instance=ExtResource("27_hhwdx")]
@@ -1722,9 +1155,6 @@ is_flying_enemy = true
 position = Vector2(5098, 185)
 is_flying_enemy = true
 
-[node name="EndArea" parent="." instance=ExtResource("12_bxdkk")]
-position = Vector2(8339, 294)
-
 [node name="DeathPlane" type="Area2D" parent="."]
 position = Vector2(2053, 534)
 scale = Vector2(2.12, 1)
@@ -1737,6 +1167,23 @@ shape = SubResource("RectangleShape2D_4tpfr")
 
 [node name="Death" type="AudioStreamPlayer2D" parent="DeathPlane"]
 stream = ExtResource("18_l8bih")
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Markers"]
+position = Vector2(3168, 288)
+
+[node name="Marker2D2" type="Marker2D" parent="Markers"]
+position = Vector2(4384, 288)
+
+[node name="Marker2D3" type="Marker2D" parent="Markers"]
+position = Vector2(6879, 138)
+
+[node name="Laser" parent="." instance=ExtResource("32_me4h2")]
+position = Vector2(1312, 288)
+
+[node name="EndArea" parent="." instance=ExtResource("12_bxdkk")]
+position = Vector2(8339, 294)
 
 [node name="Cat" parent="." instance=ExtResource("2_dl4qo")]
 position = Vector2(408, 288)
@@ -1767,12 +1214,4 @@ position = Vector2(408, 288)
 [connection signal="body_entered" from="Food/Can8" to="Food/Can8" method="_on_body_entered"]
 [connection signal="area_entered" from="Food/Can9" to="Buckets/PaintBucket3" method="_on_food_area_entered"]
 [connection signal="body_entered" from="Food/Can9" to="Food/Can9" method="_on_body_entered"]
-[connection signal="body_entered" from="Lasers/Laser" to="Lasers/Laser" method="_on_body_entered"]
-[connection signal="animation_finished" from="Lasers/Laser/AnimationPlayer" to="Lasers/Laser" method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="Lasers/Laser2" to="Lasers/Laser2" method="_on_body_entered"]
-[connection signal="animation_finished" from="Lasers/Laser2/AnimationPlayer" to="Lasers/Laser2" method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="Lasers/Laser3" to="Lasers/Laser3" method="_on_body_entered"]
-[connection signal="animation_finished" from="Lasers/Laser3/AnimationPlayer" to="Lasers/Laser3" method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="Lasers/Laser4" to="Lasers/Laser4" method="_on_body_entered"]
-[connection signal="animation_finished" from="Lasers/Laser4/AnimationPlayer" to="Lasers/Laser4" method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="DeathPlane" to="DeathPlane" method="_on_body_entered"]

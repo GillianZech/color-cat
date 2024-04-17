@@ -1,98 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://dc1uruj2epvks"]
+[gd_scene load_steps=5 format=3 uid="uid://dc1uruj2epvks"]
 
 [ext_resource type="PackedScene" uid="uid://dykbqv6sog3xw" path="res://Scenes/EndArea.tscn" id="1_odb00"]
 [ext_resource type="TileSet" uid="uid://cpefih0yhovpw" path="res://Scenes/steel.tres" id="2_ueeqq"]
 [ext_resource type="PackedScene" uid="uid://c0judastlvqt1" path="res://Scenes/Cat.tscn" id="3_6pyn4"]
-[ext_resource type="Script" path="res://Scenes/Laser.gd" id="4_6vpb6"]
-[ext_resource type="Texture2D" uid="uid://c2w10jq5oih56" path="res://Assets/laser.png" id="4_65lgr"]
-[ext_resource type="AudioStream" uid="uid://c0lpt3ae8jucd" path="res://Sounds/laser.ogg" id="5_fqcyu"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_t8rfx"]
-radius = 5.33333
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jrswt"]
-atlas = ExtResource("4_65lgr")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3th3g"]
-atlas = ExtResource("4_65lgr")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2p41a"]
-atlas = ExtResource("4_65lgr")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1qvs5"]
-atlas = ExtResource("4_65lgr")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uwbyy"]
-atlas = ExtResource("4_65lgr")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xaigm"]
-atlas = ExtResource("4_65lgr")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_udpqe"]
-atlas = ExtResource("4_65lgr")
-region = Rect2(192, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jb8sv"]
-atlas = ExtResource("4_65lgr")
-region = Rect2(224, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w2icx"]
-atlas = ExtResource("4_65lgr")
-region = Rect2(256, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_lj1im"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jrswt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3th3g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2p41a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1qvs5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uwbyy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xaigm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_udpqe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jb8sv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w2icx")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 10.0
-}]
+[ext_resource type="PackedScene" uid="uid://18j8qm76751c" path="res://Scenes/laser.tscn" id="4_kc8ug"]
 
 [node name="Level6" type="Node2D"]
-
-[node name="EndArea" parent="." instance=ExtResource("1_odb00")]
-position = Vector2(672, 224)
-NEXT_LEVEL = "EndDemo"
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_ueeqq")
 format = 2
 layer_0/tile_data = PackedInt32Array(524292, 2, 0, 524293, 65538, 0, 524294, 65538, 0, 524295, 65538, 0, 524296, 65538, 0, 524297, 65538, 0, 524298, 65538, 0, 524299, 65538, 0, 524300, 65538, 0, 589836, 65538, 2, 589837, 65538, 2, 589838, 65538, 2, 524302, 65538, 0, 524301, 65538, 0, 589835, 65538, 2, 589834, 65538, 2, 589833, 65538, 2, 589832, 65538, 2, 589829, 65538, 2, 589828, 2, 2, 589830, 65538, 2, 589831, 65538, 2, 524303, 65538, 0, 524304, 65538, 0, 524305, 65538, 0, 524306, 65538, 0, 524307, 65538, 0, 524308, 65538, 0, 524309, 65538, 0, 524310, 65538, 0, 589839, 65538, 2, 589840, 65538, 2, 589841, 65538, 2, 589842, 65538, 2, 589843, 65538, 2, 589844, 65538, 2, 589845, 65538, 2, 589846, 65538, 2, 589847, 131074, 2, 524311, 131074, 0)
-
-[node name="Cat" parent="." instance=ExtResource("3_6pyn4")]
 
 [node name="Markers" type="Node2D" parent="."]
 
@@ -102,23 +20,12 @@ position = Vector2(224, 96)
 [node name="L1" type="Marker2D" parent="Markers"]
 position = Vector2(576, 128)
 
-[node name="Laser" type="Area2D" parent="."]
-position = Vector2(352, 224)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = ExtResource("4_6vpb6")
+[node name="Laser" parent="." instance=ExtResource("4_kc8ug")]
+position = Vector2(320, 224)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Laser"]
-scale = Vector2(4, 4)
-shape = SubResource("CircleShape2D_t8rfx")
+[node name="EndArea" parent="." instance=ExtResource("1_odb00")]
+position = Vector2(672, 224)
+NEXT_LEVEL = "EndDemo"
 
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Laser"]
-position = Vector2(-0.00012207, 0)
-sprite_frames = SubResource("SpriteFrames_lj1im")
-animation = &"idle"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Laser"]
-stream = ExtResource("5_fqcyu")
-volume_db = -15.0
-
-[connection signal="body_entered" from="Laser" to="Laser" method="_on_body_entered"]
+[node name="Cat" parent="." instance=ExtResource("3_6pyn4")]
+position = Vector2(160, 224)
