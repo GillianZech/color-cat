@@ -3,76 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://dykbqv6sog3xw" path="res://Scenes/EndArea.tscn" id="1_odb00"]
 [ext_resource type="TileSet" uid="uid://cpefih0yhovpw" path="res://Scenes/steel.tres" id="2_ueeqq"]
 [ext_resource type="PackedScene" uid="uid://c0judastlvqt1" path="res://Scenes/Cat.tscn" id="3_6pyn4"]
+[ext_resource type="Script" path="res://Scenes/Laser.gd" id="4_6vpb6"]
 [ext_resource type="Texture2D" uid="uid://c2w10jq5oih56" path="res://Assets/laser.png" id="4_65lgr"]
 [ext_resource type="AudioStream" uid="uid://c0lpt3ae8jucd" path="res://Sounds/laser.ogg" id="5_fqcyu"]
-
-[sub_resource type="GDScript" id="GDScript_eieqp"]
-script/source = "extends Area2D
-@onready var LASER_SPRITE = $LaserSprite
-@onready var cat = self.get_parent().get_parent().get_node(\"Cat\")
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta):
-	LASER_SPRITE.play(\"idle\")
-
-func _on_body_entered(_body):
-	if visible:
-		$AudioStreamPlayer2D.play()
-		$AnimationPlayer.play(\"move\") # will be invisible at end of animation
-		set_collision_layer_value(6, 0)
-		set_collision_mask_value(1, 0)
-
-func _on_animation_player_animation_finished(anim_name):
-	if anim_name == \"move\":
-		if cat.CURRENT_LASER < cat.LASER_COUNT-1:
-			cat.CURRENT_LASER += 1
-			get_parent().get_child(cat.CURRENT_LASER).visible = true
-		else:
-			get_parent().get_parent().get_node(\"EndArea\").visible = true
-
-
-# originally I made a timer for the exact length of the move animation,
-# but using _on_animation_player_animation_finished made more sense.
-# I saved this code here in case I want to make another timer elsewhere.
-
-# (part of on_body_entered):
-		#var timer : Timer = Timer.new()
-		#add_child(timer)
-		#timer.wait_time = 0.55
-		#timer.autostart = false
-		#timer.one_shot = true
-		#timer.timeout.connect(_on_timer_timeout)
-		#timer.start()
-#func _on_timer_timeout():
-	#if cat.CURRENT_LASER >= cat.LASER_COUNT - 1:
-		#get_parent().get_parent().get_node(\"EndArea\").visible = true
-	#else:
-		#cat.CURRENT_LASER += 1
-		#get_parent().get_child(cat.CURRENT_LASER).visible = true
-
-
-# my attempt at automating laser animations
-
-#func _move(cat):
-	#var animPlayer = AnimationPlayer.new()
-	#add_child(animPlayer)
-	#var lib : AnimationLibrary = AnimationLibrary.new()
-	#var next = Animation.new()
-	#lib.add_animation(\"next\", next)
-	#animPlayer.add_animation_library(\"lib\", lib)
-	#
-	#
-	#next.add_track(0)
-	#next.length = 0.55
-	#var path = String(self.get_path()) + \":position\"
-	#next.track_set_path(0, path)
-	#next.track_insert_key(0, 0.0, 1)
-	#next.track_insert_key(0, 100.0, 3)
-	#next.track_insert_key(0, 200.0, 5)
-	#next.track_insert_key(0, 300.0, 7)
-	#animPlayer.play(\"next\")
-
-"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t8rfx"]
 radius = 5.33333
@@ -161,45 +94,31 @@ layer_0/tile_data = PackedInt32Array(524292, 2, 0, 524293, 65538, 0, 524294, 655
 
 [node name="Cat" parent="." instance=ExtResource("3_6pyn4")]
 
-[node name="Lasers" type="Node2D" parent="."]
+[node name="Markers" type="Node2D" parent="."]
 
-[node name="Laser" type="Area2D" parent="Lasers"]
+[node name="L0" type="Marker2D" parent="Markers"]
+position = Vector2(224, 96)
+
+[node name="L1" type="Marker2D" parent="Markers"]
+position = Vector2(576, 128)
+
+[node name="Laser" type="Area2D" parent="."]
 position = Vector2(352, 224)
 scale = Vector2(1.5, 1.5)
 collision_layer = 32
-script = SubResource("GDScript_eieqp")
+script = ExtResource("4_6vpb6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Laser"]
 scale = Vector2(4, 4)
 shape = SubResource("CircleShape2D_t8rfx")
 
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser"]
+[node name="LaserSprite" type="AnimatedSprite2D" parent="Laser"]
 position = Vector2(-0.00012207, 0)
 sprite_frames = SubResource("SpriteFrames_lj1im")
 animation = &"idle"
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Laser"]
 stream = ExtResource("5_fqcyu")
 volume_db = -15.0
 
-[node name="Laser2" type="Area2D" parent="Lasers"]
-position = Vector2(512, 224)
-scale = Vector2(1.5, 1.5)
-collision_layer = 32
-script = SubResource("GDScript_eieqp")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers/Laser2"]
-scale = Vector2(4, 4)
-shape = SubResource("CircleShape2D_t8rfx")
-
-[node name="LaserSprite" type="AnimatedSprite2D" parent="Lasers/Laser2"]
-position = Vector2(-0.00012207, 0)
-sprite_frames = SubResource("SpriteFrames_lj1im")
-animation = &"idle"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lasers/Laser2"]
-stream = ExtResource("5_fqcyu")
-volume_db = -15.0
-
-[connection signal="body_entered" from="Lasers/Laser" to="Lasers/Laser" method="_on_body_entered"]
-[connection signal="body_entered" from="Lasers/Laser2" to="Lasers/Laser2" method="_on_body_entered"]
+[connection signal="body_entered" from="Laser" to="Laser" method="_on_body_entered"]

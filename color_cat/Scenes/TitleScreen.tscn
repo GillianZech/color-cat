@@ -43,5 +43,14 @@ theme_override_fonts/font = ExtResource("2_rfmo8")
 theme_override_font_sizes/font_size = 36
 text = "QUIT"
 
+[node name="Level6" type="Button" parent="."]
+layout_mode = 0
+offset_left = 544.0
+offset_top = 320.0
+offset_right = 736.0
+offset_bottom = 384.0
+text = "LEVEL 6 :D"
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Level6" to="." method="_on_level_6_pressed"]

@@ -1,29 +1,36 @@
 extends Area2D
 @onready var LASER_SPRITE = $LaserSprite
-@onready var cat = self.get_parent().get_parent().get_node("Cat")
-
-func _ready():
-	
-	pass
+@onready var cat = self.get_parent().get_node("Cat")
+#@onready var MARKERS = get_parent().get_node("Markers").get_children() # array of positions (markers)
+#@onready var markers_amount = MARKERS.size()
+@onready var markers = get_parent().get_node("Markers") # just a node, not an array you can get size of
+@onready var markers_amount = get_parent().get_node("Markers").get_children().size() # array of positions (markers) that I'm getting the size of
+var current_marker = 0
+var tween
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
 	LASER_SPRITE.play("idle")
 
 func _on_body_entered(_body):
-	if visible:
-		$AudioStreamPlayer2D.play()
-		$AnimationPlayer.play("move") # will be invisible at end of animation
-		set_collision_layer_value(6, 0)
-		set_collision_mask_value(1, 0)
+	$AudioStreamPlayer2D.play()
+	tween = create_tween()
+	if current_marker == markers_amount: # gone through all markers, now go to EndArea position
+		var new_position = get_parent().get_node("EndArea").position
+		tween.tween_property(self, "global_position", new_position, 0.5).set_trans(Tween.EASE_OUT)
+		tween.finished.connect(tween_finished) # links signal of tween finishing just like _on_body_entered
+	else:
+		var new_position = markers.get_child(current_marker).position
+		# Tween the node's position from current to next position
+		tween.tween_property(self, "global_position", new_position, 0.5).set_trans(Tween.EASE_OUT)
+		current_marker+=1
 
-func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "move":
-		if cat.CURRENT_LASER < cat.LASER_COUNT-1:
-			cat.CURRENT_LASER += 1
-			get_parent().get_child(cat.CURRENT_LASER).visible = true
-		else:
-			get_parent().get_parent().get_node("EndArea").visible = true
+func tween_finished():
+	get_parent().get_node("EndArea").visible = true
+	visible = false
+	
+
+
 
 
 # originally I made a timer for the exact length of the move animation,
@@ -44,50 +51,3 @@ func _on_animation_player_animation_finished(anim_name):
 	#else:
 		#cat.CURRENT_LASER += 1
 		#get_parent().get_child(cat.CURRENT_LASER).visible = true
-
-
-# my attempt at automating laser animations
-
-#func _move(cat):
-	#var animPlayer = AnimationPlayer.new()
-	#add_child(animPlayer)
-	#var lib : AnimationLibrary = AnimationLibrary.new()
-	#var next = Animation.new()
-	#lib.add_animation("next", next)
-	#animPlayer.add_animation_library("lib", lib)
-	#
-	#
-	#next.add_track(0)
-	#next.length = 0.55
-	#var path = String(self.get_path()) + ":position"
-	#next.track_set_path(0, path)
-	#next.track_insert_key(0, 0.0, 1)
-	#next.track_insert_key(0, 100.0, 3)
-	#next.track_insert_key(0, 200.0, 5)
-	#next.track_insert_key(0, 300.0, 7)
-	#animPlayer.play("next")
-
-
-
-	#var animation_player = AnimationPlayer.new()
-	#add_child(animation_player)
-#
-	#var animation = Animation.new()
-	#animation_player.add_animation("move", animation)
-#
-	#var transform_track = Animation.Track.TYPE_TRANSFORM
-	#var property_path = "global_position"
-	#var track = animation.add_track(transform_track, property_path)
-	#
-	## Set the length of the animation
-	#animation.set_length(2)
-#
-	## Add keyframes
-	#track.add_key(0)
-	#track.add_key(1)
-	#track.add_key(2)
-#
-	## Set keyframe values
-	#track.set_key_value(0, Vector2(0, 0))
-	#track.set_key_value(1, Vector2(100, 0))
-	#track.set_key_value(2, Vector2(200, 0))

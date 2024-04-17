@@ -18,6 +18,7 @@ var FOOD_APPEARED
 @onready var WALK_AUDIO = $WalkAudio
 @onready var CURRENT_LASER
 @onready var LASER_COUNT
+@onready var laser_positions = []
 @onready var DOORS: Array
 @onready var FOOD: Array
 @onready var LASERS: Array
@@ -57,18 +58,14 @@ func _ready():
 		FOOD = []
 
 	# Lasers
-	if get_parent().get_node("Lasers"):
-		LASERS = get_parent().get_node("Lasers").get_children()
-		if LASERS != []:
-			for laser in LASERS:
-				laser.visible = false
-				LASER_COUNT+=1 # won't change throughout the level but will be different by level
-			get_parent().get_node("Lasers").get_child(0).visible = true
-	else:
-		LASERS = []
-		# if there are no lasers, then EndArea should be visible immediately
-		if get_parent().get_node("EndArea"):
-			get_parent().get_node("EndArea").visible = true
+	#if get_parent().get_node("Lasers"):
+		#LASERS = get_parent().get_node("Lasers").get_children()
+		
+	#else:
+		#LASERS = []
+		## if there are no lasers, then EndArea should be visible immediately
+		#if get_parent().get_node("EndArea"):
+			#get_parent().get_node("EndArea").visible = true
 
 # Code that runs every frame
 func _physics_process(_delta):
