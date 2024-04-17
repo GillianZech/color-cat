@@ -2,6 +2,10 @@ extends Area2D
 @onready var LASER_SPRITE = $LaserSprite
 @onready var cat = self.get_parent().get_parent().get_node("Cat")
 
+func _ready():
+	
+	pass
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
 	LASER_SPRITE.play("idle")
@@ -63,3 +67,27 @@ func _on_animation_player_animation_finished(anim_name):
 	#next.track_insert_key(0, 300.0, 7)
 	#animPlayer.play("next")
 
+
+
+	#var animation_player = AnimationPlayer.new()
+	#add_child(animation_player)
+#
+	#var animation = Animation.new()
+	#animation_player.add_animation("move", animation)
+#
+	#var transform_track = Animation.Track.TYPE_TRANSFORM
+	#var property_path = "global_position"
+	#var track = animation.add_track(transform_track, property_path)
+	#
+	## Set the length of the animation
+	#animation.set_length(2)
+#
+	## Add keyframes
+	#track.add_key(0)
+	#track.add_key(1)
+	#track.add_key(2)
+#
+	## Set keyframe values
+	#track.set_key_value(0, Vector2(0, 0))
+	#track.set_key_value(1, Vector2(100, 0))
+	#track.set_key_value(2, Vector2(200, 0))

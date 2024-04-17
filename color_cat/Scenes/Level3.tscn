@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=3 uid="uid://dc7f5jmb5wlfb"]
+[gd_scene load_steps=130 format=3 uid="uid://dc7f5jmb5wlfb"]
 
 [ext_resource type="Texture2D" uid="uid://dnej6v08nn5ag" path="res://Assets/background/SCS_Background_Nighttime_01.png" id="1_obbwj"]
 [ext_resource type="Texture2D" uid="uid://bb7yj2jt5q0nc" path="res://Assets/background/SCS_Skyline_Nighttime_Layer01.png" id="2_4myvx"]
@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://cgeushhu2cvhc" path="res://Assets/paint_bucket_yellow_sprite_sheet.png" id="21_l5d3g"]
 [ext_resource type="PackedScene" uid="uid://dkwnokg50alof" path="res://Scenes/Spike.tscn" id="22_d2ood"]
 [ext_resource type="AudioStream" uid="uid://c0lpt3ae8jucd" path="res://Sounds/laser.ogg" id="24_qfr1a"]
+[ext_resource type="PackedScene" uid="uid://cpgsfyulne2ru" path="res://Scenes/enemy.tscn" id="30_qj63j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7egkx"]
 size = Vector2(24, 64)
@@ -1207,9 +1208,6 @@ theme = ExtResource("6_shpy2")
 theme_override_font_sizes/font_size = 72
 text = "R to restart"
 
-[node name="Cat" parent="." instance=ExtResource("2_i2ybn")]
-position = Vector2(216, 224)
-
 [node name="EndArea" parent="." instance=ExtResource("14_e5de3")]
 position = Vector2(1408, 352)
 NEXT_LEVEL = "Level4"
@@ -1926,6 +1924,22 @@ libraries = {
 
 [node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can5"]
 stream = ExtResource("14_kmpra")
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource("30_qj63j")]
+position = Vector2(960, 192)
+is_flying_enemy = true
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource("30_qj63j")]
+position = Vector2(4384, 96)
+is_flying_enemy = true
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource("30_qj63j")]
+position = Vector2(4096, 416)
+
+[node name="Cat" parent="." instance=ExtResource("2_i2ybn")]
+position = Vector2(216, 224)
 
 [connection signal="body_entered" from="DeathPlane" to="DeathPlane" method="_on_body_entered"]
 [connection signal="body_entered" from="Buckets/PaintBucket" to="Buckets/PaintBucket" method="_on_body_entered"]

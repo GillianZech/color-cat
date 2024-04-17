@@ -21,7 +21,7 @@ func update_score(animate):
 	# slowly shrink back to normal size
 	#$FoodCount.text = "Food collected this round: "+str(food_count)
 	#$FoodCount.text = "Food collected this round: "+str(food_count-pfood_count)+"\nFood collected overall: "+str(food_count)
-	$FoodCount.text = "Food collected this round: "+str(food_count)+"\nFood collected overall: "+str(food_count+pfood_count)
+	$FoodCount.text = "Food overall: "+str(food_count+pfood_count)+"\nFood this round: "+str(food_count)
 	if animate:
 		$AnimationPlayer.play("food_collected")
 

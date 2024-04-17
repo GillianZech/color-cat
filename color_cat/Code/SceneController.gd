@@ -67,7 +67,8 @@ func _on_animation_player_animation_finished(anim_name):
 			ANIM.play("fade_out")
 	if anim_name == "fade_out": #do these things once the level fully loads back in
 		# make HUD visible
-		if CURRENT_LEVEL != title_screen:
+		#if CURRENT_LEVEL != title_screen:
+		if CURRENT_LEVEL_NAME != "TitleScreen":
 			hud.visible = true
 			if not music.is_playing() and music_switch.button_pressed:
 				music.play()

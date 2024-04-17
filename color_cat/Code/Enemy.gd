@@ -10,7 +10,7 @@ var JUMP_VELOCITY = -400
 var DEAD = false
 
 var TARGET_VECTOR = Vector2(0,0)
-var ENGAGE_DISTANCE = 300
+var ENGAGE_DISTANCE = 500
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
