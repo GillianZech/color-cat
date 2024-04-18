@@ -25,13 +25,108 @@ fit_content = true
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 512.0
+offset_left = 352.0
 offset_top = 256.0
-offset_right = 768.0
+offset_right = 928.0
 offset_bottom = 320.0
 theme_override_fonts/font = ExtResource("2_rfmo8")
 theme_override_font_sizes/font_size = 36
 text = "START"
+
+[node name="Levels" type="Button" parent="."]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 352.0
+offset_right = 608.0
+offset_bottom = 416.0
+theme_override_fonts/font = ExtResource("2_rfmo8")
+theme_override_font_sizes/font_size = 36
+text = "LEVELS"
+
+[node name="LevelButtons" type="Node2D" parent="."]
+visible = false
+
+[node name="Level1" type="Button" parent="LevelButtons"]
+offset_left = 352.0
+offset_top = 448.0
+offset_right = 416.0
+offset_bottom = 512.0
+theme_override_fonts/font = ExtResource("2_rfmo8")
+theme_override_font_sizes/font_size = 36
+text = "1"
+
+[node name="Level2" type="Button" parent="LevelButtons"]
+offset_left = 448.0
+offset_top = 448.0
+offset_right = 512.0
+offset_bottom = 512.0
+theme_override_fonts/font = ExtResource("2_rfmo8")
+theme_override_font_sizes/font_size = 36
+text = "2"
+
+[node name="Level3" type="Button" parent="LevelButtons"]
+offset_left = 544.0
+offset_top = 448.0
+offset_right = 608.0
+offset_bottom = 512.0
+theme_override_fonts/font = ExtResource("2_rfmo8")
+theme_override_font_sizes/font_size = 36
+text = "3"
+
+[node name="Level4" type="Button" parent="LevelButtons"]
+offset_left = 672.0
+offset_top = 448.0
+offset_right = 736.0
+offset_bottom = 512.0
+theme_override_fonts/font = ExtResource("2_rfmo8")
+theme_override_font_sizes/font_size = 36
+text = "4"
+
+[node name="Level5" type="Button" parent="LevelButtons"]
+offset_left = 768.0
+offset_top = 448.0
+offset_right = 832.0
+offset_bottom = 512.0
+theme_override_fonts/font = ExtResource("2_rfmo8")
+theme_override_font_sizes/font_size = 36
+text = "5"
+
+[node name="Level6" type="Button" parent="LevelButtons"]
+offset_left = 864.0
+offset_top = 448.0
+offset_right = 928.0
+offset_bottom = 512.0
+theme_override_fonts/font = ExtResource("2_rfmo8")
+theme_override_font_sizes/font_size = 36
+text = "6"
+
+[node name="ControlsButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 672.0
+offset_top = 352.0
+offset_right = 928.0
+offset_bottom = 416.0
+theme_override_fonts/font = ExtResource("2_rfmo8")
+theme_override_font_sizes/font_size = 36
+text = "CONTROLS"
+
+[node name="ControlsText" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 384.0
+offset_top = 480.0
+offset_right = 896.0
+offset_bottom = 579.0
+theme_override_fonts/normal_font = ExtResource("2_rfmo8")
+theme_override_fonts/bold_font = ExtResource("2_rfmo8")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[u]A/left arrow[/u]: move left             [u]Enter[/u]: pause/unpause
+[u]D/right arrow[/u]: move right        [u]R[/u]: restart level
+[u]W/spacebar/up arrow[/u]: jump"
+fit_content = true
+autowrap_mode = 0
 
 [node name="QuitButton" type="Button" parent="."]
 layout_mode = 0
@@ -43,71 +138,13 @@ theme_override_fonts/font = ExtResource("2_rfmo8")
 theme_override_font_sizes/font_size = 36
 text = "QUIT"
 
-[node name="Levels" type="Button" parent="."]
-layout_mode = 0
-offset_left = 512.0
-offset_top = 352.0
-offset_right = 768.0
-offset_bottom = 416.0
-theme_override_fonts/font = ExtResource("2_rfmo8")
-theme_override_font_sizes/font_size = 36
-text = "LEVELS"
-
-[node name="Node" type="Node" parent="."]
-
-[node name="Level1" type="Button" parent="Node"]
-offset_left = 352.0
-offset_top = 448.0
-offset_right = 416.0
-offset_bottom = 512.0
-theme_override_fonts/font = ExtResource("2_rfmo8")
-theme_override_font_sizes/font_size = 36
-text = "1"
-
-[node name="Level2" type="Button" parent="Node"]
-offset_left = 448.0
-offset_top = 448.0
-offset_right = 512.0
-offset_bottom = 512.0
-theme_override_fonts/font = ExtResource("2_rfmo8")
-theme_override_font_sizes/font_size = 36
-text = "2"
-
-[node name="Level3" type="Button" parent="Node"]
-offset_left = 544.0
-offset_top = 448.0
-offset_right = 608.0
-offset_bottom = 512.0
-theme_override_fonts/font = ExtResource("2_rfmo8")
-theme_override_font_sizes/font_size = 36
-text = "3"
-
-[node name="Level4" type="Button" parent="Node"]
-offset_left = 672.0
-offset_top = 448.0
-offset_right = 736.0
-offset_bottom = 512.0
-theme_override_fonts/font = ExtResource("2_rfmo8")
-theme_override_font_sizes/font_size = 36
-text = "4"
-
-[node name="Level5" type="Button" parent="Node"]
-offset_left = 768.0
-offset_top = 448.0
-offset_right = 832.0
-offset_bottom = 512.0
-theme_override_fonts/font = ExtResource("2_rfmo8")
-theme_override_font_sizes/font_size = 36
-text = "5"
-
-[node name="Level6" type="Button" parent="Node"]
-offset_left = 864.0
-offset_top = 448.0
-offset_right = 928.0
-offset_bottom = 512.0
-theme_override_fonts/font = ExtResource("2_rfmo8")
-theme_override_font_sizes/font_size = 36
-text = "6"
-
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Levels" to="." method="_on_levels_pressed"]
+[connection signal="pressed" from="LevelButtons/Level1" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="LevelButtons/Level2" to="." method="_on_level_2_pressed"]
+[connection signal="pressed" from="LevelButtons/Level3" to="." method="_on_level_3_pressed"]
+[connection signal="pressed" from="LevelButtons/Level4" to="." method="_on_level_4_pressed"]
+[connection signal="pressed" from="LevelButtons/Level5" to="." method="_on_level_5_pressed"]
+[connection signal="pressed" from="LevelButtons/Level6" to="." method="_on_level_6_pressed"]
+[connection signal="pressed" from="ControlsButton" to="." method="_on_controls_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

@@ -10,7 +10,7 @@ var tween_speed = 0.5
 
 func _ready():
 	$CollisionShape2D.set_scale(collision_scale)
-	pass
+	
 
 func _physics_process(_delta):
 	LASER_SPRITE.play("idle")
