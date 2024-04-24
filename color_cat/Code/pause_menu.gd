@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var unpause_button = $Unpause
 @onready var quit_to_title = $QuitToTitle
 @onready var quit_and_close = $QuitAndClose
+@onready var music = get_parent().get_node("BackgroundMusic")
 
 func unpause():
 	hud.paused = false
@@ -25,6 +26,6 @@ func _on_quit_and_close_pressed():
 
 func _on_music_switch_toggled(toggled_on):
 	if toggled_on:
-		get_parent().get_parent().music.play()
+		music.play()
 	else:
-		get_parent().get_parent().music.stop()
+		music.stop()

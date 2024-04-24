@@ -1,0 +1,97 @@
+[gd_scene load_steps=11 format=3 uid="uid://bro0nk6v5146y"]
+
+[ext_resource type="Script" path="res://Code/SceneController.gd" id="1_kyn8p"]
+[ext_resource type="AudioStream" uid="uid://b5y1fgkb5iplb" path="res://Sounds/weramp.ogg" id="3_w7o3t"]
+[ext_resource type="PackedScene" uid="uid://b2svwmqbe8ryq" path="res://Scenes/hud.tscn" id="4_duthn"]
+[ext_resource type="AudioStream" uid="uid://pllq2g8c63nh" path="res://Sounds/16bar.ogg" id="5_h4uy0"]
+[ext_resource type="PackedScene" uid="uid://bsjhk3bsxa73u" path="res://Scenes/pause_menu.tscn" id="6_6064m"]
+[ext_resource type="PackedScene" uid="uid://dk3jgga1aa22v" path="res://Scenes/TitleScreen.tscn" id="6_c65bx"]
+
+[sub_resource type="Animation" id="Animation_vdcqd"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_nbxxg"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_y1mro"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_btb1h"]
+_data = {
+"RESET": SubResource("Animation_vdcqd"),
+"fade_in": SubResource("Animation_nbxxg"),
+"fade_out": SubResource("Animation_y1mro")
+}
+
+[node name="SceneController" type="Node" node_paths=PackedStringArray("ANIM")]
+script = ExtResource("1_kyn8p")
+ANIM = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_btb1h")
+}
+
+[node name="ColorRect" type="ColorRect" parent="AnimationPlayer"]
+modulate = Color(1, 1, 1, 0)
+z_index = 100
+offset_left = -3076.0
+offset_top = -3082.0
+offset_right = 4503.0
+offset_bottom = 1737.0
+scale = Vector2(1.98141, 1.43203)
+color = Color(0, 0, 0, 1)
+
+[node name="HUD" parent="." instance=ExtResource("4_duthn")]
+visible = false
+
+[node name="Restart" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_w7o3t")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_h4uy0")
+volume_db = -20.144
+max_distance = 1e+09
+attenuation = 0.01
+
+[node name="TitleScreen" parent="." instance=ExtResource("6_c65bx")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("6_6064m")]
+visible = false
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

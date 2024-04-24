@@ -514,7 +514,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_s022u")
 }],
-"loop": false,
+"loop": true,
 "name": &"idle",
 "speed": 5.0
 }, {
@@ -991,7 +991,7 @@ shape = SubResource("CircleShape2D_a6c14")
 [node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket"]
 scale = Vector2(2, 1.8)
 sprite_frames = SubResource("SpriteFrames_0noxq")
-animation = &"splash"
+animation = &"idle"
 
 [node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket"]
 stream = ExtResource("5_se1di")
@@ -1012,7 +1012,7 @@ shape = SubResource("CircleShape2D_a784t")
 position = Vector2(0.000108898, 1.84774e-05)
 scale = Vector2(2.851, 2.28222)
 sprite_frames = SubResource("SpriteFrames_ypfvi")
-animation = &"splash"
+animation = &"idle"
 
 [node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket2"]
 stream = ExtResource("5_se1di")
@@ -1030,7 +1030,7 @@ shape = SubResource("CircleShape2D_a6c14")
 [node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket3"]
 scale = Vector2(2, 1.8)
 sprite_frames = SubResource("SpriteFrames_rrbks")
-animation = &"splash"
+animation = &"idle"
 
 [node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket3"]
 stream = ExtResource("5_se1di")

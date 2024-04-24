@@ -1,31 +1,2593 @@
-[gd_scene load_steps=5 format=3 uid="uid://dc1uruj2epvks"]
+[gd_scene load_steps=92 format=3 uid="uid://dc1uruj2epvks"]
 
+[ext_resource type="Texture2D" uid="uid://nxein6hl20v5" path="res://Assets/background/SCS_Background_Daytime_01.png" id="1_o7f86"]
 [ext_resource type="PackedScene" uid="uid://dykbqv6sog3xw" path="res://Scenes/EndArea.tscn" id="1_odb00"]
+[ext_resource type="Texture2D" uid="uid://ce0raexayspwl" path="res://Assets/background/SCS_Skyline_Daytime_Layer01.png" id="2_mckk8"]
 [ext_resource type="TileSet" uid="uid://cpefih0yhovpw" path="res://Scenes/steel.tres" id="2_ueeqq"]
 [ext_resource type="PackedScene" uid="uid://c0judastlvqt1" path="res://Scenes/Cat.tscn" id="3_6pyn4"]
 [ext_resource type="PackedScene" uid="uid://18j8qm76751c" path="res://Scenes/laser.tscn" id="4_kc8ug"]
+[ext_resource type="PackedScene" uid="uid://cpgsfyulne2ru" path="res://Scenes/enemy.tscn" id="5_nynj8"]
+[ext_resource type="Texture2D" uid="uid://uh1dhh5eim45" path="res://Assets/unlocked_door.png" id="6_jh6q4"]
+[ext_resource type="Texture2D" uid="uid://clsfg4b1i1dt2" path="res://Assets/locked_door.png" id="7_oi00c"]
+[ext_resource type="AudioStream" uid="uid://07jpj77vqh2s" path="res://Sounds/lock.ogg" id="8_g80by"]
+[ext_resource type="AudioStream" uid="uid://8ktkbjjr4fnp" path="res://Sounds/unlock.ogg" id="9_dvl8a"]
+[ext_resource type="Script" path="res://Code/PaintBucket.gd" id="11_wg02j"]
+[ext_resource type="Texture2D" uid="uid://cf1jykggxkf8v" path="res://Assets/paint_bucket_red.png" id="12_ee3d0"]
+[ext_resource type="Texture2D" uid="uid://csdax0y8win6l" path="res://Assets/paint_bucket_red_sprite_sheet.png" id="13_4r3k7"]
+[ext_resource type="AudioStream" uid="uid://ba1ta67ygvkp2" path="res://Sounds/dwoop2.ogg" id="14_y3ka6"]
+[ext_resource type="Texture2D" uid="uid://bem4r7kdi8pee" path="res://Assets/paint_bucket_blue.png" id="15_57ypr"]
+[ext_resource type="Texture2D" uid="uid://cwvgcwiuqi1b2" path="res://Assets/paint_bucket_blue_sprite_sheet.png" id="16_6lwyq"]
+[ext_resource type="Texture2D" uid="uid://berap748ekg0t" path="res://Assets/paint_bucket_yellow.png" id="17_q078i"]
+[ext_resource type="Texture2D" uid="uid://cgeushhu2cvhc" path="res://Assets/paint_bucket_yellow_sprite_sheet.png" id="18_sel2s"]
+[ext_resource type="Script" path="res://Food.gd" id="19_hrb4a"]
+[ext_resource type="Texture2D" uid="uid://cg6kriqlt02sj" path="res://Assets/food.png" id="20_7ksof"]
+[ext_resource type="AudioStream" uid="uid://b05d6g0x3njyo" path="res://Sounds/eat.ogg" id="21_7we6n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5g4al"]
+size = Vector2(20, 61)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fm8pv"]
+atlas = ExtResource("6_jh6q4")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fewpu"]
+atlas = ExtResource("6_jh6q4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6l84v"]
+atlas = ExtResource("6_jh6q4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7u2rf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fm8pv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fewpu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6l84v")
+}],
+"loop": false,
+"name": &"unlock",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohh4f"]
+atlas = ExtResource("7_oi00c")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfaqb"]
+atlas = ExtResource("7_oi00c")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yoj3e"]
+atlas = ExtResource("7_oi00c")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5txti"]
+atlas = ExtResource("7_oi00c")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ublc7"]
+atlas = ExtResource("7_oi00c")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b2bte"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohh4f")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfaqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yoj3e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5txti")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ublc7")
+}],
+"loop": false,
+"name": &"lock",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_krgjg"]
+radius = 26.61
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skij4"]
+atlas = ExtResource("12_ee3d0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2coe"]
+atlas = ExtResource("12_ee3d0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ji1bp"]
+atlas = ExtResource("12_ee3d0")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khinl"]
+atlas = ExtResource("12_ee3d0")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcdar"]
+atlas = ExtResource("12_ee3d0")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nl0mt"]
+atlas = ExtResource("12_ee3d0")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbr17"]
+atlas = ExtResource("13_4r3k7")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tcfh4"]
+atlas = ExtResource("13_4r3k7")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kyyt"]
+atlas = ExtResource("13_4r3k7")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2bn1"]
+atlas = ExtResource("13_4r3k7")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_me7rn"]
+atlas = ExtResource("13_4r3k7")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7pv2"]
+atlas = ExtResource("13_4r3k7")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwyrx"]
+atlas = ExtResource("13_4r3k7")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_se0aa"]
+atlas = ExtResource("13_4r3k7")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0psew"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skij4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2coe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ji1bp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khinl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcdar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nl0mt")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_hbr17")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_tcfh4")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_7kyyt")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_t2bn1")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_me7rn")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_x7pv2")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_pwyrx")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_se0aa")
+}],
+"loop": false,
+"name": &"splash",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l0rbj"]
+radius = 38.2976
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5hg1"]
+atlas = ExtResource("15_57ypr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pe870"]
+atlas = ExtResource("15_57ypr")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4boqb"]
+atlas = ExtResource("15_57ypr")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5x58"]
+atlas = ExtResource("15_57ypr")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5iheg"]
+atlas = ExtResource("15_57ypr")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s022u"]
+atlas = ExtResource("15_57ypr")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mm7iu"]
+atlas = ExtResource("16_6lwyq")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aa6e7"]
+atlas = ExtResource("16_6lwyq")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ostni"]
+atlas = ExtResource("16_6lwyq")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gmtk"]
+atlas = ExtResource("16_6lwyq")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1vsb"]
+atlas = ExtResource("16_6lwyq")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1ctu"]
+atlas = ExtResource("16_6lwyq")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mieul"]
+atlas = ExtResource("16_6lwyq")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lecu"]
+atlas = ExtResource("16_6lwyq")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pu210"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5hg1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pe870")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4boqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5x58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5iheg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s022u")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_mm7iu")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_aa6e7")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_ostni")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_3gmtk")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_y1vsb")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_s1ctu")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_mieul")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_2lecu")
+}],
+"loop": false,
+"name": &"splash",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtgs7"]
+atlas = ExtResource("17_q078i")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rlfbn"]
+atlas = ExtResource("17_q078i")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23ysn"]
+atlas = ExtResource("17_q078i")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nehvh"]
+atlas = ExtResource("17_q078i")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31xna"]
+atlas = ExtResource("17_q078i")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6g1r7"]
+atlas = ExtResource("17_q078i")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ks468"]
+atlas = ExtResource("18_sel2s")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tywky"]
+atlas = ExtResource("18_sel2s")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iiapp"]
+atlas = ExtResource("18_sel2s")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjdok"]
+atlas = ExtResource("18_sel2s")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aih85"]
+atlas = ExtResource("18_sel2s")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iq6c0"]
+atlas = ExtResource("18_sel2s")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4vvq"]
+atlas = ExtResource("18_sel2s")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vy22m"]
+atlas = ExtResource("18_sel2s")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mk7nc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtgs7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rlfbn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23ysn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nehvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31xna")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6g1r7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_ks468")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_tywky")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_iiapp")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_xjdok")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_aih85")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_iq6c0")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_k4vvq")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_vy22m")
+}],
+"loop": false,
+"name": &"splash",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ymhni"]
+radius = 13.0384
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umd7g"]
+atlas = ExtResource("20_7ksof")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thstt"]
+atlas = ExtResource("20_7ksof")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gd2o6"]
+atlas = ExtResource("20_7ksof")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sm4wj"]
+atlas = ExtResource("20_7ksof")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gcm7"]
+atlas = ExtResource("20_7ksof")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbduu"]
+atlas = ExtResource("20_7ksof")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aqu8d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_umd7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thstt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gd2o6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sm4wj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gcm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vbduu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_4doyy"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FoodSprite:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FoodSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FoodSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mylwv"]
+resource_name = "collect"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FoodSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.2, 1)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FoodSprite:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.8)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FoodSprite:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -60, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.8)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a0npr"]
+_data = {
+"RESET": SubResource("Animation_4doyy"),
+"collect": SubResource("Animation_mylwv")
+}
 
 [node name="Level6" type="Node2D"]
+
+[node name="ScsBackgroundDaytime01" type="Sprite2D" parent="."]
+position = Vector2(1328, -144)
+scale = Vector2(4.45, 5)
+texture = ExtResource("1_o7f86")
+
+[node name="ScsSkylineDaytimeLayer01" type="Sprite2D" parent="."]
+position = Vector2(2080, 192)
+scale = Vector2(6.8, 6.94949)
+texture = ExtResource("2_mckk8")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_ueeqq")
 format = 2
-layer_0/tile_data = PackedInt32Array(524292, 2, 0, 524293, 65538, 0, 524294, 65538, 0, 524295, 65538, 0, 524296, 65538, 0, 524297, 65538, 0, 524298, 65538, 0, 524299, 65538, 0, 524300, 65538, 0, 589836, 65538, 2, 589837, 65538, 2, 589838, 65538, 2, 524302, 65538, 0, 524301, 65538, 0, 589835, 65538, 2, 589834, 65538, 2, 589833, 65538, 2, 589832, 65538, 2, 589829, 65538, 2, 589828, 2, 2, 589830, 65538, 2, 589831, 65538, 2, 524303, 65538, 0, 524304, 65538, 0, 524305, 65538, 0, 524306, 65538, 0, 524307, 65538, 0, 524308, 65538, 0, 524309, 65538, 0, 524310, 65538, 0, 589839, 65538, 2, 589840, 65538, 2, 589841, 65538, 2, 589842, 65538, 2, 589843, 65538, 2, 589844, 65538, 2, 589845, 65538, 2, 589846, 65538, 2, 589847, 131074, 2, 524311, 131074, 0)
+layer_0/tile_data = PackedInt32Array(524292, 65538, 0, 524293, 65538, 0, 524294, 65538, 0, 524295, 65538, 0, 524296, 65538, 0, 524297, 65538, 0, 524298, 65538, 0, 524299, 65538, 0, 524300, 65538, 0, 589836, 65538, 1, 589837, 65538, 1, 589838, 65538, 1, 524302, 65538, 0, 524301, 65538, 0, 589835, 65538, 1, 589834, 65538, 1, 589833, 65538, 1, 589832, 65538, 1, 589829, 65538, 1, 589828, 65538, 1, 589830, 65538, 1, 589831, 65538, 1, 524303, 65538, 0, 524304, 65538, 0, 524305, 65538, 0, 524306, 65538, 0, 524307, 65538, 0, 524308, 65538, 0, 524309, 65538, 0, 524310, 65538, 0, 589839, 65538, 1, 589840, 65538, 1, 589841, 65538, 1, 589842, 65538, 1, 589843, 65538, 1, 589844, 65538, 1, 589845, 65538, 1, 589846, 65538, 1, 589847, 65538, 1, 524311, 65538, 0, 589911, 65538, 1, 524375, 65538, 1, 589910, 65538, 1, 524374, 65538, 1, 589909, 65538, 1, 524373, 65538, 1, 589908, 65538, 1, 524372, 65538, 0, 589907, 65538, 1, 524371, 65538, 0, 589906, 65538, 1, 524370, 65538, 0, 589905, 65538, 1, 524369, 65538, 0, 589904, 65538, 1, 524368, 65538, 0, 589903, 65538, 1, 524367, 65538, 0, 589902, 65538, 1, 524366, 65538, 0, 589901, 65538, 1, 524365, 65538, 0, 589900, 65538, 1, 524364, 65538, 0, 589899, 65538, 1, 524363, 65538, 0, 589898, 65538, 1, 524362, 65538, 0, 589897, 65538, 1, 524361, 65538, 0, 589896, 65538, 1, 524360, 65538, 0, 589895, 65538, 1, 524359, 65538, 0, 589894, 65538, 1, 524358, 65538, 0, 589893, 65538, 1, 524357, 65538, 0, 589892, 65538, 1, 524356, 65538, 0, 589891, 65538, 1, 524355, 65538, 0, 589890, 65538, 1, 524354, 65538, 0, 589889, 65538, 1, 524353, 65538, 0, 589888, 65538, 1, 524352, 65538, 0, 589887, 65538, 1, 524351, 65538, 0, 589886, 65538, 1, 524350, 65538, 0, 589885, 65538, 1, 524349, 65538, 0, 589884, 65538, 1, 524348, 65538, 0, 589883, 65538, 1, 524347, 65538, 0, 589882, 65538, 1, 524346, 65538, 0, 589881, 65538, 1, 524345, 65538, 0, 589880, 65538, 1, 524344, 65538, 0, 589879, 65538, 1, 524343, 65538, 0, 589878, 65538, 1, 524342, 65538, 0, 589877, 65538, 1, 524341, 65538, 0, 589876, 65538, 1, 524340, 65538, 0, 589875, 65538, 1, 524339, 65538, 0, 589874, 65538, 1, 524338, 65538, 0, 589873, 65538, 1, 524337, 65538, 0, 589872, 65538, 1, 524336, 65538, 0, 589871, 65538, 1, 524335, 65538, 0, 589870, 65538, 1, 524334, 65538, 0, 589869, 65538, 1, 524333, 65538, 0, 589868, 65538, 1, 524332, 65538, 0, 589867, 65538, 1, 524331, 65538, 0, 589866, 65538, 1, 524330, 65538, 0, 589865, 65538, 1, 524329, 65538, 0, 589864, 65538, 1, 524328, 65538, 0, 589863, 65538, 1, 524327, 65538, 0, 589862, 65538, 1, 524326, 65538, 0, 589861, 65538, 1, 524325, 65538, 0, 589860, 65538, 1, 524324, 65538, 0, 589859, 65538, 1, 524323, 65538, 0, 589858, 65538, 1, 524322, 65538, 0, 589857, 65538, 1, 524321, 65538, 0, 589856, 65538, 1, 524320, 65538, 0, 589855, 65538, 1, 524319, 65538, 0, 589854, 65538, 1, 524318, 65538, 0, 589853, 65538, 1, 524317, 65538, 0, 589852, 65538, 1, 524316, 65538, 0, 589851, 65538, 1, 524315, 65538, 0, 589850, 65538, 1, 524314, 65538, 0, 589849, 65538, 1, 524313, 65538, 0, 589848, 65538, 1, 524312, 65538, 0, 589827, 65538, 1, 524291, 65538, 0, 589826, 65538, 1, 524290, 65538, 0, 589825, 65538, 1, 524289, 65538, 0, 589824, 65538, 1, 524288, 65538, 0, 655359, 65538, 1, 589823, 65538, 1, 655358, 2, 1, 589822, 2, 1, 524287, 131074, 1, 458751, 131074, 1, 393215, 131074, 1, 327679, 131074, 1, 262143, 131074, 1, 196607, 131074, 1, 131071, 131074, 1, 65535, 131074, 1, -1, 131074, 1, -65537, 131074, 1, -131073, 131074, 1, -196609, 131074, 1, -262145, 131074, 1, -327681, 131074, 1, -393217, 131074, 1, -458753, 131074, 1, 524286, 2, 1, 458750, 2, 1, 393214, 2, 1, 327678, 2, 1, 262142, 2, 1, 196606, 2, 1, 131070, 2, 1, 65534, 2, 1, -2, 2, 1, -65538, 2, 1, -131074, 2, 1, -196610, 2, 1, -262146, 2, 1, -327682, 2, 1, -393218, 2, 1, -458754, 2, 1, -524289, 131074, 1, -589825, 131074, 1, -655361, 131074, 1, -720897, 131074, 0, -524290, 2, 1, -589826, 2, 1, -655362, 2, 1, -720898, 2, 0, 655461, 131074, 1, 589925, 131074, 1, 524389, 131074, 1, 458853, 131074, 1, 393317, 131074, 1, 327781, 131074, 1, 262245, 131074, 1, 196709, 131074, 1, 131173, 131074, 1, 65637, 131074, 1, 101, 131074, 1, -65435, 131074, 1, -130971, 131074, 1, -196507, 131074, 1, -262043, 131074, 1, -327579, 131074, 1, -393115, 131074, 1, -458651, 131074, 1, -524187, 131074, 1, -589723, 131074, 1, -655259, 131074, 1, -720795, 131074, 1, -786331, 131074, 1, -851867, 131074, 1, -917403, 131074, 1, -982939, 131074, 1, -1048475, 131074, 1, -1114011, 131074, 1, -1179547, 131074, 1, -1245083, 131074, 1, -1310619, 131074, 1, -1376155, 131074, 1, -1441691, 131074, 1, -1507227, 131074, 1, -1572763, 131074, 1, -1638299, 131074, 1, -1703835, 131074, 1, -1769371, 131074, 1, 655460, 65538, 1, 589924, 65538, 1, 524388, 65538, 1, 458852, 65538, 1, 393316, 65538, 1, 327780, 65538, 1, 262244, 65538, 1, 196708, 65538, 1, 131172, 65538, 1, 65636, 65538, 1, 100, 65538, 1, -65436, 65538, 1, -130972, 65538, 1, -196508, 65538, 1, -262044, 65538, 1, -327580, 65538, 1, -393116, 65538, 1, -458652, 65538, 1, -524188, 65538, 1, -589724, 65538, 1, -655260, 65538, 1, -720796, 65538, 1, -786332, 65538, 1, -851868, 65538, 1, -917404, 65538, 1, -982940, 65538, 1, -1048476, 65538, 1, -1114012, 65538, 1, -1179548, 65538, 1, -1245084, 65538, 1, -1310620, 65538, 1, -1376156, 65538, 1, -1441692, 65538, 1, -1507228, 65538, 1, -1572764, 65538, 1, -1638300, 65538, 1, -1703836, 65538, 1, -1769372, 65538, 1, 655459, 65538, 1, 589923, 65538, 1, 524387, 65538, 1, 458851, 65538, 1, 393315, 65538, 1, 327779, 65538, 1, 262243, 65538, 1, 196707, 65538, 1, 131171, 65538, 1, 65635, 65538, 1, 99, 65538, 1, -65437, 65538, 1, -130973, 65538, 1, -196509, 65538, 1, -262045, 65538, 1, -327581, 65538, 1, -393117, 65538, 1, -458653, 65538, 1, -524189, 65538, 1, -589725, 65538, 1, -655261, 65538, 1, -720797, 65538, 1, -786333, 65538, 1, -851869, 65538, 1, -917405, 65538, 1, -982941, 65538, 1, -1048477, 65538, 1, -1114013, 65538, 1, -1179549, 65538, 1, -1245085, 65538, 1, -1310621, 65538, 1, -1376157, 65538, 1, -1441693, 65538, 1, -1507229, 65538, 1, -1572765, 65538, 1, -1638301, 65538, 1, -1703837, 65538, 1, -1769373, 65538, 1, 655458, 65538, 1, 589922, 65538, 1, 524386, 65538, 1, 458850, 65538, 1, 393314, 65538, 1, 327778, 65538, 1, 262242, 65538, 1, 196706, 65538, 1, 131170, 65538, 1, 65634, 65538, 1, 98, 65538, 1, -65438, 65538, 1, -130974, 65538, 1, -196510, 65538, 1, -262046, 65538, 1, -327582, 65538, 1, -393118, 65538, 1, -458654, 65538, 1, -524190, 65538, 1, -589726, 65538, 1, -655262, 65538, 1, -720798, 65538, 1, -786334, 65538, 1, -851870, 65538, 1, -917406, 65538, 1, -982942, 65538, 1, -1048478, 65538, 1, -1114014, 65538, 1, -1179550, 65538, 1, -1245086, 65538, 1, -1310622, 65538, 1, -1376158, 65538, 1, -1441694, 65538, 1, -1507230, 65538, 1, -1572766, 65538, 1, -1638302, 65538, 1, -1703838, 65538, 1, -1769374, 65538, 1, 655457, 65538, 1, 589921, 65538, 1, 524385, 65538, 1, 458849, 65538, 1, 393313, 65538, 1, 327777, 65538, 1, 262241, 65538, 1, 196705, 65538, 1, 131169, 65538, 1, 65633, 65538, 1, 97, 65538, 1, -65439, 65538, 1, -130975, 65538, 1, -196511, 65538, 1, -262047, 65538, 1, -327583, 65538, 1, -393119, 65538, 1, -458655, 65538, 1, -524191, 65538, 1, -589727, 65538, 1, -655263, 65538, 1, -720799, 65538, 1, -786335, 65538, 1, -851871, 65538, 1, -917407, 65538, 1, -982943, 65538, 1, -1048479, 65538, 1, -1114015, 65538, 1, -1179551, 65538, 1, -1245087, 65538, 1, -1310623, 65538, 1, -1376159, 65538, 1, -1441695, 65538, 1, -1507231, 65538, 1, -1572767, 65538, 1, -1638303, 65538, 1, -1703839, 65538, 1, -1769375, 65538, 1, 655456, 65538, 1, 589920, 65538, 1, 524384, 65538, 1, 458848, 65538, 1, 393312, 65538, 1, 327776, 65538, 1, 262240, 65538, 1, 196704, 65538, 1, 131168, 65538, 1, 65632, 65538, 1, 96, 65538, 1, -65440, 65538, 1, -130976, 65538, 1, -196512, 65538, 1, -262048, 65538, 1, -327584, 65538, 1, -393120, 65538, 1, -458656, 65538, 1, -524192, 65538, 1, -589728, 65538, 1, -655264, 65538, 1, -720800, 65538, 1, -786336, 65538, 1, -851872, 65538, 1, -917408, 65538, 1, -982944, 65538, 1, -1048480, 65538, 1, -1114016, 65538, 1, -1179552, 65538, 1, -1245088, 65538, 1, -1310624, 65538, 1, -1376160, 65538, 1, -1441696, 65538, 1, -1507232, 65538, 1, -1572768, 65538, 1, -1638304, 65538, 1, -1703840, 65538, 1, -1769376, 65538, 1, 655455, 65538, 1, 589919, 65538, 1, 524383, 65538, 1, 458847, 65538, 1, 393311, 65538, 1, 327775, 65538, 1, 262239, 65538, 1, 196703, 65538, 1, 131167, 65538, 1, 65631, 65538, 1, 95, 65538, 1, -65441, 65538, 1, -130977, 65538, 1, -196513, 65538, 1, -262049, 65538, 1, -327585, 65538, 1, -393121, 65538, 1, -458657, 65538, 1, -524193, 65538, 1, -589729, 65538, 1, -655265, 65538, 1, -720801, 65538, 1, -786337, 65538, 1, -851873, 65538, 1, -917409, 65538, 1, -982945, 65538, 1, -1048481, 65538, 1, -1114017, 65538, 1, -1179553, 65538, 1, -1245089, 65538, 1, -1310625, 65538, 1, -1376161, 65538, 1, -1441697, 65538, 1, -1507233, 65538, 1, -1572769, 65538, 1, -1638305, 65538, 1, -1703841, 65538, 1, -1769377, 65538, 1, 655454, 65538, 1, 589918, 65538, 1, 524382, 65538, 1, 458846, 65538, 1, 393310, 65538, 1, 327774, 65538, 1, 262238, 65538, 1, 196702, 65538, 1, 131166, 65538, 1, 65630, 65538, 1, 94, 65538, 1, -65442, 65538, 1, -130978, 65538, 1, -196514, 65538, 1, -262050, 65538, 1, -327586, 65538, 1, -393122, 65538, 1, -458658, 65538, 1, -524194, 65538, 1, -589730, 65538, 1, -655266, 65538, 1, -720802, 65538, 1, -786338, 65538, 1, -851874, 65538, 1, -917410, 65538, 1, -982946, 65538, 1, -1048482, 65538, 1, -1114018, 65538, 1, -1179554, 65538, 1, -1245090, 65538, 1, -1310626, 65538, 1, -1376162, 65538, 1, -1441698, 65538, 1, -1507234, 65538, 1, -1572770, 65538, 1, -1638306, 65538, 1, -1703842, 65538, 1, -1769378, 65538, 1, 655453, 65538, 1, 589917, 65538, 1, 524381, 65538, 1, 458845, 65538, 1, 393309, 65538, 1, 327773, 65538, 1, 262237, 65538, 1, 196701, 65538, 1, 131165, 65538, 1, 65629, 65538, 1, 93, 65538, 1, -65443, 65538, 1, -130979, 65538, 1, -196515, 65538, 1, -262051, 65538, 1, -327587, 65538, 1, -393123, 65538, 1, -458659, 65538, 1, -524195, 65538, 1, -589731, 65538, 1, -655267, 65538, 1, -720803, 65538, 1, -786339, 65538, 1, -851875, 65538, 1, -917411, 65538, 1, -982947, 65538, 1, -1048483, 65538, 1, -1114019, 65538, 1, -1179555, 65538, 1, -1245091, 65538, 1, -1310627, 65538, 1, -1376163, 65538, 1, -1441699, 65538, 1, -1507235, 65538, 1, -1572771, 65538, 1, -1638307, 65538, 1, -1703843, 65538, 1, -1769379, 65538, 1, 655452, 65538, 1, 589916, 65538, 1, 524380, 65538, 1, 458844, 65538, 1, 393308, 65538, 1, 327772, 65538, 1, 262236, 65538, 1, 196700, 65538, 1, 131164, 65538, 1, 65628, 65538, 1, 92, 65538, 1, -65444, 65538, 1, -130980, 65538, 1, -196516, 65538, 1, -262052, 65538, 1, -327588, 65538, 1, -393124, 65538, 1, -458660, 65538, 1, -524196, 65538, 1, -589732, 65538, 1, -655268, 65538, 1, -720804, 65538, 1, -786340, 65538, 1, -851876, 65538, 1, -917412, 65538, 1, -982948, 65538, 1, -1048484, 65538, 1, -1114020, 65538, 1, -1179556, 65538, 1, -1245092, 65538, 1, -1310628, 65538, 1, -1376164, 65538, 1, -1441700, 65538, 1, -1507236, 65538, 1, -1572772, 65538, 1, -1638308, 65538, 1, -1703844, 65538, 1, -1769380, 65538, 1, 655451, 65538, 1, 589915, 65538, 1, 524379, 65538, 1, 458843, 65538, 1, 393307, 65538, 1, 327771, 65538, 1, 262235, 65538, 1, 196699, 65538, 1, 131163, 65538, 1, 65627, 65538, 1, 91, 65538, 1, -65445, 65538, 1, -130981, 65538, 1, -196517, 65538, 1, -262053, 65538, 1, -327589, 65538, 1, -393125, 65538, 1, -458661, 65538, 1, -524197, 65538, 1, -589733, 65538, 1, -655269, 65538, 1, -720805, 65538, 1, -786341, 65538, 1, -851877, 65538, 1, -917413, 65538, 1, -982949, 65538, 1, -1048485, 65538, 1, -1114021, 65538, 1, -1179557, 65538, 1, -1245093, 65538, 1, -1310629, 65538, 1, -1376165, 65538, 1, -1441701, 65538, 1, -1507237, 65538, 1, -1572773, 65538, 1, -1638309, 65538, 1, -1703845, 65538, 1, -1769381, 65538, 1, 655450, 65538, 1, 589914, 65538, 1, 524378, 65538, 1, 458842, 65538, 1, 393306, 65538, 1, 327770, 65538, 1, 262234, 65538, 1, 196698, 65538, 1, 131162, 65538, 1, 65626, 65538, 1, 90, 65538, 1, -65446, 65538, 1, -130982, 65538, 1, -196518, 65538, 1, -262054, 65538, 1, -327590, 65538, 1, -393126, 65538, 1, -458662, 65538, 1, -524198, 65538, 1, -589734, 65538, 1, -655270, 65538, 1, -720806, 65538, 1, -786342, 65538, 1, -851878, 65538, 1, -917414, 65538, 1, -982950, 65538, 1, -1048486, 65538, 1, -1114022, 65538, 1, -1179558, 65538, 1, -1245094, 65538, 1, -1310630, 65538, 1, -1376166, 65538, 1, -1441702, 65538, 1, -1507238, 65538, 1, -1572774, 65538, 1, -1638310, 65538, 1, -1703846, 65538, 1, -1769382, 65538, 1, 655449, 65538, 1, 589913, 65538, 1, 524377, 65538, 1, 458841, 65538, 1, 393305, 65538, 1, 327769, 65538, 1, 262233, 65538, 1, 196697, 65538, 1, 131161, 65538, 1, 65625, 65538, 1, 89, 65538, 1, -65447, 65538, 1, -130983, 65538, 1, -196519, 65538, 1, -262055, 65538, 1, -327591, 65538, 1, -393127, 65538, 1, -458663, 65538, 1, -524199, 65538, 1, -589735, 65538, 1, -655271, 65538, 1, -720807, 65538, 1, -786343, 65538, 1, -851879, 65538, 1, -917415, 65538, 1, -982951, 65538, 1, -1048487, 65538, 1, -1114023, 65538, 1, -1179559, 65538, 1, -1245095, 65538, 1, -1310631, 65538, 1, -1376167, 65538, 1, -1441703, 65538, 1, -1507239, 65538, 1, -1572775, 65538, 1, -1638311, 65538, 1, -1703847, 65538, 1, -1769383, 65538, 1, 655448, 65538, 1, 589912, 65538, 1, 524376, 65538, 1, 458840, 65538, 1, 393304, 65538, 1, 327768, 65538, 1, 262232, 65538, 1, 196696, 65538, 1, 131160, 65538, 1, 65624, 65538, 1, 88, 65538, 1, -65448, 65538, 1, -130984, 65538, 1, -196520, 65538, 1, -262056, 65538, 1, -327592, 65538, 1, -393128, 65538, 1, -458664, 65538, 1, -524200, 65538, 1, -589736, 65538, 1, -655272, 65538, 1, -720808, 65538, 1, -786344, 65538, 1, -851880, 65538, 1, -917416, 65538, 1, -982952, 65538, 1, -1048488, 65538, 1, -1114024, 65538, 1, -1179560, 65538, 1, -1245096, 65538, 1, -1310632, 65538, 1, -1376168, 65538, 1, -1441704, 65538, 1, -1507240, 65538, 1, -1572776, 65538, 1, -1638312, 65538, 1, -1703848, 65538, 1, -1769384, 65538, 1, 655447, 65538, 1, 458839, 65538, 1, 393303, 65538, 1, 327767, 65538, 1, 262231, 65538, 1, 196695, 65538, 1, 131159, 65538, 1, 65623, 65538, 1, 87, 65538, 1, -65449, 65538, 1, -130985, 65538, 1, -196521, 65538, 1, -262057, 65538, 1, -327593, 65538, 1, -393129, 65538, 1, -458665, 65538, 1, -524201, 65538, 1, -589737, 65538, 1, -655273, 65538, 1, -720809, 65538, 1, -786345, 65538, 1, -851881, 65538, 1, -917417, 65538, 1, -982953, 65538, 1, -1048489, 65538, 1, -1114025, 65538, 1, -1179561, 65538, 1, -1245097, 65538, 1, -1310633, 65538, 1, -1376169, 65538, 1, -1441705, 65538, 1, -1507241, 65538, 1, -1572777, 65538, 1, -1638313, 65538, 1, -1703849, 65538, 1, -1769385, 65538, 1, 655446, 65538, 1, 458838, 65538, 1, 393302, 65538, 1, 327766, 65538, 1, 262230, 65538, 1, 196694, 65538, 1, 131158, 65538, 1, 65622, 65538, 1, 86, 65538, 1, -65450, 65538, 1, -130986, 65538, 1, -196522, 65538, 1, -262058, 65538, 1, -327594, 65538, 1, -393130, 65538, 1, -458666, 65538, 1, -524202, 65538, 1, -589738, 65538, 1, -655274, 65538, 1, -720810, 65538, 1, -786346, 65538, 1, -851882, 65538, 1, -917418, 65538, 1, -982954, 65538, 1, -1048490, 65538, 1, -1114026, 65538, 1, -1179562, 65538, 1, -1245098, 65538, 1, -1310634, 65538, 1, -1376170, 65538, 1, -1441706, 65538, 1, -1507242, 65538, 1, -1572778, 65538, 1, -1638314, 65538, 1, -1703850, 65538, 1, -1769386, 65538, 1, 655445, 65538, 1, 458837, 2, 1, 393301, 2, 1, 327765, 2, 1, 262229, 2, 1, 196693, 2, 1, 131157, 2, 1, 65621, 2, 1, 85, 2, 1, -65451, 2, 1, -130987, 2, 1, -196523, 2, 1, -262059, 2, 1, -327595, 2, 1, -393131, 2, 1, -458667, 2, 1, -524203, 2, 1, -589739, 2, 1, -655275, 2, 1, -720811, 2, 1, -786347, 2, 1, -851883, 2, 1, -917419, 2, 1, -982955, 2, 1, -1048491, 2, 1, -1114027, 2, 1, -1179563, 2, 1, -1245099, 2, 1, -1310635, 2, 1, -1376171, 2, 1, -1441707, 2, 1, -1507243, 2, 1, -1572779, 2, 1, -1638315, 2, 1, -1703851, 2, 1, -1769387, 2, 1, 983129, 65538, 2, 917593, 65538, 1, 852057, 65538, 1, 786521, 65538, 1, 720985, 65538, 1, 983128, 65538, 2, 917592, 65538, 1, 852056, 65538, 1, 786520, 65538, 1, 720984, 65538, 1, 983127, 65538, 2, 917591, 65538, 1, 852055, 65538, 1, 786519, 65538, 1, 720983, 65538, 1, 983126, 65538, 2, 917590, 65538, 1, 852054, 65538, 1, 786518, 65538, 1, 720982, 65538, 1, 983125, 65538, 2, 917589, 65538, 1, 852053, 65538, 1, 786517, 65538, 1, 720981, 65538, 1, 983124, 65538, 2, 917588, 65538, 1, 852052, 65538, 1, 786516, 65538, 1, 720980, 65538, 1, 655444, 65538, 1, 983123, 65538, 2, 917587, 65538, 1, 852051, 65538, 1, 786515, 65538, 1, 720979, 65538, 1, 655443, 65538, 1, 983122, 65538, 2, 917586, 65538, 1, 852050, 65538, 1, 786514, 65538, 1, 720978, 65538, 1, 655442, 65538, 1, 983121, 65538, 2, 917585, 65538, 1, 852049, 65538, 1, 786513, 65538, 1, 720977, 65538, 1, 655441, 65538, 1, 983120, 65538, 2, 917584, 65538, 1, 852048, 65538, 1, 786512, 65538, 1, 720976, 65538, 1, 655440, 65538, 1, 983119, 65538, 2, 917583, 65538, 1, 852047, 65538, 1, 786511, 65538, 1, 720975, 65538, 1, 655439, 65538, 1, 983118, 65538, 2, 917582, 65538, 1, 852046, 65538, 1, 786510, 65538, 1, 720974, 65538, 1, 655438, 65538, 1, 983117, 65538, 2, 917581, 65538, 1, 852045, 65538, 1, 786509, 65538, 1, 720973, 65538, 1, 655437, 65538, 1, 983116, 65538, 2, 917580, 65538, 1, 852044, 65538, 1, 786508, 65538, 1, 720972, 65538, 1, 655436, 65538, 1, 983115, 65538, 2, 917579, 65538, 1, 852043, 65538, 1, 786507, 65538, 1, 720971, 65538, 1, 655435, 65538, 1, 983114, 65538, 2, 917578, 65538, 1, 852042, 65538, 1, 786506, 65538, 1, 720970, 65538, 1, 655434, 65538, 1, 983113, 65538, 2, 917577, 65538, 1, 852041, 65538, 1, 786505, 65538, 1, 720969, 65538, 1, 655433, 65538, 1, 983112, 65538, 2, 917576, 65538, 1, 852040, 65538, 1, 786504, 65538, 1, 720968, 65538, 1, 655432, 65538, 1, 983111, 65538, 2, 917575, 65538, 1, 852039, 65538, 1, 786503, 65538, 1, 720967, 65538, 1, 655431, 65538, 1, 983110, 65538, 2, 917574, 65538, 1, 852038, 65538, 1, 786502, 65538, 1, 720966, 65538, 1, 655430, 65538, 1, 983109, 65538, 2, 917573, 65538, 1, 852037, 65538, 1, 786501, 65538, 1, 720965, 65538, 1, 655429, 65538, 1, 983108, 65538, 2, 917572, 65538, 1, 852036, 65538, 1, 786500, 65538, 1, 720964, 65538, 1, 655428, 65538, 1, 983107, 65538, 2, 917571, 65538, 1, 852035, 65538, 1, 786499, 65538, 1, 720963, 65538, 1, 655427, 65538, 1, 983106, 65538, 2, 917570, 65538, 1, 852034, 65538, 1, 786498, 65538, 1, 720962, 65538, 1, 655426, 65538, 1, 983105, 65538, 2, 917569, 65538, 1, 852033, 65538, 1, 786497, 65538, 1, 720961, 65538, 1, 655425, 65538, 1, 983104, 65538, 2, 917568, 65538, 1, 852032, 65538, 1, 786496, 65538, 1, 720960, 65538, 1, 655424, 65538, 1, 983103, 65538, 2, 917567, 65538, 1, 852031, 65538, 1, 786495, 65538, 1, 720959, 65538, 1, 655423, 65538, 1, 983102, 65538, 2, 917566, 65538, 1, 852030, 65538, 1, 786494, 65538, 1, 720958, 65538, 1, 655422, 65538, 1, 983101, 65538, 2, 917565, 65538, 1, 852029, 65538, 1, 786493, 65538, 1, 720957, 65538, 1, 655421, 65538, 1, 983100, 65538, 2, 917564, 65538, 1, 852028, 65538, 1, 786492, 65538, 1, 720956, 65538, 1, 655420, 65538, 1, 983099, 65538, 2, 917563, 65538, 1, 852027, 65538, 1, 786491, 65538, 1, 720955, 65538, 1, 655419, 65538, 1, 983098, 65538, 2, 917562, 65538, 1, 852026, 65538, 1, 786490, 65538, 1, 720954, 65538, 1, 655418, 65538, 1, 983097, 65538, 2, 917561, 65538, 1, 852025, 65538, 1, 786489, 65538, 1, 720953, 65538, 1, 655417, 65538, 1, 983096, 65538, 2, 917560, 65538, 1, 852024, 65538, 1, 786488, 65538, 1, 720952, 65538, 1, 655416, 65538, 1, 983095, 65538, 2, 917559, 65538, 1, 852023, 65538, 1, 786487, 65538, 1, 720951, 65538, 1, 655415, 65538, 1, 983094, 65538, 2, 917558, 65538, 1, 852022, 65538, 1, 786486, 65538, 1, 720950, 65538, 1, 655414, 65538, 1, 983093, 65538, 2, 917557, 65538, 1, 852021, 65538, 1, 786485, 65538, 1, 720949, 65538, 1, 655413, 65538, 1, 983092, 65538, 2, 917556, 65538, 1, 852020, 65538, 1, 786484, 65538, 1, 720948, 65538, 1, 655412, 65538, 1, 983091, 65538, 2, 917555, 65538, 1, 852019, 65538, 1, 786483, 65538, 1, 720947, 65538, 1, 655411, 65538, 1, 983090, 65538, 2, 917554, 65538, 1, 852018, 65538, 1, 786482, 65538, 1, 720946, 65538, 1, 655410, 65538, 1, 983089, 65538, 2, 917553, 65538, 1, 852017, 65538, 1, 786481, 65538, 1, 720945, 65538, 1, 655409, 65538, 1, 983088, 65538, 2, 917552, 65538, 1, 852016, 65538, 1, 786480, 65538, 1, 720944, 65538, 1, 655408, 65538, 1, 983087, 65538, 2, 917551, 65538, 1, 852015, 65538, 1, 786479, 65538, 1, 720943, 65538, 1, 655407, 65538, 1, 983086, 65538, 2, 917550, 65538, 1, 852014, 65538, 1, 786478, 65538, 1, 720942, 65538, 1, 655406, 65538, 1, 983085, 65538, 2, 917549, 65538, 1, 852013, 65538, 1, 786477, 65538, 1, 720941, 65538, 1, 655405, 65538, 1, 983084, 65538, 2, 917548, 65538, 1, 852012, 65538, 1, 786476, 65538, 1, 720940, 65538, 1, 655404, 65538, 1, 983083, 65538, 2, 917547, 65538, 1, 852011, 65538, 1, 786475, 65538, 1, 720939, 65538, 1, 655403, 65538, 1, 983082, 65538, 2, 917546, 65538, 1, 852010, 65538, 1, 786474, 65538, 1, 720938, 65538, 1, 655402, 65538, 1, 983081, 65538, 2, 917545, 65538, 1, 852009, 65538, 1, 786473, 65538, 1, 720937, 65538, 1, 655401, 65538, 1, 983080, 65538, 2, 917544, 65538, 1, 852008, 65538, 1, 786472, 65538, 1, 720936, 65538, 1, 655400, 65538, 1, 983079, 65538, 2, 917543, 65538, 1, 852007, 65538, 1, 786471, 65538, 1, 720935, 65538, 1, 655399, 65538, 1, 983078, 65538, 2, 917542, 65538, 1, 852006, 65538, 1, 786470, 65538, 1, 720934, 65538, 1, 655398, 65538, 1, 983077, 65538, 2, 917541, 65538, 1, 852005, 65538, 1, 786469, 65538, 1, 720933, 65538, 1, 655397, 65538, 1, 983076, 65538, 2, 917540, 65538, 1, 852004, 65538, 1, 786468, 65538, 1, 720932, 65538, 1, 655396, 65538, 1, 983075, 65538, 2, 917539, 65538, 1, 852003, 65538, 1, 786467, 65538, 1, 720931, 65538, 1, 655395, 65538, 1, 983074, 65538, 2, 917538, 65538, 1, 852002, 65538, 1, 786466, 65538, 1, 720930, 65538, 1, 655394, 65538, 1, 983073, 65538, 2, 917537, 65538, 1, 852001, 65538, 1, 786465, 65538, 1, 720929, 65538, 1, 655393, 65538, 1, 983072, 65538, 2, 917536, 65538, 1, 852000, 65538, 1, 786464, 65538, 1, 720928, 65538, 1, 655392, 65538, 1, 983071, 65538, 2, 917535, 65538, 1, 851999, 65538, 1, 786463, 65538, 1, 720927, 65538, 1, 655391, 65538, 1, 983070, 65538, 2, 917534, 65538, 1, 851998, 65538, 1, 786462, 65538, 1, 720926, 65538, 1, 655390, 65538, 1, 983069, 65538, 2, 917533, 65538, 1, 851997, 65538, 1, 786461, 65538, 1, 720925, 65538, 1, 655389, 65538, 1, 983068, 65538, 2, 917532, 65538, 1, 851996, 65538, 1, 786460, 65538, 1, 720924, 65538, 1, 655388, 65538, 1, 983067, 65538, 2, 917531, 65538, 1, 851995, 65538, 1, 786459, 65538, 1, 720923, 65538, 1, 655387, 65538, 1, 983066, 65538, 2, 917530, 65538, 1, 851994, 65538, 1, 786458, 65538, 1, 720922, 65538, 1, 655386, 65538, 1, 983065, 65538, 2, 917529, 65538, 1, 851993, 65538, 1, 786457, 65538, 1, 720921, 65538, 1, 655385, 65538, 1, 983064, 65538, 2, 917528, 65538, 1, 851992, 65538, 1, 786456, 65538, 1, 720920, 65538, 1, 655384, 65538, 1, 983063, 65538, 2, 917527, 65538, 1, 851991, 65538, 1, 786455, 65538, 1, 720919, 65538, 1, 655383, 65538, 1, 983062, 65538, 2, 917526, 65538, 1, 851990, 65538, 1, 786454, 65538, 1, 720918, 65538, 1, 655382, 65538, 1, 983061, 65538, 2, 917525, 65538, 1, 851989, 65538, 1, 786453, 65538, 1, 720917, 65538, 1, 655381, 65538, 1, 983060, 65538, 2, 917524, 65538, 1, 851988, 65538, 1, 786452, 65538, 1, 720916, 65538, 1, 655380, 65538, 1, 983059, 65538, 2, 917523, 65538, 1, 851987, 65538, 1, 786451, 65538, 1, 720915, 65538, 1, 655379, 65538, 1, 983058, 65538, 2, 917522, 65538, 1, 851986, 65538, 1, 786450, 65538, 1, 720914, 65538, 1, 655378, 65538, 1, 983057, 65538, 2, 917521, 65538, 1, 851985, 65538, 1, 786449, 65538, 1, 720913, 65538, 1, 655377, 65538, 1, 983056, 65538, 2, 917520, 65538, 1, 851984, 65538, 1, 786448, 65538, 1, 720912, 65538, 1, 655376, 65538, 1, 983055, 65538, 2, 917519, 65538, 1, 851983, 65538, 1, 786447, 65538, 1, 720911, 65538, 1, 655375, 65538, 1, 983054, 65538, 2, 917518, 65538, 1, 851982, 65538, 1, 786446, 65538, 1, 720910, 65538, 1, 655374, 65538, 1, 983053, 65538, 2, 917517, 65538, 1, 851981, 65538, 1, 786445, 65538, 1, 720909, 65538, 1, 655373, 65538, 1, 983052, 65538, 2, 917516, 65538, 1, 851980, 65538, 1, 786444, 65538, 1, 720908, 65538, 1, 655372, 65538, 1, 983051, 65538, 2, 917515, 65538, 1, 851979, 65538, 1, 786443, 65538, 1, 720907, 65538, 1, 655371, 65538, 1, 983050, 65538, 2, 917514, 65538, 1, 851978, 65538, 1, 786442, 65538, 1, 720906, 65538, 1, 655370, 65538, 1, 983049, 65538, 2, 917513, 65538, 1, 851977, 65538, 1, 786441, 65538, 1, 720905, 65538, 1, 655369, 65538, 1, 983048, 65538, 2, 917512, 65538, 1, 851976, 65538, 1, 786440, 65538, 1, 720904, 65538, 1, 655368, 65538, 1, 983047, 65538, 2, 917511, 65538, 1, 851975, 65538, 1, 786439, 65538, 1, 720903, 65538, 1, 655367, 65538, 1, 983046, 65538, 2, 917510, 65538, 1, 851974, 65538, 1, 786438, 65538, 1, 720902, 65538, 1, 655366, 65538, 1, 983045, 65538, 2, 917509, 65538, 1, 851973, 65538, 1, 786437, 65538, 1, 720901, 65538, 1, 655365, 65538, 1, 983044, 65538, 2, 917508, 65538, 1, 851972, 65538, 1, 786436, 65538, 1, 720900, 65538, 1, 655364, 65538, 1, 983043, 65538, 2, 917507, 65538, 1, 851971, 65538, 1, 786435, 65538, 1, 720899, 65538, 1, 655363, 65538, 1, 983042, 65538, 2, 917506, 65538, 1, 851970, 65538, 1, 786434, 65538, 1, 720898, 65538, 1, 655362, 65538, 1, 983041, 65538, 2, 917505, 65538, 1, 851969, 65538, 1, 786433, 65538, 1, 720897, 65538, 1, 655361, 65538, 1, 983040, 65538, 2, 917504, 65538, 1, 851968, 65538, 1, 786432, 65538, 1, 720896, 65538, 1, 655360, 65538, 1, 1048575, 65538, 2, 983039, 65538, 1, 917503, 65538, 1, 851967, 65538, 1, 786431, 65538, 1, 720895, 65538, 1, 1048574, 2, 2, 983038, 2, 1, 917502, 2, 1, 851966, 2, 1, 786430, 2, 1, 720894, 2, 1, 983141, 131074, 2, 917605, 131074, 1, 852069, 131074, 1, 786533, 131074, 1, 720997, 131074, 1, 983140, 65538, 2, 917604, 65538, 1, 852068, 65538, 1, 786532, 65538, 1, 720996, 65538, 1, 983139, 65538, 2, 917603, 65538, 1, 852067, 65538, 1, 786531, 65538, 1, 720995, 65538, 1, 983138, 65538, 2, 917602, 65538, 1, 852066, 65538, 1, 786530, 65538, 1, 720994, 65538, 1, 983137, 65538, 2, 917601, 65538, 1, 852065, 65538, 1, 786529, 65538, 1, 720993, 65538, 1, 983136, 65538, 2, 917600, 65538, 1, 852064, 65538, 1, 786528, 65538, 1, 720992, 65538, 1, 983135, 65538, 2, 917599, 65538, 1, 852063, 65538, 1, 786527, 65538, 1, 720991, 65538, 1, 983134, 65538, 2, 917598, 65538, 1, 852062, 65538, 1, 786526, 65538, 1, 720990, 65538, 1, 983133, 65538, 2, 917597, 65538, 1, 852061, 65538, 1, 786525, 65538, 1, 720989, 65538, 1, 983132, 65538, 2, 917596, 65538, 1, 852060, 65538, 1, 786524, 65538, 1, 720988, 65538, 1, 983131, 65538, 2, 917595, 65538, 1, 852059, 65538, 1, 786523, 65538, 1, 720987, 65538, 1, 983130, 65538, 2, 917594, 65538, 1, 852058, 65538, 1, 786522, 65538, 1, 720986, 65538, 1, -1834907, 131074, 1, -1900443, 131074, 1, -1965979, 131074, 1, -2031515, 131074, 1, -2097051, 131074, 1, -2162587, 131074, 1, -2228123, 131074, 1, -2293659, 131074, 1, -2359195, 131074, 1, -2424731, 131074, 1, -2490267, 131074, 1, -2555803, 131074, 1, -2621339, 131074, 1, -2686875, 131074, 1, -2752411, 131074, 0, -1834908, 65538, 1, -1900444, 65538, 1, -1965980, 65538, 1, -2031516, 65538, 1, -2097052, 65538, 1, -2162588, 65538, 1, -2228124, 65538, 1, -2293660, 65538, 1, -2359196, 65538, 1, -2424732, 65538, 1, -2490268, 65538, 1, -2555804, 65538, 1, -2621340, 65538, 1, -2686876, 65538, 1, -2752412, 65538, 0, -1834909, 65538, 1, -1900445, 65538, 1, -1965981, 65538, 1, -2031517, 65538, 1, -2097053, 65538, 1, -2162589, 65538, 1, -2228125, 65538, 1, -2293661, 65538, 1, -2359197, 65538, 1, -2424733, 65538, 1, -2490269, 65538, 1, -2555805, 65538, 1, -2621341, 65538, 1, -2686877, 65538, 1, -2752413, 65538, 0, -1834910, 65538, 1, -1900446, 65538, 1, -1965982, 65538, 1, -2031518, 65538, 1, -2097054, 65538, 1, -2162590, 65538, 1, -2228126, 65538, 1, -2293662, 65538, 1, -2359198, 65538, 1, -2424734, 65538, 1, -2490270, 65538, 1, -2555806, 65538, 1, -2621342, 65538, 1, -2686878, 65538, 1, -2752414, 65538, 0, -1834911, 65538, 1, -1900447, 65538, 1, -1965983, 65538, 1, -2031519, 65538, 1, -2097055, 65538, 1, -2162591, 65538, 1, -2228127, 65538, 1, -2293663, 65538, 1, -2359199, 65538, 1, -2424735, 65538, 1, -2490271, 65538, 1, -2555807, 65538, 1, -2621343, 65538, 1, -2686879, 65538, 1, -2752415, 65538, 0, -1834912, 65538, 1, -1900448, 65538, 1, -1965984, 65538, 1, -2031520, 65538, 1, -2097056, 65538, 1, -2162592, 65538, 1, -2228128, 65538, 1, -2293664, 65538, 1, -2359200, 65538, 1, -2424736, 65538, 1, -2490272, 65538, 1, -2555808, 65538, 1, -2621344, 65538, 1, -2686880, 65538, 1, -2752416, 65538, 0, -1834913, 65538, 1, -1900449, 65538, 1, -1965985, 65538, 1, -2031521, 65538, 1, -2097057, 65538, 1, -2162593, 65538, 1, -2228129, 65538, 1, -2293665, 65538, 1, -2359201, 65538, 1, -2424737, 65538, 1, -2490273, 65538, 1, -2555809, 65538, 1, -2621345, 65538, 1, -2686881, 65538, 1, -2752417, 65538, 0, -1834914, 65538, 1, -1900450, 65538, 1, -1965986, 65538, 1, -2031522, 65538, 1, -2097058, 65538, 1, -2162594, 65538, 1, -2228130, 65538, 1, -2293666, 65538, 1, -2359202, 65538, 1, -2424738, 65538, 1, -2490274, 65538, 1, -2555810, 65538, 1, -2621346, 65538, 1, -2686882, 65538, 1, -2752418, 65538, 0, -1834915, 65538, 1, -1900451, 65538, 1, -1965987, 65538, 1, -2031523, 65538, 1, -2097059, 65538, 1, -2162595, 65538, 1, -2228131, 65538, 1, -2293667, 65538, 1, -2359203, 65538, 1, -2424739, 65538, 1, -2490275, 65538, 1, -2555811, 65538, 1, -2621347, 65538, 1, -2686883, 65538, 1, -2752419, 65538, 0, -1834916, 65538, 1, -1900452, 65538, 1, -1965988, 65538, 1, -2031524, 65538, 1, -2097060, 65538, 1, -2162596, 65538, 1, -2228132, 65538, 1, -2293668, 65538, 1, -2359204, 65538, 1, -2424740, 65538, 1, -2490276, 65538, 1, -2555812, 65538, 1, -2621348, 65538, 1, -2686884, 65538, 1, -2752420, 65538, 0, -1834917, 65538, 1, -1900453, 65538, 1, -1965989, 65538, 1, -2031525, 65538, 1, -2097061, 65538, 1, -2162597, 65538, 1, -2228133, 65538, 1, -2293669, 65538, 1, -2359205, 65538, 1, -2424741, 65538, 1, -2490277, 65538, 1, -2555813, 65538, 1, -2621349, 65538, 1, -2686885, 65538, 1, -2752421, 65538, 0, -1834918, 65538, 1, -1900454, 65538, 1, -1965990, 65538, 1, -2031526, 65538, 1, -2097062, 65538, 1, -2162598, 65538, 1, -2228134, 65538, 1, -2293670, 65538, 1, -2359206, 65538, 1, -2424742, 65538, 1, -2490278, 65538, 1, -2555814, 65538, 1, -2621350, 65538, 1, -2686886, 65538, 1, -2752422, 65538, 0, -1834919, 65538, 1, -1900455, 65538, 1, -1965991, 65538, 1, -2031527, 65538, 1, -2097063, 65538, 1, -2162599, 65538, 1, -2228135, 65538, 1, -2293671, 65538, 1, -2359207, 65538, 1, -2424743, 65538, 1, -2490279, 65538, 1, -2555815, 65538, 1, -2621351, 65538, 1, -2686887, 65538, 1, -2752423, 65538, 0, -1834920, 65538, 1, -1900456, 65538, 1, -1965992, 65538, 1, -2031528, 65538, 1, -2097064, 65538, 1, -2162600, 65538, 1, -2228136, 65538, 1, -2293672, 65538, 1, -2359208, 65538, 1, -2424744, 65538, 1, -2490280, 65538, 1, -2555816, 65538, 1, -2621352, 65538, 1, -2686888, 65538, 1, -2752424, 65538, 0, -1834921, 65538, 1, -1900457, 65538, 1, -1965993, 65538, 1, -2031529, 65538, 1, -2097065, 65538, 1, -2162601, 65538, 1, -2228137, 65538, 1, -2293673, 65538, 1, -2359209, 65538, 1, -2424745, 65538, 1, -2490281, 65538, 1, -2555817, 65538, 1, -2621353, 65538, 1, -2686889, 65538, 1, -2752425, 65538, 0, -1834922, 65538, 1, -1900458, 65538, 1, -1965994, 65538, 1, -2031530, 65538, 1, -2097066, 65538, 1, -2162602, 65538, 1, -2228138, 65538, 1, -2293674, 65538, 1, -2359210, 65538, 1, -2424746, 65538, 1, -2490282, 65538, 1, -2555818, 65538, 1, -2621354, 65538, 1, -2686890, 65538, 1, -2752426, 65538, 0, -1834923, 2, 1, -1900459, 2, 1, -1965995, 2, 1, -2031531, 2, 1, -2097067, 2, 1, -2162603, 2, 1, -2228139, 2, 1, -2293675, 2, 1, -2359211, 2, 1, -2424747, 2, 1, -2490283, 2, 1, -2555819, 2, 1, -2621355, 2, 1, -2686891, 2, 1, -2752427, 2, 0)
 
 [node name="Markers" type="Node2D" parent="."]
 
 [node name="L0" type="Marker2D" parent="Markers"]
-position = Vector2(224, 96)
+position = Vector2(736, -32)
 
 [node name="L1" type="Marker2D" parent="Markers"]
-position = Vector2(576, 128)
+position = Vector2(1056, 224)
+
+[node name="L2" type="Marker2D" parent="Markers"]
+position = Vector2(1824, -160)
 
 [node name="Laser" parent="." instance=ExtResource("4_kc8ug")]
-position = Vector2(320, 224)
+position = Vector2(640, 96)
 
 [node name="EndArea" parent="." instance=ExtResource("1_odb00")]
-position = Vector2(672, 224)
-NEXT_LEVEL = "EndDemo"
+position = Vector2(2144, -32)
+NEXT_LEVEL = "Level7"
 
 [node name="Cat" parent="." instance=ExtResource("3_6pyn4")]
 position = Vector2(160, 224)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(64, -32)
+is_flying_enemy = true
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(160, -32)
+is_flying_enemy = true
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(256, -32)
+is_flying_enemy = true
+
+[node name="Enemy4" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(352, -32)
+is_flying_enemy = true
+
+[node name="Enemy5" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(448, -32)
+is_flying_enemy = true
+
+[node name="Enemy6" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(96, -64)
+is_flying_enemy = true
+
+[node name="Enemy7" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(192, -64)
+is_flying_enemy = true
+
+[node name="Enemy8" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(288, -64)
+is_flying_enemy = true
+
+[node name="Enemy9" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(384, -64)
+is_flying_enemy = true
+
+[node name="Enemy10" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(64, -96)
+is_flying_enemy = true
+
+[node name="Enemy11" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(160, -96)
+is_flying_enemy = true
+
+[node name="Enemy12" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(256, -96)
+is_flying_enemy = true
+
+[node name="Enemy13" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(352, -96)
+is_flying_enemy = true
+
+[node name="Enemy14" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(448, -96)
+is_flying_enemy = true
+
+[node name="Enemy15" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(1440, -96)
+is_flying_enemy = true
+
+[node name="Enemy16" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(1664, 0)
+is_flying_enemy = true
+
+[node name="Enemy18" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(1824, -64)
+is_flying_enemy = true
+
+[node name="Enemy19" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(1952, 32)
+is_flying_enemy = true
+
+[node name="Enemy20" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(2016, -128)
+is_flying_enemy = true
+
+[node name="Enemy21" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(1472, -320)
+is_flying_enemy = true
+
+[node name="Enemy22" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(1888, -320)
+is_flying_enemy = true
+
+[node name="Enemy23" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(1408, 224)
+
+[node name="Enemy24" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(1600, 224)
+
+[node name="Enemy25" parent="Enemies" instance=ExtResource("5_nynj8")]
+position = Vector2(1792, 224)
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(288, 0)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(416, 160)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D2"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D2"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D2"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D2"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D2"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D20" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(608, 128)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D20"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D20"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D20"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D20"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D20"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(352, 0)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D3"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D3"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D3"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D3"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D3"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(416, 0)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D4"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D4"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D4"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D4"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D4"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(480, 0)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D5"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D5"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D5"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D5"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D5"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D11" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(544, 0)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D11"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D11"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D11"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D11"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D11"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D12" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(608, 0)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D12"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D12"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D12"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D12"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D12"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D13" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(672, 0)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D13"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D13"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D13"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D13"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D13"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D14" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(736, 0)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D14"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D14"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D14"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D14"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D14"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D15" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(800, 96)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D15"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D15"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D15"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D15"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D15"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D16" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(800, 160)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D16"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D16"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D16"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D16"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D16"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D17" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(800, 224)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D17"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D17"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D17"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D17"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D17"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D18" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(800, 32)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D18"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D18"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D18"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D18"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D18"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(224, 0)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D6"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D6"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D6"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D6"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D6"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(160, 0)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D7"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D7"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D7"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D7"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D7"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(96, 0)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D8"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D8"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D8"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D8"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D8"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(32, 0)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D9"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D9"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D9"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D9"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D9"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(32, 0)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D10"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D10"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D10"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D10"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D10"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D19" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1440, -64)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D19"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D19"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D19"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D19"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D19"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D21" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1440, -128)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D21"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D21"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D21"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D21"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D21"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D22" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1376, -96)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D22"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D22"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D22"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D22"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D22"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D23" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1504, -96)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D23"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D23"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D23"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D23"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D23"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D24" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1696, -128)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D24"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D24"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D24"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D24"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D24"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D25" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1696, -256)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D25"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D25"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D25"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D25"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D25"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D26" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1632, -192)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D26"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D26"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D26"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D26"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D26"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D27" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1760, -192)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D27"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D27"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D27"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D27"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D27"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D28" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1664, 32)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D28"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D28"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D28"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D28"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D28"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D29" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1664, -32)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D29"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D29"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D29"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D29"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D29"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D30" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1600, 0)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D30"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D30"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D30"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D30"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D30"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D31" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1728, 0)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D31"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D31"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D31"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D31"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D31"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D32" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1824, -32)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D32"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D32"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D32"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D32"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D32"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D33" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1824, -96)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D33"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D33"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D33"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D33"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D33"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D34" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1760, -64)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D34"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D34"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D34"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D34"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D34"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D35" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1888, -64)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D35"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D35"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D35"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D35"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D35"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D36" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1952, 64)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D36"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D36"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D36"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D36"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D36"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D37" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1952, 0)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D37"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D37"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D37"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D37"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D37"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D38" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1888, 32)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D38"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D38"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D38"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D38"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D38"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D39" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2016, 32)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D39"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D39"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D39"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D39"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D39"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D56" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2144, 0)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D56"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D56"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D56"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D56"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D56"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D57" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2144, -64)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D57"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D57"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D57"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D57"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D57"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D58" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2080, -32)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D58"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D58"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D58"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D58"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D58"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D59" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2208, -32)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D59"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D59"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D59"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D59"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D59"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D40" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2016, -96)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D40"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D40"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D40"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D40"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D40"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D41" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2016, -160)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D41"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D41"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D41"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D41"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D41"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D42" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1952, -128)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D42"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D42"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D42"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D42"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D42"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D43" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2080, -128)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D43"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D43"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D43"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D43"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D43"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D44" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1376, 128)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D44"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D44"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D44"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D44"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D44"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D45" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1504, 64)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D45"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D45"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D45"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D45"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D45"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D46" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2144, -224)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D46"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D46"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D46"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D46"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D46"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D47" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2240, -288)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D47"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D47"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D47"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D47"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D47"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D48" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2304, -224)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D48"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D48"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D48"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D48"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D48"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D49" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2304, -320)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D49"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D49"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D49"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D49"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D49"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D50" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2304, -416)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D50"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D50"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D50"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D50"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D50"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D51" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2304, -512)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D51"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D51"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D51"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D51"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D51"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D52" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2304, -512)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D52"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D52"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D52"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D52"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D52"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D53" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2368, -544)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D53"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D53"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D53"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D53"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D53"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D54" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2464, -544)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D54"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D54"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D54"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D54"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D54"]
+stream = ExtResource("9_dvl8a")
+
+[node name="StaticBody2D55" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2560, -544)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D55"]
+shape = SubResource("RectangleShape2D_5g4al")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D55"]
+modulate = Color(1, 1, 1, 0.509804)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u2rf")
+animation = &"idle"
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D55"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b2bte")
+animation = &"idle"
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D55"]
+stream = ExtResource("8_g80by")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D55"]
+stream = ExtResource("9_dvl8a")
+
+[node name="Buckets" type="Node2D" parent="."]
+
+[node name="PaintBucket" type="Area2D" parent="Buckets"]
+position = Vector2(1696, -192)
+scale = Vector2(0.672262, 0.813744)
+collision_layer = 4
+script = ExtResource("11_wg02j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket"]
+shape = SubResource("CircleShape2D_krgjg")
+
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket"]
+scale = Vector2(2, 1.8)
+sprite_frames = SubResource("SpriteFrames_0psew")
+animation = &"idle"
+
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket"]
+stream = ExtResource("14_y3ka6")
+
+[node name="PaintBucket9" type="Area2D" parent="Buckets"]
+position = Vector2(2368, -320)
+scale = Vector2(0.672262, 0.813744)
+collision_layer = 4
+script = ExtResource("11_wg02j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket9"]
+shape = SubResource("CircleShape2D_krgjg")
+
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket9"]
+scale = Vector2(2, 1.8)
+sprite_frames = SubResource("SpriteFrames_0psew")
+animation = &"idle"
+
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket9"]
+stream = ExtResource("14_y3ka6")
+
+[node name="PaintBucket2" type="Area2D" parent="Buckets"]
+position = Vector2(864, 224)
+scale = Vector2(0.47, 0.645)
+collision_layer = 4
+script = ExtResource("11_wg02j")
+COLOR = "Blue"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket2"]
+position = Vector2(0.000171661, 3.8743e-07)
+scale = Vector2(1, 0.877517)
+shape = SubResource("CircleShape2D_l0rbj")
+
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket2"]
+position = Vector2(0.000108898, 1.84774e-05)
+scale = Vector2(2.851, 2.28222)
+sprite_frames = SubResource("SpriteFrames_pu210")
+animation = &"idle"
+
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket2"]
+stream = ExtResource("14_y3ka6")
+
+[node name="PaintBucket4" type="Area2D" parent="Buckets"]
+position = Vector2(1888, -128)
+scale = Vector2(0.47, 0.645)
+collision_layer = 4
+script = ExtResource("11_wg02j")
+COLOR = "Blue"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket4"]
+position = Vector2(0.000171661, 3.8743e-07)
+scale = Vector2(1, 0.877517)
+shape = SubResource("CircleShape2D_l0rbj")
+
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket4"]
+position = Vector2(0.000108898, 1.84774e-05)
+scale = Vector2(2.851, 2.28222)
+sprite_frames = SubResource("SpriteFrames_pu210")
+animation = &"idle"
+
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket4"]
+stream = ExtResource("14_y3ka6")
+
+[node name="PaintBucket3" type="Area2D" parent="Buckets"]
+position = Vector2(288, 224)
+scale = Vector2(0.672262, 0.813744)
+collision_layer = 4
+script = ExtResource("11_wg02j")
+COLOR = "Yellow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket3"]
+shape = SubResource("CircleShape2D_krgjg")
+
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket3"]
+scale = Vector2(2, 1.8)
+sprite_frames = SubResource("SpriteFrames_mk7nc")
+animation = &"idle"
+
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket3"]
+stream = ExtResource("14_y3ka6")
+
+[node name="PaintBucket5" type="Area2D" parent="Buckets"]
+position = Vector2(1659, -82)
+scale = Vector2(0.672262, 0.813744)
+collision_layer = 4
+script = ExtResource("11_wg02j")
+COLOR = "Yellow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket5"]
+shape = SubResource("CircleShape2D_krgjg")
+
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket5"]
+scale = Vector2(2, 1.8)
+sprite_frames = SubResource("SpriteFrames_mk7nc")
+animation = &"idle"
+
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket5"]
+stream = ExtResource("14_y3ka6")
+
+[node name="PaintBucket6" type="Area2D" parent="Buckets"]
+position = Vector2(1440, -192)
+scale = Vector2(0.672262, 0.813744)
+collision_layer = 4
+script = ExtResource("11_wg02j")
+COLOR = "Yellow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket6"]
+shape = SubResource("CircleShape2D_krgjg")
+
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket6"]
+scale = Vector2(2, 1.8)
+sprite_frames = SubResource("SpriteFrames_mk7nc")
+animation = &"idle"
+
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket6"]
+stream = ExtResource("14_y3ka6")
+
+[node name="PaintBucket7" type="Area2D" parent="Buckets"]
+position = Vector2(1696, -320)
+scale = Vector2(0.672262, 0.813744)
+collision_layer = 4
+script = ExtResource("11_wg02j")
+COLOR = "Yellow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket7"]
+shape = SubResource("CircleShape2D_krgjg")
+
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket7"]
+scale = Vector2(2, 1.8)
+sprite_frames = SubResource("SpriteFrames_mk7nc")
+animation = &"idle"
+
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket7"]
+stream = ExtResource("14_y3ka6")
+
+[node name="PaintBucket8" type="Area2D" parent="Buckets"]
+position = Vector2(2240, -384)
+scale = Vector2(0.672262, 0.813744)
+collision_layer = 4
+script = ExtResource("11_wg02j")
+COLOR = "Yellow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket8"]
+shape = SubResource("CircleShape2D_krgjg")
+
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket8"]
+scale = Vector2(2, 1.8)
+sprite_frames = SubResource("SpriteFrames_mk7nc")
+animation = &"idle"
+
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket8"]
+stream = ExtResource("14_y3ka6")
+
+[node name="Food" type="Node2D" parent="."]
+
+[node name="Can" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(32, 160)
+collision_layer = 8
+script = ExtResource("19_hrb4a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can"]
+shape = SubResource("CircleShape2D_ymhni")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can"]
+sprite_frames = SubResource("SpriteFrames_aqu8d")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can"]
+stream = ExtResource("21_7we6n")
+
+[node name="Can2" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(608, -32)
+collision_layer = 8
+script = ExtResource("19_hrb4a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can2"]
+shape = SubResource("CircleShape2D_ymhni")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can2"]
+sprite_frames = SubResource("SpriteFrames_aqu8d")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can2"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can2"]
+stream = ExtResource("21_7we6n")
+
+[node name="Can3" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(2016, -192)
+collision_layer = 8
+script = ExtResource("19_hrb4a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can3"]
+shape = SubResource("CircleShape2D_ymhni")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can3"]
+sprite_frames = SubResource("SpriteFrames_aqu8d")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can3"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can3"]
+stream = ExtResource("21_7we6n")
+
+[node name="Can4" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(2432, -256)
+collision_layer = 8
+script = ExtResource("19_hrb4a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can4"]
+shape = SubResource("CircleShape2D_ymhni")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can4"]
+sprite_frames = SubResource("SpriteFrames_aqu8d")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can4"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can4"]
+stream = ExtResource("21_7we6n")
+
+[node name="Can5" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(2208, 128)
+collision_layer = 8
+script = ExtResource("19_hrb4a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can5"]
+shape = SubResource("CircleShape2D_ymhni")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can5"]
+sprite_frames = SubResource("SpriteFrames_aqu8d")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can5"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can5"]
+stream = ExtResource("21_7we6n")
+
+[node name="Can6" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(1952, -32)
+collision_layer = 8
+script = ExtResource("19_hrb4a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can6"]
+shape = SubResource("CircleShape2D_ymhni")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can6"]
+sprite_frames = SubResource("SpriteFrames_aqu8d")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can6"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can6"]
+stream = ExtResource("21_7we6n")
+
+[node name="Can7" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(192, -128)
+collision_layer = 8
+script = ExtResource("19_hrb4a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can7"]
+shape = SubResource("CircleShape2D_ymhni")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can7"]
+sprite_frames = SubResource("SpriteFrames_aqu8d")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can7"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can7"]
+stream = ExtResource("21_7we6n")
+
+[node name="Can8" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(1728, 160)
+collision_layer = 8
+script = ExtResource("19_hrb4a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can8"]
+shape = SubResource("CircleShape2D_ymhni")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can8"]
+sprite_frames = SubResource("SpriteFrames_aqu8d")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can8"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can8"]
+stream = ExtResource("21_7we6n")
+
+[connection signal="body_entered" from="Buckets/PaintBucket" to="Buckets/PaintBucket" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket/BucketSprite" to="Buckets/PaintBucket" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket9" to="Buckets/PaintBucket9" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket9/BucketSprite" to="Buckets/PaintBucket9" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket2" to="Buckets/PaintBucket2" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket2/BucketSprite" to="Buckets/PaintBucket2" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket4" to="Buckets/PaintBucket4" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket4/BucketSprite" to="Buckets/PaintBucket4" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket3" to="Buckets/PaintBucket3" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket3/BucketSprite" to="Buckets/PaintBucket3" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket5" to="Buckets/PaintBucket5" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket5/BucketSprite" to="Buckets/PaintBucket5" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket6" to="Buckets/PaintBucket6" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket6/BucketSprite" to="Buckets/PaintBucket6" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket7" to="Buckets/PaintBucket7" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket7/BucketSprite" to="Buckets/PaintBucket7" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket8" to="Buckets/PaintBucket8" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket8/BucketSprite" to="Buckets/PaintBucket8" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Food/Can" to="Food/Can" method="_on_body_entered"]
+[connection signal="body_entered" from="Food/Can2" to="Food/Can2" method="_on_body_entered"]
+[connection signal="body_entered" from="Food/Can3" to="Food/Can3" method="_on_body_entered"]
+[connection signal="body_entered" from="Food/Can4" to="Food/Can4" method="_on_body_entered"]
+[connection signal="body_entered" from="Food/Can5" to="Food/Can5" method="_on_body_entered"]
+[connection signal="body_entered" from="Food/Can6" to="Food/Can6" method="_on_body_entered"]
+[connection signal="body_entered" from="Food/Can7" to="Food/Can7" method="_on_body_entered"]
+[connection signal="body_entered" from="Food/Can8" to="Food/Can8" method="_on_body_entered"]

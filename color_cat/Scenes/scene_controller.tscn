@@ -85,7 +85,7 @@ stream = ExtResource("3_w7o3t")
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_h4uy0")
-volume_db = -22.106
+volume_db = -20.144
 max_distance = 1e+09
 attenuation = 0.01
 

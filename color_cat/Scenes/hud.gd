@@ -11,19 +11,23 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("pause"): # Enter key or Escape key
-		if paused:
-			get_parent().get_node("PauseMenu").unpause()
-		else:
-			pause()
+		if get_parent().CURRENT_LEVEL_NAME != "TitleScreen":
+			if paused:
+				get_parent().get_node("PauseMenu").unpause()
+			else:
+				pause()
 
 func update_score(animate):
 	# play an animation that makes it immediately large and then
 	# slowly shrink back to normal size
 	#$FoodCount.text = "Food collected this round: "+str(food_count)
 	#$FoodCount.text = "Food collected this round: "+str(food_count-pfood_count)+"\nFood collected overall: "+str(food_count)
-	$FoodCount.text = "Food overall: "+str(food_count+pfood_count)+"\nFood this round: "+str(food_count)
-	if animate:
-		$AnimationPlayer.play("food_collected")
+	if get_parent().CURRENT_LEVEL_NAME == "EndDemo":
+		$FoodCount.text = ""
+	else:
+		$FoodCount.text = "Food overall: "+str(food_count+pfood_count)+"\nFood this round: "+str(food_count)
+		if animate:
+			$AnimationPlayer.play("food_collected")
 
 func pause():
 	paused = true

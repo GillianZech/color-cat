@@ -966,7 +966,7 @@ shape = SubResource("CircleShape2D_bfi8p")
 position = Vector2(0.000108898, 1.84774e-05)
 scale = Vector2(2.851, 2.28222)
 sprite_frames = SubResource("SpriteFrames_8p281")
-animation = &"splash"
+animation = &"idle"
 
 [node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket2"]
 stream = ExtResource("7_8tosj")
@@ -984,7 +984,7 @@ shape = SubResource("CircleShape2D_k6kla")
 [node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket3"]
 scale = Vector2(2, 1.8)
 sprite_frames = SubResource("SpriteFrames_qbd8o")
-animation = &"splash"
+animation = &"idle"
 
 [node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket3"]
 stream = ExtResource("7_8tosj")

@@ -1,0 +1,1719 @@
+[gd_scene load_steps=95 format=3 uid="uid://bfg55s53o7x6"]
+
+[ext_resource type="Texture2D" uid="uid://n2baq8whuvn5" path="res://Assets/background/SCS_Background_Sunset_01.png" id="1_rh2yr"]
+[ext_resource type="PackedScene" uid="uid://c0judastlvqt1" path="res://Scenes/Cat.tscn" id="2_ermmk"]
+[ext_resource type="Texture2D" uid="uid://dppggppxyvjd0" path="res://Assets/background/SCS_Skyline_Nighttime_Layer02.png" id="2_s1r4k"]
+[ext_resource type="Texture2D" uid="uid://uh1dhh5eim45" path="res://Assets/unlocked_door.png" id="3_w3b4f"]
+[ext_resource type="Texture2D" uid="uid://clsfg4b1i1dt2" path="res://Assets/locked_door.png" id="4_c70to"]
+[ext_resource type="AudioStream" uid="uid://07jpj77vqh2s" path="res://Sounds/lock.ogg" id="5_2xvuf"]
+[ext_resource type="AudioStream" uid="uid://8ktkbjjr4fnp" path="res://Sounds/unlock.ogg" id="6_gqb0o"]
+[ext_resource type="Script" path="res://Code/PaintBucket.gd" id="7_1dn0n"]
+[ext_resource type="Script" path="res://Scenes/DeathPlane.gd" id="7_y127n"]
+[ext_resource type="AudioStream" uid="uid://b5y1fgkb5iplb" path="res://Sounds/weramp.ogg" id="8_18q1d"]
+[ext_resource type="Texture2D" uid="uid://cf1jykggxkf8v" path="res://Assets/paint_bucket_red.png" id="8_786ga"]
+[ext_resource type="Texture2D" uid="uid://csdax0y8win6l" path="res://Assets/paint_bucket_red_sprite_sheet.png" id="9_5cm10"]
+[ext_resource type="AudioStream" uid="uid://ba1ta67ygvkp2" path="res://Sounds/dwoop2.ogg" id="10_hiv3u"]
+[ext_resource type="Texture2D" uid="uid://bem4r7kdi8pee" path="res://Assets/paint_bucket_blue.png" id="11_brd70"]
+[ext_resource type="Texture2D" uid="uid://cwvgcwiuqi1b2" path="res://Assets/paint_bucket_blue_sprite_sheet.png" id="12_jlm6i"]
+[ext_resource type="Texture2D" uid="uid://berap748ekg0t" path="res://Assets/paint_bucket_yellow.png" id="13_hj0in"]
+[ext_resource type="Texture2D" uid="uid://cgeushhu2cvhc" path="res://Assets/paint_bucket_yellow_sprite_sheet.png" id="14_8jmgy"]
+[ext_resource type="PackedScene" uid="uid://dykbqv6sog3xw" path="res://Scenes/EndArea.tscn" id="17_6tbay"]
+[ext_resource type="PackedScene" uid="uid://18j8qm76751c" path="res://Scenes/laser.tscn" id="17_lbbed"]
+[ext_resource type="PackedScene" uid="uid://cpgsfyulne2ru" path="res://Scenes/enemy.tscn" id="19_i0chs"]
+[ext_resource type="PackedScene" uid="uid://dkwnokg50alof" path="res://Scenes/Spike.tscn" id="20_8tfjv"]
+[ext_resource type="Script" path="res://Food.gd" id="21_5l8fy"]
+[ext_resource type="Texture2D" uid="uid://cg6kriqlt02sj" path="res://Assets/food.png" id="22_m5a6o"]
+[ext_resource type="AudioStream" uid="uid://b05d6g0x3njyo" path="res://Sounds/eat.ogg" id="23_mr2nl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ym3v"]
+size = Vector2(24, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iemk7"]
+atlas = ExtResource("3_w3b4f")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0sx0"]
+atlas = ExtResource("3_w3b4f")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sc8gm"]
+atlas = ExtResource("3_w3b4f")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kb1rn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iemk7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l0sx0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sc8gm")
+}],
+"loop": false,
+"name": &"unlock",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epusc"]
+atlas = ExtResource("4_c70to")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ej41d"]
+atlas = ExtResource("4_c70to")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ankmd"]
+atlas = ExtResource("4_c70to")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ragy7"]
+atlas = ExtResource("4_c70to")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqa0a"]
+atlas = ExtResource("4_c70to")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8o00s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epusc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ej41d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ankmd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ragy7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqa0a")
+}],
+"loop": false,
+"name": &"lock",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pvm2n"]
+radius = 26.61
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skij4"]
+atlas = ExtResource("8_786ga")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2coe"]
+atlas = ExtResource("8_786ga")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ji1bp"]
+atlas = ExtResource("8_786ga")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khinl"]
+atlas = ExtResource("8_786ga")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcdar"]
+atlas = ExtResource("8_786ga")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nl0mt"]
+atlas = ExtResource("8_786ga")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbr17"]
+atlas = ExtResource("9_5cm10")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tcfh4"]
+atlas = ExtResource("9_5cm10")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kyyt"]
+atlas = ExtResource("9_5cm10")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2bn1"]
+atlas = ExtResource("9_5cm10")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_me7rn"]
+atlas = ExtResource("9_5cm10")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7pv2"]
+atlas = ExtResource("9_5cm10")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwyrx"]
+atlas = ExtResource("9_5cm10")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_se0aa"]
+atlas = ExtResource("9_5cm10")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7a7qg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skij4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2coe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ji1bp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khinl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcdar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nl0mt")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_hbr17")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_tcfh4")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_7kyyt")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_t2bn1")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_me7rn")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_x7pv2")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_pwyrx")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_se0aa")
+}],
+"loop": false,
+"name": &"splash",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n6uvt"]
+radius = 38.2976
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5hg1"]
+atlas = ExtResource("11_brd70")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pe870"]
+atlas = ExtResource("11_brd70")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4boqb"]
+atlas = ExtResource("11_brd70")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5x58"]
+atlas = ExtResource("11_brd70")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5iheg"]
+atlas = ExtResource("11_brd70")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s022u"]
+atlas = ExtResource("11_brd70")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mm7iu"]
+atlas = ExtResource("12_jlm6i")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aa6e7"]
+atlas = ExtResource("12_jlm6i")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ostni"]
+atlas = ExtResource("12_jlm6i")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gmtk"]
+atlas = ExtResource("12_jlm6i")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1vsb"]
+atlas = ExtResource("12_jlm6i")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1ctu"]
+atlas = ExtResource("12_jlm6i")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mieul"]
+atlas = ExtResource("12_jlm6i")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lecu"]
+atlas = ExtResource("12_jlm6i")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3n3vl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5hg1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pe870")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4boqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5x58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5iheg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s022u")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_mm7iu")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_aa6e7")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_ostni")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_3gmtk")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_y1vsb")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_s1ctu")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_mieul")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_2lecu")
+}],
+"loop": false,
+"name": &"splash",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtgs7"]
+atlas = ExtResource("13_hj0in")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rlfbn"]
+atlas = ExtResource("13_hj0in")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23ysn"]
+atlas = ExtResource("13_hj0in")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nehvh"]
+atlas = ExtResource("13_hj0in")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31xna"]
+atlas = ExtResource("13_hj0in")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6g1r7"]
+atlas = ExtResource("13_hj0in")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ks468"]
+atlas = ExtResource("14_8jmgy")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tywky"]
+atlas = ExtResource("14_8jmgy")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iiapp"]
+atlas = ExtResource("14_8jmgy")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjdok"]
+atlas = ExtResource("14_8jmgy")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aih85"]
+atlas = ExtResource("14_8jmgy")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iq6c0"]
+atlas = ExtResource("14_8jmgy")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4vvq"]
+atlas = ExtResource("14_8jmgy")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vy22m"]
+atlas = ExtResource("14_8jmgy")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0xf00"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtgs7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rlfbn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23ysn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nehvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31xna")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6g1r7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_ks468")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_tywky")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_iiapp")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_xjdok")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_aih85")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_iq6c0")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_k4vvq")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_vy22m")
+}],
+"loop": false,
+"name": &"splash",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dmnn5"]
+size = Vector2(139.846, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1wft1"]
+radius = 13.0384
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umd7g"]
+atlas = ExtResource("22_m5a6o")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thstt"]
+atlas = ExtResource("22_m5a6o")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gd2o6"]
+atlas = ExtResource("22_m5a6o")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sm4wj"]
+atlas = ExtResource("22_m5a6o")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gcm7"]
+atlas = ExtResource("22_m5a6o")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbduu"]
+atlas = ExtResource("22_m5a6o")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wmtjv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_umd7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thstt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gd2o6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sm4wj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gcm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vbduu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_4doyy"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FoodSprite:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FoodSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FoodSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mylwv"]
+resource_name = "collect"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FoodSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.2, 1)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FoodSprite:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.8)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FoodSprite:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -60, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.8)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a0npr"]
+_data = {
+"RESET": SubResource("Animation_4doyy"),
+"collect": SubResource("Animation_mylwv")
+}
+
+[node name="Level7" type="Node2D"]
+position = Vector2(-96, 96)
+
+[node name="ScsBackgroundSunset01" type="Sprite2D" parent="."]
+position = Vector2(3120, 64.0001)
+scale = Vector2(9.65, 3.6)
+texture = ExtResource("1_rh2yr")
+
+[node name="ScsSkylineNighttimeLayer02" type="Sprite2D" parent="."]
+position = Vector2(2912, 576)
+scale = Vector2(9, 15.2258)
+texture = ExtResource("2_s1r4k")
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(288, 480)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(352, 480)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D4"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D4"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D4"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D4"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D4"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(416, 480)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D5"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D5"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D5"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D5"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D5"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(544, 480)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D6"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D6"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D6"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D6"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D6"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(672, 480)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D7"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D7"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D7"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D7"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D7"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(672, 480)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D8"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D8"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D8"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D8"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D8"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(832, 480)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D9"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D9"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D9"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D9"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D9"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(992, 480)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D10"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D10"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D10"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D10"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D10"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D11" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(736, 384)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D11"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D11"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D11"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D11"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D11"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D12" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(896, 320)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D12"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D12"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D12"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D12"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D12"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D13" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1216, 480)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D13"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D13"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D13"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D13"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D13"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D14" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1440, 480)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D14"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D14"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D14"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D14"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D14"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D15" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1664, 480)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D15"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D15"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D15"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D15"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D15"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D16" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1888, 480)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D16"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D16"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D16"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D16"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D16"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D17" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2112, 480)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D17"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D17"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D17"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D17"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D17"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D18" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2336, 480)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D18"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D18"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D18"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D18"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D18"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D19" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(1984, 384)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D19"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D19"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D19"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D19"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D19"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D20" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2240, 320)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D20"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D20"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D20"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D20"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D20"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D21" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2400, 256)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D21"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D21"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D21"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D21"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D21"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D22" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2080, 224)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D22"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D22"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D22"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D22"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D22"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D23" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(2688, 480)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D23"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D23"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D23"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D23"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D23"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D24" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(3008, 480)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D24"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D24"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D24"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D24"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D24"]
+stream = ExtResource("6_gqb0o")
+
+[node name="StaticBody2D25" type="StaticBody2D" parent="Doors"]
+light_mask = 16
+position = Vector2(3296, 480)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D25"]
+position = Vector2(12, 32)
+shape = SubResource("RectangleShape2D_2ym3v")
+
+[node name="UnlockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D25"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kb1rn")
+animation = &"idle"
+centered = false
+
+[node name="LockedDoorSprite" type="AnimatedSprite2D" parent="Doors/StaticBody2D25"]
+position = Vector2(-20, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8o00s")
+animation = &"idle"
+centered = false
+
+[node name="LockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D25"]
+stream = ExtResource("5_2xvuf")
+
+[node name="UnlockAudio" type="AudioStreamPlayer2D" parent="Doors/StaticBody2D25"]
+stream = ExtResource("6_gqb0o")
+
+[node name="Buckets" type="Node2D" parent="."]
+
+[node name="PaintBucket" type="Area2D" parent="Buckets"]
+position = Vector2(1920, 160)
+scale = Vector2(0.672262, 0.813744)
+collision_layer = 4
+script = ExtResource("7_1dn0n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket"]
+shape = SubResource("CircleShape2D_pvm2n")
+
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket"]
+scale = Vector2(2, 1.8)
+sprite_frames = SubResource("SpriteFrames_7a7qg")
+animation = &"idle"
+
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket"]
+stream = ExtResource("10_hiv3u")
+
+[node name="PaintBucket2" type="Area2D" parent="Buckets"]
+position = Vector2(512, 352)
+scale = Vector2(0.47, 0.645)
+collision_layer = 4
+script = ExtResource("7_1dn0n")
+COLOR = "Blue"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket2"]
+position = Vector2(0.000171661, 3.8743e-07)
+scale = Vector2(1, 0.877517)
+shape = SubResource("CircleShape2D_n6uvt")
+
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket2"]
+position = Vector2(0.000108898, 1.84774e-05)
+scale = Vector2(2.851, 2.28222)
+sprite_frames = SubResource("SpriteFrames_3n3vl")
+animation = &"idle"
+
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket2"]
+stream = ExtResource("10_hiv3u")
+
+[node name="PaintBucket3" type="Area2D" parent="Buckets"]
+position = Vector2(3552, 416)
+scale = Vector2(0.672262, 0.813744)
+collision_layer = 4
+script = ExtResource("7_1dn0n")
+COLOR = "Yellow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket3"]
+shape = SubResource("CircleShape2D_pvm2n")
+
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket3"]
+scale = Vector2(2, 1.8)
+sprite_frames = SubResource("SpriteFrames_0xf00")
+animation = &"idle"
+
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket3"]
+stream = ExtResource("10_hiv3u")
+
+[node name="PaintBucket7" type="Area2D" parent="Buckets"]
+position = Vector2(2688, 352)
+scale = Vector2(0.672262, 0.813744)
+collision_layer = 4
+script = ExtResource("7_1dn0n")
+COLOR = "Yellow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket7"]
+shape = SubResource("CircleShape2D_pvm2n")
+
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket7"]
+scale = Vector2(2, 1.8)
+sprite_frames = SubResource("SpriteFrames_0xf00")
+animation = &"idle"
+
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket7"]
+stream = ExtResource("10_hiv3u")
+
+[node name="PaintBucket8" type="Area2D" parent="Buckets"]
+position = Vector2(384, 352)
+scale = Vector2(0.672262, 0.813744)
+collision_layer = 4
+script = ExtResource("7_1dn0n")
+COLOR = "Yellow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket8"]
+shape = SubResource("CircleShape2D_pvm2n")
+
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket8"]
+scale = Vector2(2, 1.8)
+sprite_frames = SubResource("SpriteFrames_0xf00")
+animation = &"idle"
+
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket8"]
+stream = ExtResource("10_hiv3u")
+
+[node name="PaintBucket5" type="Area2D" parent="Buckets"]
+position = Vector2(1984, 128)
+scale = Vector2(0.672262, 0.813744)
+collision_layer = 4
+script = ExtResource("7_1dn0n")
+COLOR = "Yellow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket5"]
+shape = SubResource("CircleShape2D_pvm2n")
+
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket5"]
+scale = Vector2(2, 1.8)
+sprite_frames = SubResource("SpriteFrames_0xf00")
+animation = &"idle"
+
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket5"]
+stream = ExtResource("10_hiv3u")
+
+[node name="PaintBucket6" type="Area2D" parent="Buckets"]
+position = Vector2(928, 288)
+scale = Vector2(0.672262, 0.813744)
+collision_layer = 4
+script = ExtResource("7_1dn0n")
+COLOR = "Yellow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket6"]
+shape = SubResource("CircleShape2D_pvm2n")
+
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket6"]
+scale = Vector2(2, 1.8)
+sprite_frames = SubResource("SpriteFrames_0xf00")
+animation = &"idle"
+
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket6"]
+stream = ExtResource("10_hiv3u")
+
+[node name="PaintBucket4" type="Area2D" parent="Buckets"]
+position = Vector2(1408, 384)
+scale = Vector2(0.47, 0.645)
+collision_layer = 4
+script = ExtResource("7_1dn0n")
+COLOR = "Blue"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buckets/PaintBucket4"]
+position = Vector2(0.000171661, 3.8743e-07)
+scale = Vector2(1, 0.877517)
+shape = SubResource("CircleShape2D_n6uvt")
+
+[node name="BucketSprite" type="AnimatedSprite2D" parent="Buckets/PaintBucket4"]
+position = Vector2(0.000108898, 1.84774e-05)
+scale = Vector2(2.851, 2.28222)
+sprite_frames = SubResource("SpriteFrames_3n3vl")
+animation = &"idle"
+
+[node name="BucketSplashAudio" type="AudioStreamPlayer2D" parent="Buckets/PaintBucket4"]
+stream = ExtResource("10_hiv3u")
+
+[node name="DeathPlane" type="Area2D" parent="."]
+position = Vector2(2144, 736)
+scale = Vector2(7.2, 1)
+collision_layer = 64
+script = ExtResource("7_y127n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathPlane"]
+scale = Vector2(7.33962, 1)
+shape = SubResource("RectangleShape2D_dmnn5")
+
+[node name="Death" type="AudioStreamPlayer2D" parent="DeathPlane"]
+stream = ExtResource("8_18q1d")
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="L0" type="Marker2D" parent="Markers"]
+position = Vector2(1184, 448)
+
+[node name="L1" type="Marker2D" parent="Markers"]
+position = Vector2(1536, 352)
+
+[node name="L2" type="Marker2D" parent="Markers"]
+position = Vector2(2303, 96)
+
+[node name="Laser" parent="." instance=ExtResource("17_lbbed")]
+position = Vector2(864, 288)
+
+[node name="EndArea" parent="." instance=ExtResource("17_6tbay")]
+position = Vector2(4128, 352)
+NEXT_LEVEL = "EndDemo"
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource("19_i0chs")]
+position = Vector2(864, 416)
+is_flying_enemy = true
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource("19_i0chs")]
+position = Vector2(1248, 320)
+is_flying_enemy = true
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource("19_i0chs")]
+position = Vector2(1760, 544)
+is_flying_enemy = true
+
+[node name="Enemy4" parent="Enemies" instance=ExtResource("19_i0chs")]
+position = Vector2(2240, 192)
+is_flying_enemy = true
+
+[node name="Enemy7" parent="Enemies" instance=ExtResource("19_i0chs")]
+position = Vector2(2944, 416)
+is_flying_enemy = true
+
+[node name="Enemy5" parent="Enemies" instance=ExtResource("19_i0chs")]
+position = Vector2(3584, 480)
+is_flying_enemy = true
+
+[node name="Enemy6" parent="Enemies" instance=ExtResource("19_i0chs")]
+position = Vector2(3840, 384)
+is_flying_enemy = true
+
+[node name="Spikes" type="Node2D" parent="."]
+
+[node name="Spike" parent="Spikes" instance=ExtResource("20_8tfjv")]
+position = Vector2(2336, 192)
+
+[node name="Spike2" parent="Spikes" instance=ExtResource("20_8tfjv")]
+position = Vector2(2240, 416)
+rotation = -3.14159
+
+[node name="Spike3" parent="Spikes" instance=ExtResource("20_8tfjv")]
+position = Vector2(1600, 416)
+
+[node name="Spike4" parent="Spikes" instance=ExtResource("20_8tfjv")]
+position = Vector2(2944, 416)
+
+[node name="Food" type="Node2D" parent="."]
+
+[node name="Can" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(256, 224)
+collision_layer = 8
+script = ExtResource("21_5l8fy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can"]
+shape = SubResource("CircleShape2D_1wft1")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can"]
+sprite_frames = SubResource("SpriteFrames_wmtjv")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can"]
+stream = ExtResource("23_mr2nl")
+
+[node name="Can2" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(800, 448)
+collision_layer = 8
+script = ExtResource("21_5l8fy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can2"]
+shape = SubResource("CircleShape2D_1wft1")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can2"]
+sprite_frames = SubResource("SpriteFrames_wmtjv")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can2"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can2"]
+stream = ExtResource("23_mr2nl")
+
+[node name="Can3" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(1280, 352)
+collision_layer = 8
+script = ExtResource("21_5l8fy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can3"]
+shape = SubResource("CircleShape2D_1wft1")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can3"]
+sprite_frames = SubResource("SpriteFrames_wmtjv")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can3"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can3"]
+stream = ExtResource("23_mr2nl")
+
+[node name="Can4" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(1920, 96)
+collision_layer = 8
+script = ExtResource("21_5l8fy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can4"]
+shape = SubResource("CircleShape2D_1wft1")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can4"]
+sprite_frames = SubResource("SpriteFrames_wmtjv")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can4"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can4"]
+stream = ExtResource("23_mr2nl")
+
+[node name="Can5" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(2304, 416)
+collision_layer = 8
+script = ExtResource("21_5l8fy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can5"]
+shape = SubResource("CircleShape2D_1wft1")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can5"]
+sprite_frames = SubResource("SpriteFrames_wmtjv")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can5"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can5"]
+stream = ExtResource("23_mr2nl")
+
+[node name="Can6" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(2944, 352)
+collision_layer = 8
+script = ExtResource("21_5l8fy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can6"]
+shape = SubResource("CircleShape2D_1wft1")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can6"]
+sprite_frames = SubResource("SpriteFrames_wmtjv")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can6"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can6"]
+stream = ExtResource("23_mr2nl")
+
+[node name="Can7" type="Area2D" parent="Food" groups=["food"]]
+position = Vector2(3712, 256)
+collision_layer = 8
+script = ExtResource("21_5l8fy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Can7"]
+shape = SubResource("CircleShape2D_1wft1")
+debug_color = Color(0.960784, 1, 0.054902, 0.47451)
+
+[node name="FoodSprite" type="AnimatedSprite2D" parent="Food/Can7"]
+sprite_frames = SubResource("SpriteFrames_wmtjv")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Food/Can7"]
+libraries = {
+"": SubResource("AnimationLibrary_a0npr")
+}
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="Food/Can7"]
+stream = ExtResource("23_mr2nl")
+
+[node name="Cat" parent="." instance=ExtResource("2_ermmk")]
+position = Vector2(256, 448)
+
+[connection signal="body_entered" from="Buckets/PaintBucket" to="Buckets/PaintBucket" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket/BucketSprite" to="Buckets/PaintBucket" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket2" to="Buckets/PaintBucket2" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket2/BucketSprite" to="Buckets/PaintBucket2" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket3" to="Buckets/PaintBucket3" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket3/BucketSprite" to="Buckets/PaintBucket3" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket7" to="Buckets/PaintBucket7" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket7/BucketSprite" to="Buckets/PaintBucket7" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket8" to="Buckets/PaintBucket8" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket8/BucketSprite" to="Buckets/PaintBucket8" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket5" to="Buckets/PaintBucket5" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket5/BucketSprite" to="Buckets/PaintBucket5" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket6" to="Buckets/PaintBucket6" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket6/BucketSprite" to="Buckets/PaintBucket6" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="Buckets/PaintBucket4" to="Buckets/PaintBucket4" method="_on_body_entered"]
+[connection signal="animation_finished" from="Buckets/PaintBucket4/BucketSprite" to="Buckets/PaintBucket4" method="_on_bucket_sprite_animation_finished"]
+[connection signal="body_entered" from="DeathPlane" to="DeathPlane" method="_on_body_entered"]
+[connection signal="body_entered" from="Food/Can" to="Food/Can" method="_on_body_entered"]
+[connection signal="body_entered" from="Food/Can2" to="Food/Can2" method="_on_body_entered"]
+[connection signal="body_entered" from="Food/Can3" to="Food/Can3" method="_on_body_entered"]
+[connection signal="body_entered" from="Food/Can4" to="Food/Can4" method="_on_body_entered"]
+[connection signal="body_entered" from="Food/Can5" to="Food/Can5" method="_on_body_entered"]
+[connection signal="body_entered" from="Food/Can6" to="Food/Can6" method="_on_body_entered"]
+[connection signal="body_entered" from="Food/Can7" to="Food/Can7" method="_on_body_entered"]
